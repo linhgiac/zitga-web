@@ -1,0 +1,28 @@
+.content{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.title-content{
+    height: 240px;
+    width: 100%;
+    z-index: -1;
+    background-attachment: fixed;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    z-index: 101;
+}
+.content-title-img{
+
+}
+ 
+.content-title-inner{
+    height: 400px;
+}
+.content-inner{
+    background-color: #000;
+    height: 400px;
+}

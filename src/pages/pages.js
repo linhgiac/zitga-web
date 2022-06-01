@@ -1,16 +1,23 @@
 import React from "react";
 import {Routes, Route} from "react-router-dom"
-import AboutUs from "../about/aboutUs";
-import Careers from '../../pages/careers/careers';
-import Contact from '../../pages/contact/contact';
-import News from '../../pages/news/news';
-import Product from '../../pages/product/product'
-import Login from '../../pages/login/login'
+import Home from "../pages/home/home"
+import AboutUs from "../pages/about/aboutUs";
+import Careers from '../pages/careers/careers';
+import Contact from '../pages/contact/contact';
+import News from '../pages/news/news';
+import Product from '../pages/product/product'
+import Login from '../pages/login/login'
+
+import Header from '../components/header/header';
 
 
 
-const Home = () => {
+const Page = () => {
     return (
+    <div>
+        <div>
+            <Header/>
+        </div>
         <div>
             <Routes>
                     <Route 
@@ -43,7 +50,9 @@ const Home = () => {
                     />
                 </Routes>
         </div>
+    </div>
+        
     )
 }
 
-export default Home;
+export default Page;

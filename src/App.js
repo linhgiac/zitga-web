@@ -1,10 +1,10 @@
-import Header from './components/header/header'
-import './App.css';
+import Page from './pages/pages'
+
 
 function App() {
   return (
     <div>
-      <Header/>
+      <Page/>
     </div>
   );
 }
