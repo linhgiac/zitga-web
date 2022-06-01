@@ -12,7 +12,13 @@ import Login from '../../pages/login/login'
 const Home = () => {
     return (
         <div>
-            <Routes>
+            <routes/>
+        </div>
+    )
+}
+const routes = () => {
+    return (
+        <Routes>
                     <Route 
                         path='/' 
                         element={<Home/>}
@@ -42,7 +48,6 @@ const Home = () => {
                         element={<Login/>}
                     />
                 </Routes>
-        </div>
     )
 }
 

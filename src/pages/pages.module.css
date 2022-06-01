@@ -3,15 +3,14 @@
     padding: 0;
     box-sizing: border-box;
 }
-.title-content{
+.titleContent{
    
 }
-.content-title-img{
-   background-image: url(http://zitga.com.vn/wp-content/uploads/2019/11/rsz_tintuc.jpg);
-   background-repeat: no-repeat;
-   background-attachment: fixed;
-   background-position: center 0%;
-   width: 100%;
+.contentTitleImg{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center 0%;
+    width: 100%;
    
 }
 .title{ 
@@ -22,10 +21,10 @@
     margin: 20px;
     text-align: center;
     line-height: 400px;
-    
+    text-transform: uppercase;
     
 }
-.content-title-inner{
+.contentTitleInner{
     display: table;
     height: 400px;
     width: 100%;

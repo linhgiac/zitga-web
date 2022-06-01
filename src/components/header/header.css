@@ -3,7 +3,7 @@ nav{
     background-color: #000;
     font-size: 'Open Sans';
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 500;
 }
 .div-header{
     margin: 0 auto;
@@ -66,5 +66,5 @@ nav{
     transform: skewX(15deg);
 }
 .header-btn {
-    padding: 0 5px;
+    padding: 0 10px;
 }

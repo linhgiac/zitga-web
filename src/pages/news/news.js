@@ -1,8 +1,9 @@
 import React from "react";
-import '../pages.css'
+import  "./news.css"
+import PageStyles from "../pages.module.css"
 const News = () => {
     return (
-        <div className="content">
+        <div className={PageStyles.content}>
             <div>
                 <NewsTitleImage/>
             </div>
@@ -14,10 +15,10 @@ const News = () => {
 }
 const NewsTitleImage = () => {
     return (
-        <div className="title-content" >
-            <div className="content-title-img">
-                <div class="content-title-inner">
-                    <div className="title">NEWS</div>
+        <div className={PageStyles.titleContent} >
+            <div className={PageStyles.contentTitleImg} id="news-img">
+                <div class={PageStyles.contentTitleInner}>
+                    <div className={PageStyles.title}>NEWS</div>
                 </div>
             </div> 
             

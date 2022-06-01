@@ -8,7 +8,9 @@ import News from '../pages/news/news';
 import Product from '../pages/product/product'
 import Login from '../pages/login/login'
 
+import '../pages/pages.module.css'
 import Header from '../components/header/header';
+
 
 
 
@@ -19,38 +21,39 @@ const Page = () => {
             <Header/>
         </div>
         <div>
-            <Routes>
-                    <Route 
-                        path='/' 
-                        element={<Home/>}
-                    />
-                    <Route 
-                        path='/about' 
-                        element={<AboutUs/>}
-                    />
-                    <Route 
-                        path='/careers' 
-                        element={<Careers/>}
-                    />
-                    <Route 
-                        path='/product' 
-                        element={<Product/>}
-                    />
-                    <Route 
-                        path='/news' 
-                        element={<News/>}
-                    />
-                    <Route 
-                        path='/contact' 
-                        element={<Contact/>}
-                    />
-                    <Route 
-                        path='/login' 
-                        element={<Login/>}
-                    />
-                </Routes>
+           
+                <Routes>
+                        <Route
+                            path='/'
+                            element={<Home/>}
+                        />
+                        <Route
+                            path='/about'
+                            element={<AboutUs/>}
+                        />
+                        <Route
+                            path='/careers'
+                            element={<Careers/>}
+                        />
+                        <Route
+                            path='/product'
+                            element={<Product/>}
+                        />
+                        <Route
+                            path='/news'
+                            element={<News/>}
+                        />
+                        <Route
+                            path='/contact'
+                            element={<Contact/>}
+                        />
+                        <Route
+                            path='/login'
+                            element={<Login/>}
+                        />
+                    </Routes>
         </div>
-        
+
     </div>
         
     )
