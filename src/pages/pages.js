@@ -50,6 +50,7 @@ const Page = () => {
                     />
                 </Routes>
         </div>
+        
     </div>
         
     )

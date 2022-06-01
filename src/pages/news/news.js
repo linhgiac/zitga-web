@@ -14,13 +14,13 @@ const News = () => {
 }
 const NewsTitleImage = () => {
     return (
-        <div className="title-content">
+        <div className="title-content" >
             <div className="content-title-img">
-                <img itemprop="image" src="http://zitga.com.vn/wp-content/uploads/2019/11/rsz_tintuc.jpg" alt="Image Alt"></img>
+                <div class="content-title-inner">
+                    <div className="title">NEWS</div>
+                </div>
             </div> 
-            <div class="content-title-inner">
-                <h3>NEWS</h3>
-            </div>
+            
         </div>
         
 
@@ -34,5 +34,6 @@ const NewsContent = () =>{
         </div>
     )
 }
+
 
 export default News;
