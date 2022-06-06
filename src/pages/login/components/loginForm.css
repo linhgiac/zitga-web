@@ -1,0 +1,51 @@
+.login-wrapper {
+    box-sizing: border-box;
+    margin: 10px 0;
+    color: rgba(0, 0, 0, 0.85);
+    line-height: 1.5715;
+    position: relative;
+    background: #fff;
+    border-radius: 2px;
+    border: 1px solid black;
+}
+
+.login-header {
+    min-height: 48px;
+    margin-bottom: -1px;
+    padding: 0 24px;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    font-size: 20px;
+    background: transparent;
+    border-bottom: 1px solid #b6b5b5;
+    border-radius: 2px 2px 0 0;
+}
+
+.login-header::before {
+    display: table;
+    content: '';
+}
+
+.login-header::after {
+    display: table;
+    clear: both;
+    content: '';
+}
+
+.login-header-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.login-header-title {
+    display: inline-block;
+    flex: 1 1;
+    padding: 16px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.login-body {
+    padding: 24px;
+}
