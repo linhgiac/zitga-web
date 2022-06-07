@@ -12,16 +12,26 @@ class ProductController extends BaseController
 
     public function index()
     {
-        $products = $this->productModel->getAll();
+        $selectColumns = ['id', 'name'];
+
+        $orders = [
+            'column' => 'id',
+            'order' => 'desc',
+        ];
+
+        $products = $this->productModel->getAll(
+            $selectColumns,
+            $orders
+        );
 
         return $this->view('frontend.products.index', [
             'pageTitle' => 'Game list',
             'products' => $products,
         ]);
     }
-    public function show()
+    public function show($id)
     {
-        $product = $this->productModel->findById(1);
+        $product = $this->productModel->findById($id);
         return $this->view('frontend.products.show', [
             'product' => $product,
         ]);
