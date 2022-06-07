@@ -9,7 +9,7 @@ class ProductModel extends BaseModel
         return $this->all(self::TABLE, $select, $orderBy, $limit);
     }
 
-    public function findById($id)
+    public function findById($id) // search
     {
         return [
             'id' => 1,
@@ -17,8 +17,18 @@ class ProductModel extends BaseModel
         ];
     }
 
-    public function delete()
+    public function store($data) // add
     {
-        return __METHOD__;
+        $this->create(self::TABLE, $data);
+    }
+
+    public function updateData($id, $data)
+    {
+        $this->update(self::TABLE, $id, $data);
+    }
+
+    public function destroy($id) // delete
+    {
+        return $this->delete(self::TABLE, $id);
     }
 }
