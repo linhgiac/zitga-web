@@ -6,5 +6,70 @@
 #contact-img{
     background-image: url(http://zitga.com.vn/wp-content/uploads/2019/11/rsz_lienhe.jpg);
 }
+/* 
+Content */
+*{
+    font-size:"Open Sans";
+}
+.content-inner{
+    color: #fff;
+    background-color:#000;
+    padding-top: 133px;
+    padding-bottom: 114px;
+    margin: 0px 117px;
+    
+}
+.gutter-row{
+    margin: 0px 0px;
+}
+.content-col1{
+    padding-right: 120px;
+    width: 100%;
+}
 
+.content-sub-title{
+    
+    text-transform: uppercase;
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 1.17em;
+}
+content-separator{
+    margin-top: 2px;
+}
+p{
+    margin: 10px 0px; 
+    color: silver;
+}
+
+content-col2{
+    width: 100%;
+    font-size: 25px;
+    font-family: Montserrat,sans-serif;
+
+}
+Input{
+    width: 80%;
+}
+.content-form-input{
+    color: #fff;
+    width: 100%;
+    font-size: 17px;
+    margin-left: 10px;
+    font-family: Montserrat,sans-serif;
+    background-color: rgba(84, 71, 71, 0.29);
+    border: 1px solid transparent;
+    border-radius: 0;
+    outline: 0;
+    
+}
+.content-form-input:focus{
+    border-color: transparent transparent #ff0e1f;
+}
+.content-form-input::placeholder{
+    color: silver;
+    font-size: 17px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 100;
+}
 
