@@ -1,12 +1,19 @@
-import Page from './pages/pages'
+import Page from "./pages/pages";
+import Header from "./components/header/header";
 
+import {BrowserRouter} from "react-router-dom"
 
 function App() {
-  return (
-    <div>
-      <Page/>
-    </div>
-  );
+    return (
+        <> 
+        <BrowserRouter>
+          {(window.location.pathname !== '/login') && <Header />}
+          <Page />
+        </BrowserRouter>
+        </>
+               
+        
+    );
 }
 
 export default App;

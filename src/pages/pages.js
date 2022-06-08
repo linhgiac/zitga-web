@@ -17,9 +17,9 @@ import Header from '../components/header/header';
 const Page = () => {
     return (
     <div>
-        <div>
+        {/* <div>
             <Header/>
-        </div>
+        </div> */}
         <div>
            
                 <Routes>
