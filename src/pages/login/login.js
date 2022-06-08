@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import LoginForm from "./components/loginForm";
-import { Form } from "antd";
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 
 const Login = () => {
-    const [form] = Form.useForm();
+    let navigate = useNavigate();
 
     const adminUser = {
         email: "admin@gmail.com",
@@ -16,16 +16,20 @@ const Login = () => {
     const login = (details) => {
         console.log(details);
 
-        if (details.email === adminUser.email && details.password === adminUser.password) {
+        if (details.email === '' || details.username === '' || details.password === '') {
+            return "Vui lòng nhập đủ thông tin";
+        }
+        else if (details.email === adminUser.email && details.password === adminUser.password) {
             console.log("Logged in");
             setUser({
                 username: details.username,
                 email: details.email
-            })
+            });
+            navigate("/");
         }
         else {
-            console.log("Details do not match");
-            return "Details do not match";
+            console.log("Thông tin đăng nhập sai");
+            return "Thông tin đăng nhập sai";
         }
     };
 
@@ -45,7 +49,7 @@ const Login = () => {
                     <button onClick={() => logout()}>Logout</button>
                 </div>)
                 :
-                (<LoginForm form={form} login={login} />)}
+                (<LoginForm login={login} />)}
         </div>
 
     )
