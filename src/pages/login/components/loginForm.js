@@ -77,6 +77,14 @@ const LoginForm = ({ login }) => {
                         </div>
                     </div>
                 </form>
+                <div className='login-another'>
+                    <div className='login-text'>
+                        Chưa có tài khoản?
+                    </div>
+                    <div className='login-link-wrapper'>
+                        <a href='/signup' className='login-link'>Đăng kí</a>
+                    </div>
+                </div>
             </div>
         </div>
     );
