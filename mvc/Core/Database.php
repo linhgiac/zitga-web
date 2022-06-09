@@ -5,7 +5,7 @@ class Database
     const HOST = 'localhost';
     const USERNAME = 'root';
     const PASSWORD = '';
-    const DB_NAME = 'zitga';
+    const DB_NAME = 'tllt';
 
 
     public function connect()
