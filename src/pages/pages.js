@@ -5,9 +5,9 @@ import AboutUs from "../pages/about/aboutUs";
 import Careers from '../pages/careers/careers';
 import Contact from '../pages/contact/contact';
 import News from '../pages/news/news';
-import Product from '../pages/product/product'
-import Login from '../pages/login/login'
-
+import Product from '../pages/product/product';
+import Login from '../pages/login/login';
+import SignUp from '../pages/signup/signup';
 import '../pages/pages.module.css'
 import Header from '../components/header/header';
 
@@ -17,9 +17,9 @@ import Header from '../components/header/header';
 const Page = () => {
     return (
     <div>
-        <div>
+        {/* <div>
             <Header/>
-        </div>
+        </div> */}
         <div>
            
                 <Routes>
@@ -50,6 +50,10 @@ const Page = () => {
                         <Route
                             path='/login'
                             element={<Login/>}
+                        />
+                        <Route
+                            path='/signup'
+                            element={<SignUp />}
                         />
                     </Routes>
         </div>

@@ -1,4 +1,4 @@
-.login-wrapper {
+.signup-wrapper {
     box-sizing: border-box;
     margin: 10px 0;
     color: white;
@@ -10,7 +10,7 @@
     width: 50%;
 }
 
-.login-header {
+.signup-header {
     min-height: 48px;
     margin-bottom: -1px;
     padding: 0 24px;
@@ -21,23 +21,23 @@
     border-radius: 2px 2px 0 0;
 }
 
-.login-header::before {
+.signup-header::before {
     display: table;
     content: '';
 }
 
-.login-header::after {
+.signup-header::after {
     display: table;
     clear: both;
     content: '';
 }
 
-.login-header-wrapper {
+.signup-header-wrapper {
     display: flex;
     align-items: center;
 }
 
-.login-header-title {
+.signup-header-title {
     display: inline-block;
     flex: 1 1;
     padding: 16px 0;
@@ -48,16 +48,16 @@
     font-weight: 700;
 }
 
-.login-body {
+.signup-body {
     padding: 24px;
 }
 
-.login-form-group {
+.signup-form-group {
     padding: 10px;
     width: 100%;
 }
 
-.login-form-input {
+.signup-form-input {
     width: 100%;
     background-color: rgba(255, 255, 255, .05);
     border: 1px solid transparent;
@@ -71,24 +71,24 @@
     line-height: 20px;
 }
 
-.login-form-input::placeholder {
+.signup-form-input::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white;
     opacity: 1;
     /* Firefox */
 }
 
-.login-form-input:-ms-input-placeholder {
+.signup-form-input:-ms-input-placeholder {
     /* Internet Explorer 10-11 */
     color: white;
 }
 
-.login-form-input::-ms-input-placeholder {
+.signup-form-input::-ms-input-placeholder {
     /* Microsoft Edge */
     color: white;
 }
 
-.login-form-button {
+.signup-form-button {
     position: relative;
     display: inline-block;
     vertical-align: middle;
@@ -107,49 +107,6 @@
     cursor: pointer;
 }
 
-.login-form-button:hover {
+.signup-form-button:hover {
     filter: drop-shadow(3px 3px 20px rgba(255, 14, 31, .7));
-}
-
-.login-another {
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    margin-top: 20px;
-    width: 100%;
-    display: flex;
-}
-
-.login-text {
-    width: 70%;
-    display: inline-block;
-    vertical-align: middle;
-    color: #fff;
-    box-sizing: border-box;
-    padding: 10px 10px;
-    line-height: 1.5em;
-    text-align: center;
-    font-size: 15px;
-}
-
-.login-link-wrapper {
-    width: 30%;
-}
-
-.login-link {
-    display: inline-block;
-    vertical-align: middle;
-    color: #fff;
-    background-color: #ff0e1f;
-    box-sizing: border-box;
-    padding: 10px 10px;
-    line-height: 1.5em;
-    width: 100%;
-    text-align: center;
-    font-size: 15px;
-}
-
-.login-link:hover {
-    filter: drop-shadow(3px 3px 20px rgba(255, 14, 31, .7));
-    color: #fff;
 }

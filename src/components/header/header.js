@@ -27,7 +27,7 @@ const Header = () => {
                         <NavLink className = "header-elements" to="/news">News</NavLink>
                         <NavLink className = "header-elements" to="/contact">Contact</NavLink>
                         <div className = "header-btn">
-                            <Button type="primary" shape="round">Login</Button>
+                            <Button type="primary" shape="round" href="/login">Login</Button>
                         </div>
                         <div className = "header-btn">
                             <Button type = "primary" ghost shape="round">Sign Up</Button>
