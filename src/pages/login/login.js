@@ -49,7 +49,7 @@ const Login = () => {
 
     return (
         <div className = 'login-page'>
-            <nav>
+            <nav className = 'login-nav'>
                 <NavLink to='/'><LeftCircleFilled className ='nav-icon'/></NavLink>
             </nav>
             <div className="login-content">

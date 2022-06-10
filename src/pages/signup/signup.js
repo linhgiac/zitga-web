@@ -11,7 +11,7 @@ const SignUp = () => {
     };
     return (
         <div className = 'signup-page'>
-            <nav>
+            <nav className= 'signup-nav'>
                 <NavLink to={"/login"}><LeftCircleFilled className ='nav-icon'/></NavLink>
             </nav>
             <div className="signup-content">
