@@ -1,6 +1,24 @@
-.login-page {
+nav{
+       
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+}
+.nav-icon{
+    font-size: 40px;
+    color: #ff0e1f;
+    padding-left: 40px;
+    line-height: 100px;
+}
+.login-page{
+    height: 100%;
+    position: relative;
+}
+.login-content {
+    height: 100%;
     align-items: center;
     display: flex;
     justify-content: center;
-    background-color: #17161a;
+    background-color: #000;
 }

@@ -68,3 +68,17 @@ nav{
 .header-btn {
     padding: 0 10px;
 }
+.btn{
+    background-color: #ff0e1f;
+    border-color: #fff;
+
+}
+.btn:hover {
+    background-color: #ff0e1f !important;
+    border-color: #ff0e1f;
+}
+.btn-icon{
+    font-size: 32px;
+    color: #ff0e1f;
+    padding-left: 10px;
+}

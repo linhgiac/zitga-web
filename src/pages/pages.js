@@ -16,12 +16,8 @@ import Header from '../components/header/header';
 
 const Page = () => {
     return (
-    <div>
-        {/* <div>
-            <Header/>
-        </div> */}
-        <div>
-           
+    <div className="page">
+    
                 <Routes>
                         <Route
                             path='/'
@@ -56,7 +52,6 @@ const Page = () => {
                             element={<SignUp />}
                         />
                     </Routes>
-        </div>
 
     </div>
         

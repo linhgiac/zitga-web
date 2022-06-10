@@ -7,7 +7,8 @@ function App() {
     return (
         <> 
         <BrowserRouter>
-          {(window.location.pathname !== '/login') && <Header />}
+          {(window.location.pathname !== '/login' && window.location.pathname !== '/signup') && <Header />}
+        
           <Page />
         </BrowserRouter>
         </>

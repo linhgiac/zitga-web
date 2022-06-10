@@ -1,6 +1,26 @@
-.signup-page {
+nav{
+       
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    background-color: #fff;
+    z-index: 1;
+}
+.nav-icon{
+    font-size: 40px;
+    color: #ff0e1f;
+    padding-left: 40px;
+    line-height: 100px;
+}
+.signup-page{
+    height: 100%;
+    position: relative;
+}
+.signup-content {
+    height: 100%;
+    position: relative;
     align-items: center;
     display: flex;
     justify-content: center;
-    background-color: #17161a;
+    background-color: #000;
 }
