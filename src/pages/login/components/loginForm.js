@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { Alert } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import './loginForm.css';
 
 const LoginForm = ({ login }) => {
+    const navigate = useNavigate();
     const [error, setError] = useState("");
     const [details, setDetails] = useState({ name: '', email: '', password: '' });
-
-    // const getErrorList = (errorFields) => {
-    //     return errorFields.map((field) =>
-    //         <li key={field.name.toString()}>{field.errors.toString()}</li>
-    //     );
-    // }
 
     const submitHandler = (e) => {
         e.preventDefault();
 
-        setError(login(details));
+        let result = login(details);
+        if (result === true) {
+            navigate("/");
+        }
+        else {
+            setError(login(details));
+        }
 
     }
 

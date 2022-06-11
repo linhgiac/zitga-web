@@ -10,11 +10,12 @@ import "./header.css";
 // import Login from '../../pages/login/login'
 import { Button } from "antd";
 import "antd/dist/antd.css";
-import { LogoutOutlined} from "@ant-design/icons";
-const Header = () => {
-
+import { LogoutOutlined } from "@ant-design/icons";
+const Header = ({ app }) => {
     const handleLogout = () => {
-
+        if (app.isLogged) {
+            app.logout();
+        }
     }
 
     return (
@@ -23,8 +24,8 @@ const Header = () => {
                 <div className="header-home">
                     <NavLink className="header-elements" to="/">
                         <img
-                            itemprop="image"
-                            class="edgtf-normal-logo"
+                            itemProp="image"
+                            className="edgtf-normal-logo"
                             src="http://zitga.com.vn/wp-content/uploads/2019/11/rsz_logo-zitga-chuan-022-mobile.png"
                             alt="logo"
                         />
@@ -54,11 +55,19 @@ const Header = () => {
                     <NavLink className="header-elements" to="/contact">
                         Contact
                     </NavLink>
-                    <div className="header-btn">
-                        <Button type="primary" shape="round" href="/login" className="btn">
-                            Login
-                        </Button>
-                    </div>
+                    <>
+                        {
+                            (!app.isLogged) ?
+                                (<div className="header-btn">
+                                    <Button type="primary" shape="round" href="/login" className="btn">
+                                        Login
+                                    </Button>
+                                </div>) :
+                                (<div style={{ color: 'white', background: 'red' }}>
+                                    Hello, {app.user.name}
+                                </div>)
+                        }
+                    </>
                     <div className="header-btn">
                         <LogoutOutlined className="btn-icon" onClick={handleLogout} />
                     </div>

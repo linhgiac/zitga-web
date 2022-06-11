@@ -14,7 +14,7 @@ import Header from '../components/header/header';
 
 
 
-const Page = () => {
+const Page = ({app}) => {
     return (
     <div className="page">
     
@@ -45,11 +45,11 @@ const Page = () => {
                         />
                         <Route
                             path='/login'
-                            element={<Login/>}
+                            element={<Login login={app.login} />}
                         />
                         <Route
                             path='/signup'
-                            element={<SignUp />}
+                            element={<SignUp signup={app.signup} />}
                         />
                     </Routes>
 
