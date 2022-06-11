@@ -1,6 +1,6 @@
 nav{
     height: 90px;
-    background-color: #000;
+    background-color: #17161a;
     font-size: 'Open Sans';
     font-size: 13px;
     font-weight: 500;
@@ -52,6 +52,9 @@ nav{
     color: #fff;
     letter-spacing: .06em;
  
+}
+.header-elements:hover {
+    color: #ff0e1f;
 }
 .header-elements:hover::after{
     content: '';
