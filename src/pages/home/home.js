@@ -12,11 +12,11 @@ import Login from '../../pages/login/login'
 const Home = () => {
     return (
         <div>
-            <routes/>
+            <Routes/>
         </div>
     )
 }
-const routes = () => {
+const Routes = () => {
     return (
         <Routes>
                     <Route 
