@@ -9,17 +9,16 @@ const LoginForm = ({ login }) => {
     const [error, setError] = useState("");
     const [details, setDetails] = useState({ name: '', email: '', password: '' });
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
 
-        let result = login(details);
+        let result = await login(details);
         if (result === true) {
             navigate("/");
         }
         else {
-            setError(login(details));
+            setError(result);
         }
-
     }
 
     const clearError = () => {

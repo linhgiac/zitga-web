@@ -4,6 +4,7 @@ import Footer from "./components/footer/footer";
 
 import { BrowserRouter } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 function App() {
     const adminUser = {
@@ -13,7 +14,11 @@ function App() {
 
     const [user, setUser] = useState({ name: "", email: "" });
 
-    const login = (details) => {
+    const login = async (details) => {
+
+        const response = await axios.post('http://localhost/mvc/login.php', details);
+        console.log(response);
+
         console.log(details);
 
         if (

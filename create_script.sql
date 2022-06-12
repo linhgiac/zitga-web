@@ -1,0 +1,54 @@
+DROP DATABASE IF EXISTS `tllt`;
+CREATE DATABASE `tllt`;
+
+USE `tllt`;
+
+CREATE TABLE IF NOT EXISTS news (
+	id INT PRIMARY KEY,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    date DATE DEFAULT (DATE(CURRENT_TIMESTAMP)),
+    time TIME DEFAULT (TIME(CURRENT_TIMESTAMP)),
+    image VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS recruitment (
+	id INT PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    image VARCHAR(100) NOT NULL,
+    from_date DATE DEFAULT (DATE(CURRENT_TIMESTAMP)),
+    to_date DATE DEFAULT (DATE(CURRENT_TIMESTAMP))
+);
+
+CREATE TABLE IF NOT EXISTS `user` (
+	id INT PRIMARY KEY,
+    isAdmin BOOLEAN DEFAULT false,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    avatar VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS product (
+	id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    release_date DATE NOT NULL,
+    image VARCHAR(100) NOT NULL,
+    video VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS comment (
+	id INT,
+    news_id INT NOT NULL,
+    user_id INT NOT NULL,
+    content TEXT NOT NULL,
+    date DATE DEFAULT (DATE(CURRENT_TIMESTAMP)),
+    time TIME NOT NULL,
+    edited BOOLEAN DEFAULT false,
+    PRIMARY KEY(id, news_id),
+    FOREIGN KEY (user_id) REFERENCES user(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (news_id) REFERENCES news(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
