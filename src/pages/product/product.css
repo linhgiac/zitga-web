@@ -5,3 +5,35 @@
 #product-img{
     background-image: url(http://zitga.com.vn/wp-content/uploads/2020/07/export12-e1594117037478-1.jpg);
 }
+.product-content-inner{
+    color: #fff;
+    background-color:#17161a;
+    padding: 110px 50px;
+    margin: 0px;
+}
+.product-content-container{
+    width: 100%;
+    padding: 0px 10px;
+}
+
+
+.product-content-image{
+    
+    padding-bottom: 10px;
+}
+.product-content-image>img{
+  width: 100%;
+    
+}
+.product-content-title{
+    padding: 10px 00px;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+
+}
+.product-content-description{
+    font-size: 12px;
+    font-weight: 50;
+    font-family: Montserrat,sans-serif;
+}

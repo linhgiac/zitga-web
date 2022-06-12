@@ -61,12 +61,12 @@ function App() {
     return (
         <>
             <BrowserRouter>
-                {window.location.pathname !== "/login" &&
-                    window.location.pathname !== "/signup" && <Header app={app} />}
+                {/* {window.location.pathname !== "/login" &&
+                    window.location.pathname !== "/signup" && <Header app={app} />} */}
 
                 <Page app={app} />
-                {window.location.pathname !== "/login" &&
-                    window.location.pathname !== "/signup" && <Footer />}
+                {/* `{window.location.pathname !== "/login" &&
+                    win`dow.location.pathname !== "/signup" && <Footer />} */}
             </BrowserRouter>
         </>
     );

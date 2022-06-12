@@ -16,7 +16,8 @@
     position: relative;
 }
 .login-content {
-    height: 100%;
+    margin: auto;
+    /* height: 100%; */
     align-items: center;
     display: flex;
     justify-content: center;

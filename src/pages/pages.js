@@ -41,7 +41,7 @@ const Page = ({app}) => {
                         />
                         <Route
                             path='/contact'
-                            element={<Contact/>}
+                            element={<Contact app={app}/>}
                         />
                         <Route
                             path='/login'
