@@ -1,5 +1,5 @@
 import React from "react";
-import {Routes, Route} from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import Home from "../pages/home/home"
 import AboutUs from "../pages/about/aboutUs";
 import Careers from '../pages/careers/careers';
@@ -10,51 +10,59 @@ import Login from '../pages/login/login';
 import SignUp from '../pages/signup/signup';
 import '../pages/pages.module.css'
 import Header from '../components/header/header';
+import Footer from "../components/footer/footer";
 
 
-
-
-const Page = ({app}) => {
+const PageWrapper = ({ app, Page }) => {
     return (
-    <div className="page">
-    
-                <Routes>
-                        <Route
-                            path='/'
-                            element={<Home/>}
-                        />
-                        <Route
-                            path='/about'
-                            element={<AboutUs/>}
-                        />
-                        <Route
-                            path='/careers'
-                            element={<Careers/>}
-                        />
-                        <Route
-                            path='/product'
-                            element={<Product/>}
-                        />
-                        <Route
-                            path='/news'
-                            element={<News/>}
-                        />
-                        <Route
-                            path='/contact'
-                            element={<Contact/>}
-                        />
-                        <Route
-                            path='/login'
-                            element={<Login login={app.login} />}
-                        />
-                        <Route
-                            path='/signup'
-                            element={<SignUp signup={app.signup} />}
-                        />
-                    </Routes>
+        <>
+            <Header app={app} />
+            <div className="page">
+                <Page />
+            </div>
+            <Footer />
+        </>
+    );
+}
 
-    </div>
-        
+const Page = ({ app }) => {
+    return (
+        <>
+            <Routes>
+                <Route
+                    path='/'
+                    element={<PageWrapper app={app} Page={Home} />}
+                />
+                <Route
+                    path='/about'
+                    element={<PageWrapper app={app} Page={AboutUs} />}
+                />
+                <Route
+                    path='/careers'
+                    element={<PageWrapper app={app} Page={Careers} />}
+                />
+                <Route
+                    path='/product'
+                    element={<PageWrapper app={app} Page={Product} />}
+                />
+                <Route
+                    path='/news'
+                    element={<PageWrapper app={app} Page={News} />}
+                />
+                <Route
+                    path='/contact'
+                    element={<PageWrapper app={app} Page={Contact} />}
+                />
+                <Route
+                    path='/login'
+                    element={<Login login={app.login} />}
+                />
+                <Route
+                    path='/signup'
+                    element={<SignUp signup={app.signup} />}
+                />
+            </Routes>
+        </>
     )
 }
 
