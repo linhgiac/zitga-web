@@ -21,8 +21,8 @@ class BaseController
 
     protected function loadModel($modelPath)
     {
-        $viewPath = self::MODEL_FOLDER_NAME . '/' . $modelPath . '.php';
+        $path = self::MODEL_FOLDER_NAME . '/' . $modelPath . '.php';
 
-        return require($viewPath);
+        return require($path);
     }
 }

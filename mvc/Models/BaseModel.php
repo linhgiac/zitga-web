@@ -32,7 +32,7 @@ class BaseModel extends Database
         return $data;
     }
 
-    public function find ($table, $id)
+    public function find($table, $id)
     {
         $sql = "SELECT * FROM ${table} WHERE id = ${id} LIMIT 1";
         $query = $this->_query($sql);
@@ -43,7 +43,7 @@ class BaseModel extends Database
     {
         $columns = implode(',', array_keys($data));
 
-        $newValues= array_map(function($value){
+        $newValues= array_map(function($value) {
             return "'" . $value . "'";
         }, array_values($data));
 
@@ -54,7 +54,7 @@ class BaseModel extends Database
         $this->_query($sql);
     }
 
-    public function update($table, $id, $data) // update data vào bảng
+    public function update($table, $id, $data)
     {
         $dataSets = [];
 
@@ -72,6 +72,7 @@ class BaseModel extends Database
     public function delete($table, $id)
     {
         $sql = "DELETE FROM ${table} WHERE id = ${id}";
+
         $this->_query($sql);
     }
 
