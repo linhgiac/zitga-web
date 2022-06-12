@@ -7,7 +7,6 @@ class Database
     const PASSWORD = '';
     const DB_NAME = 'tllt';
 
-
     public function connect()
     {
         $connect = mysqli_connect(self::HOST, self::USERNAME, self::PASSWORD, self::DB_NAME);

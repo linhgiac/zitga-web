@@ -67,3 +67,14 @@
     <input type="password" class="form-control" id="" placeholder="Input password" name="password">
     <button type="submit" name="dangnhap">Sign in</button>
 </form>
+
+<?php
+header("Access-Control-Allow-Origin: *");
+$restJson = file_get_contents("php://input");
+$_GET = json_decode($restJson, true);
+
+if (empty($_GET['name']) && empty($_GET['password'])) die();
+else
+{
+    echo $_GET['name'], $_GET['password'];
+}

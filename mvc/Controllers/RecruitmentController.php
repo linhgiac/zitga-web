@@ -1,13 +1,13 @@
 <?php
 
-class NewsController extends BaseController
+class RecruitmentController extends BaseController
 {
-    private $newsModel;
+    private $recruitmentModel;
 
     public function __construct()
     {
-        $this->loadModel('NewsModel');
-        $this->newsModel = new NewsModel;
+        $this->loadModel('RecruitmentModel');
+        $this->recruitmentModel = new RecruitmentModel;
     }
 
     public function index()
@@ -19,16 +19,15 @@ class NewsController extends BaseController
             'order' => 'desc',
         ];
 
-        $newsList = $this->newsModel->getAll(
+        $recruitments = $this->recruitmentModel->getAll(
             $selectColumns,
             $orders   
         );
 
-        return $this->view('frontend.news.index', [
+        return $this->view('frontend.recruitments.index', [
             'pageTitle' => 'News list',
-            'newsList' => $newsList,
+            'recruitments' => $recruitments,
         ]);
-        // echo json_encode($newsList);
     }
 
     public function store()
@@ -36,11 +35,11 @@ class NewsController extends BaseController
         $data = [
             'id' => 3,
             'title' => 'sdfsdfgsdf',
-            'content' => 'afdvsdfsdfsdfsesdfdsfsdf',
+            'description' => 'afdvsdfsdfsdfsesdfdsfsdf',
             'image' => 'vidf'
         ];
 
-        $this->newsModel->store($data);
+        $this->recruitmentModel->store($data);
     }
 
     public function update()
@@ -48,24 +47,24 @@ class NewsController extends BaseController
         $id = $_GET['id'];
 
         $data = [
-            'title' => 'updated title yeohyedfg'
+            'title' => 'updated title recruitment'
         ];
 
-        $this->newsModel->updateData($id, $data);
+        $this->recruitmentModel->updateData($id, $data);
     }
 
     public function delete()
     {
         $id = $_GET['id'];
 
-        $this->newsModel->destroy($id);
+        $this->recruitmentModel->destroy($id);
         echo 'Xóa thành công ! :)))))';
     }
 
     public function find()
     {
         $id = $_GET['id'];
-        $result = $this->newsModel->findById($id);
+        $result = $this->recruitmentModel->findById($id);
         print_r($result);
     }
 }

@@ -35,7 +35,10 @@ class ProductController extends BaseController
         $data = [
             'id' => 3,
             'name' => 'SUMMONERS ERA',
-            'release_date' => '2020-05-22'
+            'category' => 'afdv',
+            'release_date' => '2020-05-22',
+            'image' => 'asdfs',
+            'video' => 'vidf'
         ];
 
         $this->productModel->store($data);
