@@ -17,7 +17,7 @@ const NewsTitleImage = () => {
     return (
         <div className={PageStyles.titleContent} >
             <div className={PageStyles.contentTitleImg} id="news-img">
-                <div class={PageStyles.contentTitleInner}>
+                <div className={PageStyles.contentTitleInner}>
                     <div className={PageStyles.title}>NEWS</div>
                 </div>
             </div> 

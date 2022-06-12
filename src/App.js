@@ -1,7 +1,7 @@
 import Page from "./pages/pages";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
-
+import "antd/dist/antd.css";
 import { BrowserRouter } from "react-router-dom";
 import { useState } from "react";
 

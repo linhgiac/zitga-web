@@ -9,7 +9,7 @@ import "./header.css";
 // import Home from '../../pages/home/home';
 // import Login from '../../pages/login/login'
 import { Button } from "antd";
-import "antd/dist/antd.css";
+
 import { LogoutOutlined } from "@ant-design/icons";
 const Header = ({ app }) => {
     const handleLogout = () => {
@@ -73,36 +73,7 @@ const Header = ({ app }) => {
                     </div>
                 </div>
             </div>
-            {/* <Routes>
-                    <Route 
-                        path='/' 
-                        element={<Home/>}
-                    />
-                    <Route 
-                        path='/about' 
-                        element={<AboutUs/>}
-                    />
-                    <Route 
-                        path='/careers' 
-                        element={<Careers/>}
-                    />
-                    <Route 
-                        path='/product' 
-                        element={<Product/>}
-                    />
-                    <Route 
-                        path='/news' 
-                        element={<News/>}
-                    />
-                    <Route 
-                        path='/contact' 
-                        element={<Contact/>}
-                    />
-                    <Route 
-                        path='/login' 
-                        element={<Login/>}
-                    />
-                </Routes> */}
+            
         </nav>
     );
 };

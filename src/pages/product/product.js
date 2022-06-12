@@ -18,7 +18,7 @@ const ProductTitleImage = () => {
     return (
         <div className={PageStyles.titleContent}>
             <div className={PageStyles.contentTitleImg} id="product-img">
-                <div class={PageStyles.contentTitleInner}>
+                <div className={PageStyles.contentTitleInner}>
                     <div className={PageStyles.title}>Product</div>
                 </div>
             </div>

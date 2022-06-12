@@ -20,7 +20,7 @@ const AboutUsTitleImage = () => {
     return (
         <div className={PageStyles.titleContent}>
             <div className={PageStyles.contentTitleImg} id="aboutUs-img">
-                <div class={PageStyles.contentTitleInner}>
+                <div className={PageStyles.contentTitleInner}>
                     <div className={PageStyles.title}>About Us</div>
                 </div>
             </div>
@@ -32,12 +32,12 @@ const AboutUsContent = () => {
     return (
         <div className="about-content-inner">
             <Row justify="center">
-                <Col xs={24} sm={12}>
+                <Col md={24} lg={12}>
                     <div className="about-content-image">
                         <img src="http://zitga.com.vn/wp-content/uploads/2020/03/zitga-44.jpg" />
                     </div>
                 </Col>
-                <Col xs={24} sm={12}>
+                <Col md={24} lg={12}>
                     <div className="about-content-tabs-container">
                         <div className="about-content-tabs-title">
                             Chúng tôi là Zitga
