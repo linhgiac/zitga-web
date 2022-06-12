@@ -4,3 +4,42 @@
 #careers-img{
     background-image: url(http://zitga.com.vn/wp-content/uploads/2019/11/rsz_1bannerweb5.jpg);
 }
+.careers-content-inner>div{
+    margin-top: 100px;
+}
+.careers-main-content-container{
+    width: 100%;
+}
+.careers-image-title{
+    width: 100%;
+}
+.careers-image-title>a>img{
+    width: 100%;
+}
+.careers-main-content-inner{
+    background-color: #000;
+}
+.careers-main-content-pre-title{
+    padding: 20px 20px;
+}
+.careers-pre-title-btn{
+    background-color: #ff0e1f !important;
+    border-color: #ff0e1f !important;
+    height: 28px;
+}
+.careers-main-content-title{
+    
+    font-size: 30px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    padding-left: 20px;
+}
+.careers-main-content-title>a{
+    color: #fff;
+}
+.careers-main-content-title>a:hover{
+    color: #ff0e1f
+}
+.careers-main-content-post-tiltle{
+    
+}
