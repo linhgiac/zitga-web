@@ -1,7 +1,7 @@
 import Page from "./pages/pages";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
-
+import "antd/dist/antd.css";
 import { BrowserRouter } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
@@ -16,8 +16,11 @@ function App() {
 
     const login = async (details) => {
 
-        const response = await axios.post('http://localhost/mvc/login.php', details);
-        console.log(response);
+        // Test
+        const response = await axios.get('http://localhost/mvc/?controller=product');
+        console.log(response.data);
+        console.log("Updated");
+        // End test
 
         console.log(details);
 

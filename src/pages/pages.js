@@ -18,7 +18,7 @@ const PageWrapper = ({ app, Page }) => {
         <>
             <Header app={app} />
             <div className="page">
-                <Page />
+                <Page app={app} />
             </div>
             <Footer />
         </>
@@ -27,42 +27,40 @@ const PageWrapper = ({ app, Page }) => {
 
 const Page = ({ app }) => {
     return (
-        <>
-            <Routes>
-                <Route
-                    path='/'
-                    element={<PageWrapper app={app} Page={Home} />}
-                />
-                <Route
-                    path='/about'
-                    element={<PageWrapper app={app} Page={AboutUs} />}
-                />
-                <Route
-                    path='/careers'
-                    element={<PageWrapper app={app} Page={Careers} />}
-                />
-                <Route
-                    path='/product'
-                    element={<PageWrapper app={app} Page={Product} />}
-                />
-                <Route
-                    path='/news'
-                    element={<PageWrapper app={app} Page={News} />}
-                />
-                <Route
-                    path='/contact'
-                    element={<PageWrapper app={app} Page={Contact} />}
-                />
-                <Route
-                    path='/login'
-                    element={<Login login={app.login} />}
-                />
-                <Route
-                    path='/signup'
-                    element={<SignUp signup={app.signup} />}
-                />
-            </Routes>
-        </>
+        <Routes>
+            <Route
+                path='/'
+                element={<PageWrapper app={app} Page={Home} />}
+            />
+            <Route
+                path='/about'
+                element={<PageWrapper app={app} Page={AboutUs} />}
+            />
+            <Route
+                path='/careers'
+                element={<PageWrapper app={app} Page={Careers} />}
+            />
+            <Route
+                path='/product'
+                element={<PageWrapper app={app} Page={Product} />}
+            />
+            <Route
+                path='/news'
+                element={<PageWrapper app={app} Page={News} />}
+            />
+            <Route
+                path='/contact'
+                element={<PageWrapper app={app} Page={Contact} />}
+            />
+            <Route
+                path='/login'
+                element={<Login login={app.login} />}
+            />
+            <Route
+                path='/signup'
+                element={<SignUp signup={app.signup} />}
+            />
+        </Routes>
     )
 }
 
