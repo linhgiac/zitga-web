@@ -1,8 +1,11 @@
 import React from "react";
+import { useState } from "react";
 import "./careers.css";
 import PageStyles from "../pages.module.css";
 import { Col, Row, Button } from "antd";
 import SearchAndCategories from "../../components/categories/categories";
+import { NavLink } from "react-router-dom";
+import { HeartFilled } from "@ant-design/icons";
 const Careers = () => {
     return (
         <div className={PageStyles.content}>
@@ -43,21 +46,73 @@ const CareersContent = () => {
     );
 };
 const CareersMainContent = () => {
+    const current = new Date();
+    const month = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+    const fakeData = [
+        {
+            imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
+            title: "Senior Game UX Designer",
+            day: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
+        },
+    ];
+    const [count, setCount] = useState(0);
+    const [isLike, setIsLike] = useState(false);
+    const handleLiked = () => {
+        setIsLike(!isLike);
+        if (isLike) {
+            setCount(count - 1);
+        } else {
+            setCount(count + 1);
+        }
+    };
+
     return (
-        <div className="career-main-content-container">
+        <div className="careers-main-content-container">
             <div className="careers-image-title">
                 <a href="#">
-                    <img src="http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg" />
+                    <img src={fakeData[0].imgSrc} />
                 </a>
             </div>
             <div className="careers-main-content-inner">
                 <div className="careers-main-content-pre-title">
-                    <Button type="primary" className="careers-pre-title-btn">tuyển dụng</Button>
+                    <div className="careers-pre-title-btn">tuyển dụng</div>
                 </div>
                 <div className="careers-main-content-title">
-                    <a href="#">SENIOR GAME UX DESIGNER</a>
+                    <a href="#">{fakeData[0].title}</a>
                 </div>
-                <div className="careers-main-content-post-tiltle"></div>
+                <div className="careers-main-content-post-tiltle">
+                    <div className="careers-post-left">
+                        <NavLink className="careers-post-left-element" to="#">
+                            {fakeData[0].day}
+                        </NavLink>
+
+                        <div className="careers-post-left-like">
+                            <HeartFilled
+                                onClick={handleLiked}
+                                style={{ color: "#ff0e1f" }}
+                            />
+                            <span>{count}</span>
+                        </div>
+                    </div>
+                    <div className="careers-post-right">
+                        <div className="careers-post-right-element">
+                            by admin
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -9,7 +9,7 @@ import "./header.css";
 // import Home from '../../pages/home/home';
 // import Login from '../../pages/login/login'
 import { Button } from "antd";
-
+import "antd/dist/antd.css";
 import { LogoutOutlined } from "@ant-design/icons";
 const Header = ({ app }) => {
     const handleLogout = () => {
