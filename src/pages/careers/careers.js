@@ -65,7 +65,7 @@ const CareersMainContent = () => {
         {
             imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
             title: "Senior Game UX Designer",
-            day: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
+            date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
         },
     ];
     const [count, setCount] = useState(0);
@@ -91,12 +91,12 @@ const CareersMainContent = () => {
                     <div className="careers-pre-title-btn">tuyển dụng</div>
                 </div>
                 <div className="careers-main-content-title">
-                    <a href="#">{fakeData[0].title}</a>
+                    <a href="/careers/careers-details-01">{fakeData[0].title}</a>
                 </div>
                 <div className="careers-main-content-post-tiltle">
                     <div className="careers-post-left">
                         <NavLink className="careers-post-left-element" to="#">
-                            {fakeData[0].day}
+                            {fakeData[0].date}
                         </NavLink>
 
                         <div className="careers-post-left-like">

@@ -64,7 +64,7 @@ const Header = ({ app }) => {
                                     </Button>
                                 </div>) :
                                 (<div style={{ color: 'white', background: 'red' }}>
-                                    Hello, {app.user.name}
+                                    <a href="/admin">Hello, {app.user.name}</a>
                                 </div>)
                         }
                     </>

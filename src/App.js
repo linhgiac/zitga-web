@@ -16,11 +16,11 @@ function App() {
 
     const login = async (details) => {
 
-        // Test
-        const response = await axios.get('http://localhost/mvc/?controller=product');
-        console.log(response.data);
-        console.log("Updated");
-        // End test
+        // // Test
+        // const response = await axios.get('http://localhost/mvc/?controller=product');
+        // console.log(response.data);
+        // console.log("Updated");
+        // // End test
 
         console.log(details);
 
