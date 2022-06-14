@@ -37,3 +37,31 @@
     font-weight: 50;
     font-family: Montserrat,sans-serif;
 }
+.product-modal-title{
+    color: #000;
+    font-size: 50px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-bottom: 20px;
+}
+.product-modal-video{
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+.product-modal-purchase{
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+}
+.product-modal-android, .product-modal-ios{
+    width: 200px;
+    margin: 20px;
+}
+
+.product-modal-android>a>img, .product-modal-ios>a>img{
+    width: 200px;
+}
+
