@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./header.css";
+import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 // import AboutUs from '../../pages/about/aboutUs';
 // import Careers from '../../pages/careers/careers';
 // import Contact from '../../pages/contact/contact';
@@ -17,6 +18,10 @@ const Header = ({ app }) => {
             app.logout();
         }
     };
+    const [clicked, setClicked] = useState(false);
+    const handleClicked = () => {
+        setClicked(!clicked);
+    };
 
     return (
         <nav>
@@ -31,14 +36,23 @@ const Header = ({ app }) => {
                         />
                     </NavLink>
                 </div>
+                <div className="header-icon">
+                    <a href="#" onClick={handleClicked}>
+                        {!clicked ? (
+                            <MenuOutlined
+                                style={{ color: "white", fontSize: "30px" }}
+                            />
+                        ) : (
+                            <CloseOutlined
+                                style={{ color: "white", fontSize: "30px" }}
+                            />
+                        )}
+                    </a>
+                </div>
                 <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        marginRight: "65px",
-                    }}
-                    className="header-pages"
+                    className={
+                        clicked ? "header-pages active" : "header-pages"
+                    }
                 >
                     <NavLink className="header-elements" to="/about">
                         About Us
@@ -66,13 +80,9 @@ const Header = ({ app }) => {
                                 >
                                     Login
                                 </Button>
-                                <LogoutOutlined
-                                    className="btn-icon"
-                                    onClick={handleLogout}
-                                />
                             </div>
                         ) : (
-                            <div className =' header-btn'>
+                            <div className=" header-btn">
                                 <Button
                                     type="primary"
                                     shape="round"
@@ -81,6 +91,10 @@ const Header = ({ app }) => {
                                 >
                                     Hello, {app.user.name}
                                 </Button>
+                                <LogoutOutlined
+                                    className="btn-icon"
+                                    onClick={handleLogout}
+                                />
                             </div>
                         )}
                     </>
