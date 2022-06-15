@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./header.css";
+import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 // import AboutUs from '../../pages/about/aboutUs';
 // import Careers from '../../pages/careers/careers';
 // import Contact from '../../pages/contact/contact';
@@ -9,14 +10,18 @@ import "./header.css";
 // import Home from '../../pages/home/home';
 // import Login from '../../pages/login/login'
 import { Button } from "antd";
-
+import "antd/dist/antd.css";
 import { LogoutOutlined } from "@ant-design/icons";
 const Header = ({ app }) => {
     const handleLogout = () => {
         if (app.isLogged) {
             app.logout();
         }
-    }
+    };
+    const [clicked, setClicked] = useState(false);
+    const handleClicked = () => {
+        setClicked(!clicked);
+    };
 
     return (
         <nav>
@@ -31,14 +36,23 @@ const Header = ({ app }) => {
                         />
                     </NavLink>
                 </div>
+                <div className="header-icon">
+                    <a href="#" onClick={handleClicked}>
+                        {!clicked ? (
+                            <MenuOutlined
+                                style={{ color: "white", fontSize: "30px" }}
+                            />
+                        ) : (
+                            <CloseOutlined
+                                style={{ color: "white", fontSize: "30px" }}
+                            />
+                        )}
+                    </a>
+                </div>
                 <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        marginRight: "65px",
-                    }}
-                    className="header-pages"
+                    className={
+                        clicked ? "header-pages active" : "header-pages"
+                    }
                 >
                     <NavLink className="header-elements" to="/about">
                         About Us
@@ -56,24 +70,36 @@ const Header = ({ app }) => {
                         Contact
                     </NavLink>
                     <>
-                        {
-                            (!app.isLogged) ?
-                                (<div className="header-btn">
-                                    <Button type="primary" shape="round" href="/login" className="btn">
-                                        Login
-                                    </Button>
-                                </div>) :
-                                (<div style={{ color: 'white', background: 'red' }}>
+                        {!app.isLogged ? (
+                            <div className="header-btn">
+                                <Button
+                                    type="primary"
+                                    shape="round"
+                                    href="/login"
+                                    className="btn"
+                                >
+                                    Login
+                                </Button>
+                            </div>
+                        ) : (
+                            <div className=" header-btn">
+                                <Button
+                                    type="primary"
+                                    shape="round"
+                                    href="/admin"
+                                    className="btn"
+                                >
                                     Hello, {app.user.name}
-                                </div>)
-                        }
+                                </Button>
+                                <LogoutOutlined
+                                    className="btn-icon"
+                                    onClick={handleLogout}
+                                />
+                            </div>
+                        )}
                     </>
-                    <div className="header-btn">
-                        <LogoutOutlined className="btn-icon" onClick={handleLogout} />
-                    </div>
                 </div>
             </div>
-            
         </nav>
     );
 };

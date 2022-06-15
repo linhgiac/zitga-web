@@ -45,3 +45,7 @@
     background-color: #17161a;
     /* height: 400px; */
 }
+.ant-back-top{
+    bottom: 100px !important;
+    right: 50px !important;
+}

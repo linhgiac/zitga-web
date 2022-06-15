@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./contact.css";
 import PageStyles from "../pages.module.css";
-
+import "antd/dist/antd.css";
 import { Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
 import {

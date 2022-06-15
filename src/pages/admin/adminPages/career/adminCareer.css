@@ -1,0 +1,36 @@
+.admin-career-container{
+  padding: 60px 40px;
+  width: 100%;
+  position: relative;
+}
+
+.admin-career-btn{
+  right: 40px;
+  position: absolute;
+  
+}
+.ant-btn{
+  border-color: #f0f2f5;
+  box-shadow: none;
+}
+.ant-btn-primary{
+  background-color: #ff0e1f !important;
+  border-color: #ff0e1f !important;
+}
+.ant-btn-primary:hover{
+  
+  border: 1px solid #fff !important;
+}
+.ant-btn-default{
+  margin-right: 20px;
+  border-color: none !important;
+  background-color: #f0f2f5 !important;
+}
+.ant-btn-default:hover{
+  color: #ff0e1f;
+  border-color: #f0f2f5;
+}
+.admin-career-table{
+  margin-top: 50px;
+  width: 100%;
+}

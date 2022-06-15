@@ -71,3 +71,17 @@
   line-height: 70px;
   color: #fff;
 }
+@media screen and (max-width: 960px){
+    .footer-router{
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+    }
+    .footer-elements{
+      height: 60px;
+      line-height: 60px;
+      border-bottom: #000 2px solid;
+      padding: 0;
+    }
+}
