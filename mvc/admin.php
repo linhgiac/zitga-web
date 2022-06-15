@@ -1,9 +1,4 @@
-<?php
-    session_start();
-    if( !isset($_SESSION['username'])) {
-        header('location: login.php');
-    }
-?>
+
 
 <h1>Admin page</h1>
 

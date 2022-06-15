@@ -33,7 +33,7 @@ class ProductController extends BaseController
     public function store()
     {
         $data = [
-            'id' => 3,
+            // 'id' => 3,
             'name' => 'SUMMONERS ERA',
             'category' => 'afdv',
             'release_date' => '2020-05-22',

@@ -62,7 +62,7 @@ class NewsController extends BaseController
         echo 'Xóa thành công ! :)))))';
     }
 
-    public function find()
+    public function show()
     {
         $id = $_GET['id'];
         $result = $this->newsModel->findById($id);

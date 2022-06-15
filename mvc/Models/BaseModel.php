@@ -76,6 +76,27 @@ class BaseModel extends Database
         $this->_query($sql);
     }
 
+    public function check($table, $u, $p)
+    {
+        $sql = "SELECT * FROM ${table} WHERE username = \"${u}\" and password = \"${p}\"";
+        $result = mysqli_query($this->connect, $sql);
+        if(mysqli_num_rows($result) > 0){
+            echo "Dang nhap thanh cong";
+            $_SESSION['username'] = $u;
+            header('location:admin.php');
+        }
+        else{
+            echo "That bai";
+
+            // require_once 'login.html';
+        }
+    }
+
+    public function checkS($table, $u, $p, $n, $e)
+    {
+        
+    }
+
     private function _query($sql)
     {
         return mysqli_query($this->connect, $sql);
