@@ -11,10 +11,7 @@ class ProductModel extends BaseModel
 
     public function findById($id) // search
     {
-        return [
-            'id' => 1,
-            'name' => 'GTA',
-        ];
+        return $this->find(self::TABLE, $id);
     }
 
     public function store($data) // add

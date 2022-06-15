@@ -24,16 +24,16 @@ class ProductController extends BaseController
             $orders   
         );
 
-        return $this->view('frontend.products.index', [
-            'pageTitle' => 'Game list',
-            'products' => $products,
-        ]);
+        // return $this->view('frontend.products.index', [
+        //     'pageTitle' => 'Game list',
+        //     'products' => $products,
+        // ]);
     }
 
     public function store()
     {
         $data = [
-            // 'id' => 3,
+            // 'id' => 1,
             'name' => 'SUMMONERS ERA',
             'category' => 'afdv',
             'release_date' => '2020-05-22',
@@ -55,8 +55,9 @@ class ProductController extends BaseController
         $this->productModel->updateData($id, $data);
     }
 
-    public function show($id)
+    public function show()
     {
+        $id = $_GET['id'];
         $product = $this->productModel->findById($id);
         return $this->view('frontend.products.show', [
             'product' => $product,

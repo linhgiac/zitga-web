@@ -28,15 +28,17 @@ class BaseModel extends Database
         while($row = mysqli_fetch_assoc($query)){
             array_push($data, $row);
         }
-
-        return $data;
+        $this->_encodeJWT($data);
+        //return $data;
     }
 
     public function find($table, $id)
     {
         $sql = "SELECT * FROM ${table} WHERE id = ${id} LIMIT 1";
         $query = $this->_query($sql);
-        return mysqli_fetch_assoc($query);
+        $result = mysqli_fetch_assoc($query);
+        $this->_encodeJWT($result);
+
     }
 
     public function create($table, $data = [])
@@ -52,6 +54,9 @@ class BaseModel extends Database
         $sql = "INSERT INTO ${table}(${columns}) VALUES(${newValues})";
 
         $this->_query($sql);
+
+        echo $this->_encodeJWT($data);
+
     }
 
     public function update($table, $id, $data)
@@ -67,6 +72,8 @@ class BaseModel extends Database
         $sql = "UPDATE ${table} SET ${dataSetString} WHERE id = ${id}";
 
         $this->_query($sql);
+
+        echo $this->_encodeJWT($data);
     }
 
     public function delete($table, $id)
@@ -74,6 +81,8 @@ class BaseModel extends Database
         $sql = "DELETE FROM ${table} WHERE id = ${id}";
 
         $this->_query($sql);
+
+        echo $this->_encodeJWT($id);
     }
 
     public function check($table, $u, $p)
@@ -81,14 +90,18 @@ class BaseModel extends Database
         $sql = "SELECT * FROM ${table} WHERE username = \"${u}\" and password = \"${p}\"";
         $result = mysqli_query($this->connect, $sql);
         if(mysqli_num_rows($result) > 0){
-            echo "Dang nhap thanh cong";
-            $_SESSION['username'] = $u;
-            header('location:admin.php');
+            // "Dang nhap thanh cong";
+            // $_SESSION['username'] = $u;
+            // header('location:admin.php');
+            $data = [
+                'username' => $u,
+                'password' => $p
+            ];
+            echo $this->_encodeJWT($data);
         }
         else{
             echo "That bai";
 
-            // require_once 'login.html';
         }
     }
 
@@ -100,5 +113,30 @@ class BaseModel extends Database
     private function _query($sql)
     {
         return mysqli_query($this->connect, $sql);
+    }
+
+    private function _encodeJWT($data)
+    {
+        $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
+
+        // Create token payload as a JSON string
+        $payload = json_encode($data);
+
+        // Encode Header to Base64Url String
+        $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
+
+        // Encode Payload to Base64Url String
+        $base64UrlPayload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
+
+        // Create Signature Hash
+        $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, 'abC123!', true);
+
+        // Encode Signature to Base64Url String
+        $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
+
+        // Create JWT
+        $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
+
+        echo $jwt;
     }
 }
