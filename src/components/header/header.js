@@ -16,7 +16,7 @@ const Header = ({ app }) => {
         if (app.isLogged) {
             app.logout();
         }
-    }
+    };
 
     return (
         <nav>
@@ -56,24 +56,36 @@ const Header = ({ app }) => {
                         Contact
                     </NavLink>
                     <>
-                        {
-                            (!app.isLogged) ?
-                                (<div className="header-btn">
-                                    <Button type="primary" shape="round" href="/login" className="btn">
-                                        Login
-                                    </Button>
-                                </div>) :
-                                (<div style={{ color: 'white', background: 'red' }}>
-                                    <a href="/admin">Hello, {app.user.name}</a>
-                                </div>)
-                        }
+                        {!app.isLogged ? (
+                            <div className="header-btn">
+                                <Button
+                                    type="primary"
+                                    shape="round"
+                                    href="/login"
+                                    className="btn"
+                                >
+                                    Login
+                                </Button>
+                                <LogoutOutlined
+                                    className="btn-icon"
+                                    onClick={handleLogout}
+                                />
+                            </div>
+                        ) : (
+                            <div className =' header-btn'>
+                                <Button
+                                    type="primary"
+                                    shape="round"
+                                    href="/admin"
+                                    className="btn"
+                                >
+                                    Hello, {app.user.name}
+                                </Button>
+                            </div>
+                        )}
                     </>
-                    <div className="header-btn">
-                        <LogoutOutlined className="btn-icon" onClick={handleLogout} />
-                    </div>
                 </div>
             </div>
-            
         </nav>
     );
 };

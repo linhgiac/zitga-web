@@ -70,6 +70,7 @@ nav{
 }
 .header-btn {
     padding: 0 10px;
+    display: flex;
 }
 .btn{
     background-color: #ff0e1f;

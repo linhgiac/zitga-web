@@ -7,7 +7,6 @@
 }
 .ant-layout-sider-children{
   background-color: #000;
-  width: 200px;
 }
 #components-layout-demo-responsive .logo {
   height: 32px;
@@ -72,6 +71,6 @@
 .admin-menu-item:hover, .admin-menu-item:active{
   background-color: #ff0e1f !important;
 }
-.ant-layout{
-  background-color: ;
+.ant-layout-sider-zero-width-trigger {
+  background-color: #ff0e1f;
 }

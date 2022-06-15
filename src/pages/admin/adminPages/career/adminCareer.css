@@ -1,8 +1,9 @@
 .admin-career-container{
   padding: 60px 40px;
-  
+  width: 100%;
   position: relative;
 }
+
 .admin-career-btn{
   right: 40px;
   position: absolute;
@@ -31,4 +32,5 @@
 }
 .admin-career-table{
   margin-top: 50px;
+  width: 100%;
 }

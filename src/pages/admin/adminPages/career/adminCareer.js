@@ -3,8 +3,8 @@ import "./adminCareer.css";
 import { Button, Modal, Table, Form, Input, Select, DatePicker } from "antd";
 import { useState } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
-import 'react-quill/dist/quill.snow.css';
-import ReactQuill from 'react-quill';
+import "react-quill/dist/quill.snow.css";
+import ReactQuill from "react-quill";
 const AdminCareer = () => {
     return (
         <div className="admin-career-container">
@@ -77,29 +77,33 @@ const AdminAddCareerForm = () => {
                     <DatePicker />
                 </Form.Item>
                 <Form.Item label="Description">
-                    <MyEditor/>
+                    <MyEditor />
                 </Form.Item>
             </Form>
         </div>
     );
 };
 const MyEditor = () => {
-  const [value, setValue] = useState('');
+    const [value, setValue] = useState("");
 
-  return (
-    <ReactQuill theme="snow" value={value} onChange={setValue}/>
-  );
-}
+    return <ReactQuill theme="snow" value={value} onChange={setValue} />;
+};
 const AdminCareerTable = () => {
     const columns = [
-        { title: "ID", dataIndex: "id", key: "id", width: "10%" },
-        { title: "Title", dataIndex: "title", key: "title" },
+        { title: "ID", dataIndex: "id", key: "id", width: "5%" },
+        {
+            title: "Title",
+            dataIndex: "title",
+            key: "title",
+            render: text => <a>{text}</a>,
+        },
         {
             title: "Date",
             dataIndex: "date",
             key: "date",
+            responsive: ["lg"],
         },
-        { title: "Categories", dataIndex: "type" },
+        { title: "Categories", dataIndex: "type", responsive: ["md"] },
         { title: "Delete", key: "delete" },
     ];
     const current = new Date();

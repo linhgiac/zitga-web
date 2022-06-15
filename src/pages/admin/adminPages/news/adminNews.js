@@ -78,11 +78,11 @@ const MyEditor = () => {
 const AdminNewsTable = () => {
     const columns = [
         { title: "ID", dataIndex: "id", key: "id", width: "10%" },
-        { title: "Title", dataIndex: "title", key: "title" },
+        { title: "Title", dataIndex: "title", key: "title", render: text => <a>{text}</a> },
         {
             title: "Date",
             dataIndex: "date",
-            key: "date",
+            key: "date", responsive: ['lg']
         },
 
         { title: "Delete", key: "delete" },

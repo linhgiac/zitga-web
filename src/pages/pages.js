@@ -13,6 +13,8 @@ import Header from "../components/header/header";
 import Footer from "../components/footer/footer";
 import Post from "../components/post/post";
 import Admin from "./admin/admin";
+import { BackTop } from "antd";
+import { UpCircleFilled } from "@ant-design/icons";
 import AdminUser from "./admin/adminPages/user/adminUser";
 import AdminCareer from "./admin/adminPages/career/adminCareer";
 import AdminNews from "./admin/adminPages/news/adminNews";
@@ -24,6 +26,11 @@ const PageWrapper = ({ app, Page }) => {
             <div className="page">
                 <Page app={app} />
             </div>
+            <BackTop>
+                <div style={{ color: "#ff0e1f", fontSize: "50px" }}>
+                    <UpCircleFilled />
+                </div>
+            </BackTop>
             <Footer />
         </>
     );
@@ -50,6 +57,10 @@ const Page = ({ app }) => {
                 element={<PageWrapper app={app} Page={Post} />}
             />
             <Route
+                path="/news/news-details-01"
+                element={<PageWrapper app={app} Page={Post} />}
+            />
+            <Route
                 path="/news"
                 element={<PageWrapper app={app} Page={News} />}
             />
@@ -58,7 +69,7 @@ const Page = ({ app }) => {
                 element={<PageWrapper app={app} Page={Contact} />}
             />
             <Route path="/admin" element={<Admin app={app} />} />
-            
+
             <Route path="/admin/news" element={<Admin app={app} />} />
             <Route path="/admin/career" element={<Admin app={app} />} />
 

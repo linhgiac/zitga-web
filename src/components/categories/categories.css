@@ -2,7 +2,7 @@
   height: 50px;
   width: 100%;
   font-family: Montserrat,sans-serif;
-  padding-right: 30px;
+  padding: 0 30px;
 }
 .search-form{
   height: 100%;
@@ -37,7 +37,7 @@
   font-size: 20px;
 }
 .categories-container{
-  padding: 60px 0px;
+  padding: 60px 30px;
   padding-right: 30px;
 }
 .categories-title{
