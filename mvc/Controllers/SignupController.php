@@ -14,9 +14,10 @@ class SignupController extends BaseController
     {
         $u = $_GET['username'];
         $p = $_GET['password'];
+        $rp = $_GET['repassword'];
         $n = $_GET['name'];
         $e = $_GET['email'];
-        $this->signupModel->checkSignup($u, $p, $n, $e);
+        $this->signupModel->checkSignup($u, $p, $rp, $n, $e);
     }
 
 }
