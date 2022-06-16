@@ -99,21 +99,22 @@ class BaseModel extends Database
     public function checkS($table, $u, $p, $rp, $n, $e) //check Signup
     {
         if($rp != $p) {
-            echo "repassword <> password";
+            echo json_encode(["success" => "false", "error" => "repassword <> password"]);
+            exit;
         }
 
         $sql = "SELECT * FROM user WHERE username = '$u' OR email = '$e'";
         $result = mysqli_query($this->connect, $sql);
         if(mysqli_num_rows($result) > 0){
-            echo "username or email existed";
+            echo json_encode(["success" => "false", "error" => "username or email existed"]);
         }
         else
         {
             $columns = "username, password, name, email";
             $newValues = "'$u', '$p', '$n', '$e'";
-            echo $newValues;
             $sql = "INSERT INTO ${table}(${columns}) VALUES(${newValues})";
             $this->_query($sql);
+            echo json_encode(["success" => "true"]);
         }
     }
 
