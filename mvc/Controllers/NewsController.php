@@ -10,6 +10,7 @@ class NewsController extends BaseController
         $this->newsModel = new NewsModel;
     }
 
+    // get all of tuples of news relation in database
     public function index()
     {
         $selectColumns = ['id', 'title'];
@@ -25,22 +26,17 @@ class NewsController extends BaseController
         );
 
         return $this->view('frontend.news.index', [
-            'pageTitle' => 'News list',
             'newsList' => $newsList,
         ]);
-        // echo json_encode($newsList);
     }
 
     public function store()
     {
-        $data = [
-            'id' => 3,
-            'title' => 'sdfsdfgsdf',
-            'content' => 'afdvsdfsdfsdfsesdfdsfsdf',
-            'image' => 'vidf'
-        ];
+        $data = file_get_contents('php://input');
 
-        $this->newsModel->store($data);
+        print_r($data);
+
+        // $this->newsModel->store($data);
     }
 
     public function update()

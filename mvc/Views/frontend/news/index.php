@@ -2,9 +2,7 @@
 // Headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
+header('Access-Control-Allow-Headers: *');
 
-print_r($newsList);
-echo json_encode(array($newsList));
+echo json_encode($newsList);
 ?>
