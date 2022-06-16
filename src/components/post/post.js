@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "./post.css";
-import { Row, Col } from "antd";
+import { Row, Col, Comment, Avatar } from "antd";
 
 import SearchAndCategories from "../categories/categories";
 import { CaretRightOutlined } from "@ant-design/icons";
@@ -73,23 +73,44 @@ const PostMainContent = () => {
             <div className="post-content-title">{fakeData[0].title}</div>
             <div className="post-main-content">
                 <p>đây là content</p>
+
             </div>
         </div>
     );
 };
 
 const PostComments = () => {
-    const [comment, setComment] = useState("");
+    const [comments, setComments] = useState([
+        {
+            id: 1,
+            content: "Haha",
+        },
+        {
+            id: 2,
+            content: "Haha",
+        },
+        {
+            id: 3,
+            content: "Haha",
+        },
+        {
+            id: 4,
+            content: "Haha",
+        },
+    ]);
 
     const submitHandler = (e) => {
         e.preventDefault();
 
         // comments logic here
-        console.log("Your comment: " + comment);
+        console.log("Your comment: " + comments);
     }
 
     return (
         <div className="post-comment">
+            <div className="post-comment-list" style={{ backgroundColor: 'white' }}>
+                <PostCommentList commentData={comments} />
+            </div>
             <div className="post-comment-title">
                 <p>
                     <CaretRightOutlined style={{ color: "#ff0e1f" }} />
@@ -102,7 +123,7 @@ const PostComments = () => {
                         type="text"
                         className="post-comment-input"
                         placeholder='"Your comment", nếu chưa login thì là "Bạn phải login mới có thể bình luận"'
-                        onChange={e => setComment(e.target.value)}
+                    // onChange={e => setComment(e.target.value)}
                     />
                     <button type="submit" className="post-comment-btn">Submit</button>
                 </form>
@@ -110,4 +131,27 @@ const PostComments = () => {
         </div>
     );
 };
+
+const PostCommentList = ({ commentData }) => {
+    const commentList = commentData.map((comment) =>
+        <PostComment key={comment.id.toString()} comment={comment} />
+    );
+    return (
+        <>{commentList}</>
+    )
+}
+
+const PostComment = ({ comment }) => {
+    return (
+        <Comment
+            author={"Han Solo"}
+            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+            content={
+                <p>
+                    {comment.content}
+                </p>
+            }
+        />
+    );
+}
 export default Post;
