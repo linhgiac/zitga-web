@@ -116,10 +116,10 @@ const StickManLegendsModal = () => {
                 <div className="product-modal-title">Stickman Legend</div>
                 <div className="product-modal-video">
                     <iframe
-                        class="edgtf-iframe-video fluidvids-item"
+                        className="edgtf-iframe-video fluidvids-item"
                         src="https://www.youtube.com/embed/irSMptf7MXQ?wmode=transparent"
-                        width="800"
-                        height="450"
+                        // width="800"
+                        // height="450"
                         wmode="Opaque"
                         allowfullscreen=""
                         data-fluidvids="loaded"
