@@ -28,17 +28,14 @@ class BaseModel extends Database
         while($row = mysqli_fetch_assoc($query)){
             array_push($data, $row);
         }
-        $this->_encodeJWT($data);
-        //return $data;
+        return $data;
     }
 
     public function find($table, $id)
     {
         $sql = "SELECT * FROM ${table} WHERE id = ${id} LIMIT 1";
         $query = $this->_query($sql);
-        $result = mysqli_fetch_assoc($query);
-        $this->_encodeJWT($result);
-
+        mysqli_fetch_assoc($query);
     }
 
     public function create($table, $data = [])
@@ -55,8 +52,6 @@ class BaseModel extends Database
 
         $this->_query($sql);
 
-        echo $this->_encodeJWT($data);
-
     }
 
     public function update($table, $id, $data)
@@ -72,8 +67,6 @@ class BaseModel extends Database
         $sql = "UPDATE ${table} SET ${dataSetString} WHERE id = ${id}";
 
         $this->_query($sql);
-
-        echo $this->_encodeJWT($data);
     }
 
     public function delete($table, $id)
@@ -81,11 +74,9 @@ class BaseModel extends Database
         $sql = "DELETE FROM ${table} WHERE id = ${id}";
 
         $this->_query($sql);
-
-        echo $this->_encodeJWT($id);
     }
 
-    public function check($table, $u, $p)
+    public function check($table, $u, $p) //checkLogin
     {
         $sql = "SELECT * FROM ${table} WHERE username = \"${u}\" and password = \"${p}\"";
         $result = mysqli_query($this->connect, $sql);
@@ -100,14 +91,30 @@ class BaseModel extends Database
             echo $this->_encodeJWT($data);
         }
         else{
-            echo "That bai";
-
+            header("HTTP/1.1 401 Unauthorized");
+            exit;
         }
     }
 
-    public function checkS($table, $u, $p, $n, $e)
+    public function checkS($table, $u, $p, $rp, $n, $e) //check Signup
     {
-        
+        if($rp != $p) {
+            echo "repassword <> password";
+        }
+
+        $sql = "SELECT * FROM user WHERE username = '$u' OR email = '$e'";
+        $result = mysqli_query($this->connect, $sql);
+        if(mysqli_num_rows($result) > 0){
+            echo "username or email existed";
+        }
+        else
+        {
+            $columns = "username, password, name, email";
+            $newValues = "'$u', '$p', '$n', '$e'";
+            echo $newValues;
+            $sql = "INSERT INTO ${table}(${columns}) VALUES(${newValues})";
+            $this->_query($sql);
+        }
     }
 
     private function _query($sql)

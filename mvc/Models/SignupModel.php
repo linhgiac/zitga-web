@@ -29,8 +29,8 @@ class SignupModel extends BaseModel
         return $this->delete(self::TABLE, $id);
     }
 
-    public function checkSignup($u, $p, $n, $e)
+    public function checkSignup($u, $p, $rp, $n, $e)
     {
-        return $this->checkS(self::TABLE, $u, $p, $n, $e);
+        return $this->checkS(self::TABLE, $u, $p, $rp, $n, $e);
     }
 }
