@@ -47,6 +47,9 @@
 }
 .product-modal-video{
     padding-bottom: 20px;
+    width: 100%;
+    height: calc(100% * 0.5625);
+
     display: flex;
     justify-content: center;
 }
@@ -64,4 +67,15 @@
 .product-modal-android>a>img, .product-modal-ios>a>img{
     width: 200px;
 }
+.edgtf-iframe-video.fluidvids-item{
+    width: 100%;
+    height: 100%;
+}
+@media screen and (max-width:550px){
+    .product-modal-purchase{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 
