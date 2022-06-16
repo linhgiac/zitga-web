@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "./post.css";
 import { Row, Col } from "antd";
@@ -53,9 +53,8 @@ const PostMainContent = () => {
         {
             imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
             title: "Senior Game UX Designer",
-            date: `${
-                month[current.getMonth()]
-            } ${current.getDate()}, ${current.getFullYear()}`,
+            date: `${month[current.getMonth()]
+                } ${current.getDate()}, ${current.getFullYear()}`,
             details: "",
         },
     ];
@@ -80,6 +79,15 @@ const PostMainContent = () => {
 };
 
 const PostComments = () => {
+    const [comment, setComment] = useState("");
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        // comments logic here
+        console.log("Your comment: " + comment);
+    }
+
     return (
         <div className="post-comment">
             <div className="post-comment-title">
@@ -89,11 +97,12 @@ const PostComments = () => {
                 </p>
             </div>
             <div className="post-comment-form">
-                <form>
+                <form onSubmit={submitHandler}>
                     <input
                         type="text"
                         className="post-comment-input"
                         placeholder='"Your comment", nếu chưa login thì là "Bạn phải login mới có thể bình luận"'
+                        onChange={e => setComment(e.target.value)}
                     />
                     <button type="submit" className="post-comment-btn">Submit</button>
                 </form>

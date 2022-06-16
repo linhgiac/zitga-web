@@ -5,6 +5,10 @@ import "antd/dist/antd.css";
 import { BrowserRouter } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { CookiesProvider, useCookies } from 'react-cookie';
+import { useJwt } from "react-jwt";
+
+const userAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6IkhhaGEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTUxNjIzOTAyMn0.T54_qTMO8tT3Yb4vvoP-pIn1HLSPIVSLYVfyH-iQDtA";
 
 function App() {
     const adminUser = {
@@ -12,7 +16,45 @@ function App() {
         password: "123456",
     };
 
-    const [user, setUser] = useState({ name: "", email: "" });
+    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+
+    // setCookie('userAccessToken', userAccessToken, { path: '/' });
+
+    const setCookies = (userInfo) => {
+        setCookie('name', userInfo.name, { path: '/' });
+        setCookie('email', userInfo.email, { path: '/' });
+    };
+
+    const removeCookies = () => {
+        removeCookie('name');
+        removeCookie('email');
+    };
+
+    const resetCookies = () => {
+        setCookie('name', "", { path: '/' });
+        setCookie('email', "", { path: '/' });
+    };
+
+    const { decodedToken, isUserExpired } = useJwt(cookies.userAccessToken);
+
+    if (isUserExpired) {
+        resetCookies();
+    } else {
+        console.log(decodedToken);
+        if (decodedToken !== null) {
+            console.log("Already access token exist");
+            setCookies(decodedToken);
+        } else {
+            resetCookies();
+        }
+    };
+
+    const [user, setUser] = useState({
+        name: (cookies.name === undefined ? "" : cookies.name),
+        email: (cookies.email === undefined ? "" : cookies.email),
+    });
+
+    console.log(user);
 
     const login = async (details) => {
 
@@ -31,6 +73,7 @@ function App() {
         ) {
             return "Vui lòng nhập đủ thông tin";
         } else if (
+            // Authenticate User
             details.email === adminUser.email &&
             details.password === adminUser.password
         ) {
@@ -39,6 +82,7 @@ function App() {
                 name: details.name,
                 email: details.email,
             });
+            setCookies(details);
             return true;
         } else {
             console.log("Thông tin đăng nhập sai");
@@ -47,11 +91,13 @@ function App() {
     };
 
     const logout = () => {
+        setCookie('userAccessToken', "", { path: '/' });
         console.log("Logout");
         setUser({
             name: "",
             email: "",
         });
+        resetCookies();
     };
 
     const signup = (details) => {
@@ -67,13 +113,13 @@ function App() {
     }
 
     return (
-        <>
+        <CookiesProvider>
             <BrowserRouter>
 
                 <Page app={app} />
 
             </BrowserRouter>
-        </>
+        </CookiesProvider>
     );
 }
 
