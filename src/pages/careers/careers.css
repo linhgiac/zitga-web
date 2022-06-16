@@ -9,9 +9,10 @@
 }
 .careers-main-content-container{
      margin: 30px;
-     margin-top: 20px;
-   
-    
+     margin-top: 20px; 
+}
+.careers-container{
+    margin-bottom: 40px;
 }
 .careers-image-title{
     width: 100%;

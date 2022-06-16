@@ -73,6 +73,19 @@ nav{
 .header-elements:hover {
     color: #ff0e1f;
 }
+.ant-dropdown-menu{
+    background-color: #17161a !important;
+    font-family: Montserrat, sans-serif;
+}
+.ant-dropdown-menu-item{
+    color: #fff !important;
+    padding: 10px;
+}
+.ant-dropdown-menu-item:hover{
+    color: #fff !important;
+    background-color: #ff0e1f;
+    padding: 10px;
+}
 
 .header-btn {
     padding: 0 10px;

@@ -39,7 +39,7 @@ const ProductContent = () => {
                             <StickManLegendsModal />
                         </div>
                         <div className="product-content-description">
-                            Product description
+                            Game Zitga
                         </div>
                     </div>
                 </Col>
@@ -52,7 +52,7 @@ const ProductContent = () => {
                             <EmpireWarriosModal />
                         </div>
                         <div className="product-content-description">
-                            Product description
+                            Game Zitga
                         </div>
                     </div>
                 </Col>
@@ -65,7 +65,7 @@ const ProductContent = () => {
                             <SummonersEraModal />
                         </div>
                         <div className="product-content-description">
-                            Product description
+                            Game Zitga
                         </div>
                     </div>
                 </Col>
@@ -78,7 +78,7 @@ const ProductContent = () => {
                             <ShadowKnightModal />
                         </div>
                         <div className="product-content-description">
-                            Product description
+                            Game Zitga
                         </div>
                     </div>
                 </Col>

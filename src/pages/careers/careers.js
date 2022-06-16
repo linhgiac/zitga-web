@@ -159,7 +159,7 @@ const CareerContainer = ({ career }) => {
     };
 
     return (
-        <>
+        <div className="careers-container">
             <div className="careers-image-title">
                 <a href="#">
                     <img src={career.imgSrc} />
@@ -193,7 +193,7 @@ const CareerContainer = ({ career }) => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

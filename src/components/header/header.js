@@ -9,7 +9,7 @@ import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 // import Product from '../../pages/product/product'
 // import Home from '../../pages/home/home';
 // import Login from '../../pages/login/login'
-import { Button } from "antd";
+import { Button, Menu, Dropdown } from "antd";
 import "antd/dist/antd.css";
 import { LogoutOutlined } from "@ant-design/icons";
 const Header = ({ app }) => {
@@ -50,16 +50,16 @@ const Header = ({ app }) => {
                     </a>
                 </div>
                 <div
-                    className={
-                        clicked ? "header-pages active" : "header-pages"
-                    }
+                    className={clicked ? "header-pages active" : "header-pages"}
                 >
                     <NavLink className="header-elements" to="/about">
                         About Us
                     </NavLink>
-                    <NavLink className="header-elements" to="/careers">
-                        Careers
-                    </NavLink>
+                    <Dropdown overlay= {careerCategories} placement="bottomLeft">
+                        <NavLink className="header-elements" to="/careers">
+                            Careers
+                        </NavLink>
+                    </Dropdown>
                     <NavLink className="header-elements" to="/product">
                         Product
                     </NavLink>
@@ -103,4 +103,59 @@ const Header = ({ app }) => {
         </nav>
     );
 };
+
+const careerCategories = (
+    <Menu
+        items={[
+            {
+                key: "1",
+                label: (
+                    <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="#"
+                    >
+                        Khối Sáng tạo/ Thiết kế
+                    </a>
+                ),
+            },
+            {
+                key: "2",
+                label: (
+                    <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="#"
+                    >
+                        Khối Marketing
+                    </a>
+                ),
+            },
+            {
+                key: "3",
+                label: (
+                    <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="#"
+                    >
+                        Khối Development
+                    </a>
+                ),
+            },
+            {
+                key: "4",
+                label: (
+                    <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="#"
+                    >
+                        Khối BackOffice
+                    </a>
+                ),
+            },
+        ]}
+    />
+);
 export default Header;
