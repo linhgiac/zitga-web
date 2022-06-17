@@ -10,9 +10,10 @@ class NewsController extends BaseController
         $this->newsModel = new NewsModel;
     }
 
+    // get all of tuples of news relation in the database
     public function index()
     {
-        $selectColumns = ['id', 'title'];
+        $selectColumns = ['*'];
 
         $orders = [
             'column' => 'id',
@@ -23,49 +24,73 @@ class NewsController extends BaseController
             $selectColumns,
             $orders   
         );
-
         return $this->view('frontend.news.index', [
-            'pageTitle' => 'News list',
             'newsList' => $newsList,
         ]);
-        // echo json_encode($newsList);
     }
 
+    // put (insert) an news into the database
     public function store()
     {
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
+
         $data = [
-            'id' => 3,
-            'title' => 'sdfsdfgsdf',
-            'content' => 'afdvsdfsdfsdfsesdfdsfsdf',
-            'image' => 'vidf'
+            'title' => $obj->title,
+            'content' => $obj->content,
+            'image' => $obj->image
         ];
 
         $this->newsModel->store($data);
+        return $this->view('frontend.news.confirm', [
+            'confirm' => ['success' => true]
+        ]);
     }
 
+    // update an news by its ID from the database
     public function update()
     {
-        $id = $_GET['id'];
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
 
+        $id = $obj->id;
         $data = [
-            'title' => 'updated title yeohyedfg'
+            'title' => $obj->title,
+            'content' => $obj->content,
+            'image' => $obj->image
         ];
 
         $this->newsModel->updateData($id, $data);
+        return $this->view('frontend.news.confirm', [
+            'confirm' => ['success' => true]
+        ]);
     }
 
+    // delete an news by its ID from the database
     public function delete()
     {
-        $id = $_GET['id'];
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
+
+        $id = $obj->id;
 
         $this->newsModel->destroy($id);
-        echo 'Xóa thành công ! :)))))';
+        return $this->view('frontend.news.confirm', [
+            'confirm' => ['success' => true]
+        ]);
     }
-
+    
+    // get a news by its id
     public function show()
     {
-        $id = $_GET['id'];
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
+
+        $id = $obj->id;
+
         $result = $this->newsModel->findById($id);
-        print_r($result);
+        return $this->view('frontend.news.show', [
+            'data' => [$result]
+        ]);
     }
 }
