@@ -58,11 +58,17 @@ function App() {
 
     const login = async (details) => {
 
-        // // Test
-        // const response = await axios.get('http://localhost/mvc/?controller=product');
-        // console.log(response.data);
-        // console.log("Updated");
-        // // End test
+        details = {
+          id: 1,
+          title: "updated",
+          content: "sfsdfsf",
+          image: "sfsdfsdf"
+        }
+        // Test
+        const response = await axios.post('http://localhost:8080/mvc/index.php?controller=news&action=show', details);
+        console.log(response.data);
+        console.log("Updated");
+        // End test
 
         console.log(details);
 
