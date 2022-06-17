@@ -58,14 +58,14 @@ function App() {
 
     const login = async (details) => {
 
+        // Test
         details = {
-          id: 1,
+          id: 3,
           title: "updated",
           content: "sfsdfsf",
           image: "sfsdfsdf"
         }
-        // Test
-        const response = await axios.post('http://localhost:8080/mvc/index.php?controller=news&action=show', details);
+        const response = await axios.post('http://localhost:8080/mvc/index.php?controller=news&action=store', details);
         console.log(response.data);
         console.log("Updated");
         // End test
