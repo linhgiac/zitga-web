@@ -35,7 +35,7 @@ class BaseModel extends Database
     {
         $sql = "SELECT * FROM ${table} WHERE id = ${id} LIMIT 1";
         $query = $this->_query($sql);
-        mysqli_fetch_assoc($query);
+        return mysqli_fetch_assoc($query);
     }
 
     public function create($table, $data = [])

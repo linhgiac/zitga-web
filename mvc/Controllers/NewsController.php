@@ -29,7 +29,7 @@ class NewsController extends BaseController
         ]);
     }
 
-    // put (insert) an news into the database
+    // put (insert) a news into the database
     public function store()
     {
         $detail = file_get_contents('php://input');
@@ -47,7 +47,7 @@ class NewsController extends BaseController
         ]);
     }
 
-    // update an news by its ID from the database
+    // update a news by its ID from the database
     public function update()
     {
         $detail = file_get_contents('php://input');
@@ -66,7 +66,7 @@ class NewsController extends BaseController
         ]);
     }
 
-    // delete an news by its ID from the database
+    // delete a news by its ID from the database
     public function delete()
     {
         $detail = file_get_contents('php://input');

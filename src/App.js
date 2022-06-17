@@ -59,15 +59,23 @@ function App() {
     const login = async (details) => {
 
         // Test
+        // details = {
+        //   id: 4,
+        //   title: "updated",
+        //   description: "sfsdfsf",
+        //   category: "sfsdfsd",
+        //   image: "sfsdfsdf"
+        // }
         details = {
-          id: 3,
-          title: "updated",
-          content: "sfsdfsf",
-          image: "sfsdfsdf"
-        }
-        const response = await axios.post('http://localhost:8080/mvc/index.php?controller=news&action=store', details);
+            id: 4,
+            title: "updated",
+            content: "sfsdfsd",
+            image: "sfsdfsdf"
+          }
+        const response = await axios.post('http://localhost:8080/zitga-web/mvc/?controller=news&action=store', details);
         console.log(response.data);
         console.log("Updated");
+        
         // End test
 
         console.log(details);

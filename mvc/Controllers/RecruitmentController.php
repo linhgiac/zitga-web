@@ -10,9 +10,10 @@ class RecruitmentController extends BaseController
         $this->recruitmentModel = new RecruitmentModel;
     }
 
+    // get all of tuples of recruitment relation in the database
     public function index()
     {
-        $selectColumns = ['id', 'title'];
+        $selectColumns = ['*'];
 
         $orders = [
             'column' => 'id',
@@ -23,48 +24,75 @@ class RecruitmentController extends BaseController
             $selectColumns,
             $orders   
         );
-
         return $this->view('frontend.recruitments.index', [
-            'pageTitle' => 'News list',
             'recruitments' => $recruitments,
         ]);
     }
 
+    // put (insert) a recruitment into the database
     public function store()
     {
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
+
         $data = [
-            'id' => 3,
-            'title' => 'sdfsdfgsdf',
-            'description' => 'afdvsdfsdfsdfsesdfdsfsdf',
-            'image' => 'vidf'
+            'title' => $obj->title,
+            'description' => $obj->description,
+            'category' => $obj->category,
+            'image' => $obj->image
         ];
 
         $this->recruitmentModel->store($data);
+        return $this->view('frontend.recruitments.confirm', [
+            'confirm' => ['success' => true]
+        ]);
     }
 
+    // update a recruitment by its ID from the database
     public function update()
     {
-        $id = $_GET['id'];
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
 
+        $id = $obj->id;
         $data = [
-            'title' => 'updated title recruitment'
+            'title' => $obj->title,
+            'description' => $obj->description,
+            'category' => $obj->category,
+            'image' => $obj->image
         ];
 
         $this->recruitmentModel->updateData($id, $data);
+        return $this->view('frontend.recruitments.confirm', [
+            'confirm' => ['success' => true]
+        ]);
     }
 
+    // delete a recruitments by its ID from the database
     public function delete()
     {
-        $id = $_GET['id'];
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
+
+        $id = $obj->id;
 
         $this->recruitmentModel->destroy($id);
-        echo 'Xóa thành công ! :)))))';
+        return $this->view('frontend.recruitments.confirm', [
+            'confirm' => ['success' => true]
+        ]);
     }
-
-    public function find()
+    
+    // get a recruitments by its id
+    public function show()
     {
-        $id = $_GET['id'];
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
+
+        $id = $obj->id;
+
         $result = $this->recruitmentModel->findById($id);
-        print_r($result);
+        return $this->view('frontend.recruitments.show', [
+            'data' => [$result]
+        ]);
     }
 }
