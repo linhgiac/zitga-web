@@ -4,3 +4,96 @@
 #careers-img{
     background-image: url(http://zitga.com.vn/wp-content/uploads/2019/11/rsz_1bannerweb5.jpg);
 }
+.careers-content-inner>div{
+    margin-top: 100px;
+}
+.careers-main-content-container{
+     margin: 30px;
+     margin-top: 20px; 
+}
+.careers-container{
+    margin-bottom: 40px;
+}
+.careers-image-title{
+    width: 100%;
+}
+.careers-image-title>a>img{
+    width: 100%;
+}
+.careers-main-content-inner{
+    background-color: #17161a;
+    
+}
+.careers-main-content-pre-title{
+    padding: 40px 20px;
+    padding-bottom: 20px;
+    background-color: #000;
+    display: flex;
+}
+.careers-pre-title-btn{
+    font-family: Montserrat, sans-serif;
+    padding: 5px 30px;
+    background-color: #ff0e1f;
+    color: #fff;
+}
+.careers-main-content-title{
+    background-color: #000;
+    font-size: 30px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+.careers-main-content-title>a{
+    color: #fff;
+}
+.careers-main-content-title>a:hover{
+    color: #ff0e1f
+}
+.careers-main-content-post-tiltle{
+    color: #fff;
+    background-color: #000;
+    position: relative;
+    display: flex;
+    flex-direction: row; 
+    border-top: 1px solid #ccc;
+    font-family: Montserrat,sans-serif;
+    font-weight: 200;
+}
+.careers-post-left{
+    position: relative;
+    display: flex;
+    padding: 15px 0px;
+   
+}
+.careers-post-left-element{
+    padding: 5px 30px;
+    margin-left: 20px;
+    background-color: #fff;
+    color: #000;
+}
+.careers-post-left-element:hover{
+    color: #ff0e1f
+}
+
+.careers-post-left-like{
+    margin-left: 20px;
+    line-height: 32px;
+}
+.careers-post-left-like>span{
+    padding-left: 5px;
+}
+.careers-post-right{
+    position: absolute;
+    right: 0px;
+    display: flex;
+    padding: 15px 20px;
+    
+    
+}
+.careers-post-right-element{
+    background-color: #ff0e1f;
+    color: #fff;
+    padding: 5px 30px;
+}

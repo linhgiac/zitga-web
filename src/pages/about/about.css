@@ -4,3 +4,77 @@
 #aboutUs-img{
     background-image: url(http://zitga.com.vn/wp-content/uploads/2020/05/zitga_studios.jpg);
 }
+.about-content-inner{
+    padding: 110px;
+    /* color: #fff; */
+    background-color:#17161a;
+    width: 100%;
+}
+.about-content-image{
+    padding: 20px;
+    
+    
+    padding-right: 30px;
+   
+}
+.about-content-image>img{
+    width: 100%;
+    
+   
+}
+.about-content-tabs-container{
+    padding: 20px;
+    padding-left: 30px;
+    background-color: #000;
+    /* color: #fff; */
+}
+.about-content-tabs-title{
+    font-family: Open-san, sans-serif;
+    font-size: 35px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    padding-top: 20px;
+}
+.about-content-separator{
+  
+    padding-bottom: 30px;
+}
+.about-content-tab{
+    
+}
+.about-content-tab:hover, .about-content-tab:active{
+    
+}
+.ant-tabs-tab{
+    background-color: #000 !important;
+    border-color: #000 !important;
+    color: #fff !important;
+}
+.ant-tabs-tab:hover, .ant-tabs-tab-active{
+    background-color: #ff0e1f !important;
+    border-color: #ff0e1f !important;
+    color: #fff !important;
+
+}
+.ant-tabs-tab-btn{
+    color: #fff !important;
+}
+.ant-tabs-tab-btn:active{
+    background-color: #ff0e1f !important;
+}
+.tab-pane{
+    background-color: #000 !important;
+    color: #c0c0c0;
+    font-family: Montserrat, sans-serif;
+    padding: 10px;
+    font-weight: 200;
+}
+
+.tab-pane>div>ul{
+    list-style-type: none;
+}
+
+.tab-pane>p>span{
+    font-weight: 600;
+}

@@ -11,9 +11,9 @@ Content */
 *{
     font-size:"Open Sans";
 }
-.content-inner{
+.contact-content-inner{
     color: #fff;
-    background-color:#000;
+    background-color:#17161a;
     padding-top: 133px;
     padding-bottom: 114px;
     margin: 0px 117px;
@@ -71,5 +71,21 @@ Input{
     font-size: 17px;
     font-family: Montserrat, sans-serif;
     font-weight: 100;
+}
+.contact-follow{
+    display: inline-block;
+}
+.contact-follow>ul{
+    padding-left: 0px;
+    padding-top: 10px;
+    font-weight: 0;
+    font-size: 12px;
+    opacity: 0.8;
+    color: silver;
+}
+.contact-follow>ul>li{
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 15px;
 }
 

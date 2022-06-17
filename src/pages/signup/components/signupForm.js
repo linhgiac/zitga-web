@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Alert } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 import './signupForm.css';
 
 const SignUpForm = ({ signup }) => {
+    const navigate = useNavigate();
     const [error, setError] = useState("");
     const [details, setDetails] = useState({ name: '', email: '', password: '' });
 
@@ -10,7 +13,14 @@ const SignUpForm = ({ signup }) => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        setError(signup(details));
+        let result = signup(details);
+
+        if (result === true) {
+            navigate('/login');
+        }
+        else {
+            setError(result);
+        }
     }
 
     const clearError = () => {
