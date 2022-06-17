@@ -1,11 +1,13 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./news.css";
 import PageStyles from "../pages.module.css";
 import { Col, Row, Button } from "antd";
 import SearchAndCategories from "../../components/categories/categories";
 import { NavLink } from "react-router-dom";
 import { HeartFilled } from "@ant-design/icons";
+import axios from "axios";
+
 const News = () => {
     return (
         <div className={PageStyles.content}>
@@ -46,6 +48,9 @@ const NewsContent = () => {
     );
 };
 const NewsMainContent = () => {
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState(null);
+
     const current = new Date();
     const month = [
         "January",
@@ -61,6 +66,23 @@ const NewsMainContent = () => {
         "November",
         "December",
     ];
+
+
+    const getData = async () => {
+        const response = await axios.get(
+            'http://localhost/mvc/index.php?controller=news',
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                }
+            }).then((value) => value.data);
+
+        console.log("Response data: ", response);
+        console.log("Updated");
+        setData(response);
+    }
+
     const fakeData = [
         {
             id: 1,
@@ -88,42 +110,16 @@ const NewsMainContent = () => {
         },
     ];
 
+    useEffect(() => {
+        if (isLoading) {
+            getData();
+            setLoading(false);
+        }
+    });
+
     return (
         <div className="news-main-content-container">
-            {/* <div className="news-image-title">
-                <a href="#">
-                    <img src={fakeData[0].imgSrc} />
-                </a>
-            </div>
-            <div className="news-main-content-inner">
-                <div className="news-main-content-pre-title">
-                    <div className="news-pre-title-btn">tin tức</div>
-                </div>
-                <div className="news-main-content-title">
-                    <a href="/news/news-details-01">{fakeData[0].title}</a>
-                </div>
-                <div className="news-main-content-post-tiltle">
-                    <div className="news-post-left">
-                        <NavLink className="news-post-left-element" to="#">
-                            {fakeData[0].date}
-                        </NavLink>
-
-                        <div className="news-post-left-like">
-                            <HeartFilled
-                                onClick={handleLiked}
-                                style={{ color: "#ff0e1f" }}
-                            />
-                            <span>{count}</span>
-                        </div>
-                    </div>
-                    <div className="news-post-right">
-                        <div className="news-post-right-element">
-                            by admin
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-            <NewsList newsData={fakeData} />
+            {data !== null && <NewsList newsData={data} />}
         </div>
     );
 };
@@ -148,11 +144,12 @@ const NewsContainer = ({ news }) => {
             setCount(count + 1);
         }
     };
+    console.log(news);
     return (
         <>
             <div className="news-image-title">
                 <a href="#">
-                    <img src={news.imgSrc} />
+                    <img src={news.image} />
                 </a>
             </div>
             <div className="news-main-content-inner">

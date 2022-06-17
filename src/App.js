@@ -8,7 +8,7 @@ import axios from "axios";
 import { CookiesProvider, useCookies } from 'react-cookie';
 import { useJwt } from "react-jwt";
 
-const userAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6IkhhaGEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTUxNjIzOTAyMn0.T54_qTMO8tT3Yb4vvoP-pIn1HLSPIVSLYVfyH-iQDtA";
+// const accessTokenTest = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwibmFtZSI6IkhhaGEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTUxNjIzOTAyMn0.T54_qTMO8tT3Yb4vvoP-pIn1HLSPIVSLYVfyH-iQDtA";
 
 function App() {
     const adminUser = {
@@ -16,66 +16,62 @@ function App() {
         password: "123456",
     };
 
+    // const { decodedToken, isExpired } = useJwt(accessTokenTest);
+
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
-    // setCookie('userAccessToken', userAccessToken, { path: '/' });
-
-    const setCookies = (userInfo) => {
-        setCookie('name', userInfo.name, { path: '/' });
-        setCookie('email', userInfo.email, { path: '/' });
-    };
-
-    const removeCookies = () => {
-        removeCookie('name');
-        removeCookie('email');
-    };
-
-    const resetCookies = () => {
-        setCookie('name', "", { path: '/' });
-        setCookie('email', "", { path: '/' });
-    };
-
-    const { decodedToken, isUserExpired } = useJwt(cookies.userAccessToken);
-
-    if (isUserExpired) {
-        resetCookies();
-    } else {
-        console.log(decodedToken);
-        if (decodedToken !== null) {
-            console.log("Already access token exist");
-            setCookies(decodedToken);
-        } else {
-            resetCookies();
+    const getAccessToken = () => {
+        const token = cookies.userAccessToken;
+        if (token === undefined || token === null) {
+            return null;
         }
-    };
+        else {
+            return token;
+        }
+    }
 
-    const [user, setUser] = useState({
-        name: (cookies.name === undefined ? "" : cookies.name),
-        email: (cookies.email === undefined ? "" : cookies.email),
-    });
+    const [userAccessToken, setUserAccessToken] = useState(getAccessToken());
 
-    console.log(user);
+    const { decodedToken, isExpired } = useJwt(userAccessToken);
+
+    console.log("User Access Token: ", userAccessToken);
+
+    const getUserFromToken = async (accessToken) => {
+        if (accessToken === null) {
+            return { name: "", email: "" };
+        }
+        else {
+            // Send request to Back-end to get UserInfo and return
+            // const response = await axios.post('url', userAccessToken);
+            // const data = response.data;
+            const response = decodedToken;
+            return { response };
+            // return { name: "", email: "" };
+        }
+    }
+
+    const [user, setUser] = useState(getUserFromToken(userAccessToken));
 
     const login = async (details) => {
 
         // Test
         // details = {
-        //   id: 4,
-        //   title: "updated",
-        //   description: "sfsdfsf",
-        //   category: "sfsdfsd",
-        //   image: "sfsdfsdf"
+        //     id: 3,
+        //     title: "updated",
+        //     content: "sfsdfsf",
+        //     image: "sfsdfsdf"
         // }
-        details = {
-            id: 4,
-            title: "updated",
-            content: "sfsdfsd",
-            image: "sfsdfsdf"
-          }
-        const response = await axios.post('http://localhost:8080/zitga-web/mvc/?controller=news&action=store', details);
-        console.log(response.data);
-        console.log("Updated");
-        
+        // const response = await axios.post(
+        //     'http://localhost/mvc/index.php?controller=news&action=store',
+        //     details
+        //     , {
+        //         headers: {
+        //             'Access-Control-Allow-Origin': '*',
+        //             'Content-Type': 'application/json',
+        //         }
+        //     });
+        // console.log(response.data);
+        // console.log("Updated");
         // End test
 
         console.log(details);
@@ -86,7 +82,24 @@ function App() {
             details.password === ""
         ) {
             return "Vui lòng nhập đủ thông tin";
-        } else if (
+        }
+
+        // // Test
+        const data = JSON.stringify(details);
+        const response = await axios.get(
+            'http://localhost/mvc/?controller=login&action=check&username=' + details.name + "&password=" + details.password,
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                },
+            });
+        console.log("Response Data", response.data);
+        console.log("Updated");
+
+        // // End test
+
+        if (
             // Authenticate User
             details.email === adminUser.email &&
             details.password === adminUser.password
@@ -96,7 +109,11 @@ function App() {
                 name: details.name,
                 email: details.email,
             });
-            setCookies(details);
+            // setCookie('userAccessToken', accessTokenTest, { path: '/' });
+            // setUserAccessToken(accessTokenTest);
+
+            setCookie('userAccessToken', response.data, { path: '/' });
+            setUserAccessToken(response.data);
             return true;
         } else {
             console.log("Thông tin đăng nhập sai");
@@ -105,24 +122,28 @@ function App() {
     };
 
     const logout = () => {
-        setCookie('userAccessToken', "", { path: '/' });
+        removeCookie('userAccessToken');
         console.log("Logout");
         setUser({
             name: "",
             email: "",
         });
-        resetCookies();
     };
 
-    const signup = (details) => {
+    const signup = async (details) => {
+        // const response = await axios.get(
+        //     'http://localhost/zitga-web/mvc/?controller=signup&action=check' + '&username=locnk&password=abc&repassword=abc&name=loc&email=loc@gmail.com');
+        // console.log(response);
         return true;
     }
 
     const app = {
+        id: 1,
         user: user,
         login: login,
         logout: logout,
-        isLogged: (user.email === "" || user.name === "") ? false : true,
+        //isLogged: (user.email === "" || user.name === "") ? false : true,
+        isLogged: userAccessToken === null ? false : true,
         signup: signup
     }
 
