@@ -57,9 +57,11 @@ const Header = ({ app }) => {
                     <NavLink className="header-elements" to="/about">
                         About Us
                     </NavLink>
-                    <NavLink className="header-elements" to="/careers">
-                        Careers
-                    </NavLink>
+                    <Dropdown overlay={careerCategories} placement="bottomLeft">
+                        <NavLink className="header-elements" to="/careers">
+                            Careers
+                        </NavLink>
+                    </Dropdown>
                     <NavLink className="header-elements" to="/product">
                         Product
                     </NavLink>
@@ -103,4 +105,43 @@ const Header = ({ app }) => {
         </nav>
     );
 };
+
+const careerCategories = (
+    <Menu
+        items={[
+            {
+                key: "1",
+                label: (
+                    <a rel="noopener noreferrer" href="/careers/create-design">
+                        Khối Sáng tạo/ Thiết kế
+                    </a>
+                ),
+            },
+            {
+                key: "2",
+                label: (
+                    <a rel="noopener noreferrer" href="/careers/marketing">
+                        Khối Marketing
+                    </a>
+                ),
+            },
+            {
+                key: "3",
+                label: (
+                    <a rel="noopener noreferrer" href="/careers/development">
+                        Khối Development
+                    </a>
+                ),
+            },
+            {
+                key: "4",
+                label: (
+                    <a rel="noopener noreferrer" href="careers/backoffice">
+                        Khối BackOffice
+                    </a>
+                ),
+            },
+        ]}
+    />
+);
 export default Header;

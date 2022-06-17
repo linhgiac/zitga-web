@@ -1,0 +1,141 @@
+.bear-react-carousel__test-number{
+  display: none !important;
+}
+.home-container{
+  background-color: #17161a;
+  padding-bottom: 40px;
+}
+.home-product-container{
+  padding-bottom: 80px;
+  padding-top: 30px;
+  
+}
+.home-product-title{
+  color: #fff !important;
+  font-size: 35px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  padding: 40px;
+}
+.home-product-list{
+  justify-content: space-between;
+  vertical-align: middle;
+}
+.home-product-list>ul{
+  display: inline-block;
+  margin:0;
+align-items: center;
+}
+.home-product-list>ul>li{
+  display: inline-block;
+  position: relative;
+  width: 167px;
+  height: 200px;
+  cursor: auto;
+  margin: 0px 20px;
+}
+.home-product-element{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-position: bottom center;
+  background-size: cover;
+  box-shadow: 0 8px 17px rgba(229, 221, 221, 0.1);
+}
+.home-news-container{
+  background-color: #000;
+  padding: 80px 40px;
+  
+}
+.home-news-title{
+  padding-bottom: 40px;
+}
+.home-news-title>a{
+  color: #fff !important;
+  font-size: 35px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+}
+.home-news-title>a:hover{
+  color: #ff0e1f;
+}
+.home-news-list{
+  display: flex;
+  flex-direction: row;
+}
+.home-news-element{
+  width: 100%;
+  padding-bottom: 10px;
+  margin: 0px 10px;
+  background-color: #17161a;
+}
+.home-news-img>img{
+  width: 100%;
+}
+.home-news-element-title{
+  padding: 0 30px;
+  margin: 20px 0;
+  font-family: Montserrat, sans-serif;
+}
+.home-news-element-title>span{
+  color: #fff;
+  font-size: 15px;
+}
+.home-news-element-title>a{
+  color: #fff;
+  font-size: 15px;
+  margin-top: 20px;
+  font-weight: 700;
+}
+.home-news-element-title>a:hover{
+  color: #ff0e1f;
+}
+
+@media screen and (max-width: 650px){
+  .home-news-list{
+    display: flex;
+    flex-direction: column;
+  }
+  .home-news-element{
+    margin-bottom: 20px;
+  }
+
+}
+
+.home-career-container{
+  background-image: url("http://zitga.com.vn/wp-content/uploads/2019/11/2.jpg");
+  height: 430px;
+  margin:0px 0px;
+  background-position: center top;
+  background-color: #17161a;
+  padding-top: 80px;
+  padding-left: 50px;
+  color: #fff;
+}
+.home-career-title{
+  font-size: 45px;
+  letter-spacing: 2px;
+  font-weight: 300;
+}
+.home-career-content{
+  color: rgb(230, 226, 226);
+  font-size: 20px;
+  font-weight: 300;
+  padding-bottom: 20px;
+}
+.home-career-btn{
+  background-color: #ff0e1f;
+  display: flex;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  justify-content: center;
+
+}
+.home-career-btn>a{
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+}

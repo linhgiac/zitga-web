@@ -23,7 +23,23 @@ const CareersTitleImage = () => {
         <div className={PageStyles.titleContent}>
             <div className={PageStyles.contentTitleImg} id="careers-img">
                 <div className={PageStyles.contentTitleInner}>
-                    <div className={PageStyles.title}>Careers</div>
+                    <div className={PageStyles.title}>
+                        {window.location.pathname === "/careers" && (
+                            <>Tuyển dụng</>
+                        )}
+                        {window.location.pathname === "/careers/create-design" && (
+                            <>Khối Sáng tạo/ Thiết kế</>
+                        )}
+                        {window.location.pathname === "/careers/marketing" && (
+                            <>Khối Marketing</>
+                        )}
+                        {window.location.pathname === "/careers/development" && (
+                            <>Khối Development</>
+                        )}
+                        {window.location.pathname === "/careers/backoffice" && (
+                            <>Khối BackOffice</>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,7 +81,25 @@ const CareersMainContent = () => {
         {
             imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
             title: "Senior Game UX Designer",
-            date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
+            date: `${
+                month[current.getMonth()]
+            } ${current.getDate()}, ${current.getFullYear()}`,
+        },
+        {
+            id: 2,
+            imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
+            title: "Junior Game UX Designer",
+            date: `${
+                month[current.getMonth()]
+            } ${current.getDate()}, ${current.getFullYear()}`,
+        },
+        {
+            id: 3,
+            imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
+            title: "Fresher Game UX Designer",
+            date: `${
+                month[current.getMonth()]
+            } ${current.getDate()}, ${current.getFullYear()}`,
         },
     ];
     const [count, setCount] = useState(0);
@@ -97,6 +131,64 @@ const CareersMainContent = () => {
                     <div className="careers-post-left">
                         <NavLink className="careers-post-left-element" to="#">
                             {fakeData[0].date}
+                        </NavLink>
+
+                        <div className="careers-post-left-like">
+                            <HeartFilled
+                                onClick={handleLiked}
+                                style={{ color: "#ff0e1f" }}
+                            />
+                            <span>{count}</span>
+                        </div>
+                    </div>
+                    <div className="careers-post-right">
+                        <div className="careers-post-right-element">
+                            by admin
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const CareersList = ({ careersData }) => {
+    const careersList = careersData.map(career => (
+        <CareerContainer key={career.id.toString()} career={career} />
+    ));
+    return <>{careersList}</>;
+};
+
+const CareerContainer = ({ career }) => {
+    const [count, setCount] = useState(0);
+    const [isLike, setIsLike] = useState(false);
+    const handleLiked = () => {
+        setIsLike(!isLike);
+        if (isLike) {
+            setCount(count - 1);
+        } else {
+            setCount(count + 1);
+        }
+    };
+
+    return (
+        <div className="careers-container">
+            <div className="careers-image-title">
+                <a href={`/careers/careers-details-${career.id}`}>
+                    <img src={career.imgSrc} />
+                </a>
+            </div>
+            <div className="careers-main-content-inner">
+                <div className="careers-main-content-pre-title">
+                    <div className="careers-pre-title-btn">tuyển dụng</div>
+                </div>
+                <div className="careers-main-content-title">
+                    <a href={`/careers/careers-details-${career.id}`}>{career.title}</a>
+                </div>
+                <div className="careers-main-content-post-tiltle">
+                    <div className="careers-post-left">
+                        <NavLink className="careers-post-left-element" to="#">
+                            {career.date}
                         </NavLink>
 
                         <div className="careers-post-left-like">

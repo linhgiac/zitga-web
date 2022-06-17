@@ -49,6 +49,22 @@ const Page = ({ app }) => {
                 element={<PageWrapper app={app} Page={Careers} />}
             />
             <Route
+                path="/careers/create-design"
+                element={<PageWrapper app={app} Page={Careers} />}
+            />
+            <Route
+                path="/careers/marketing"
+                element={<PageWrapper app={app} Page={Careers} />}
+            />
+            <Route
+                path="/careers/development"
+                element={<PageWrapper app={app} Page={Careers} />}
+            />
+            <Route
+                path="/careers/backoffice"
+                element={<PageWrapper app={app} Page={Careers} />}
+            />
+            <Route
                 path="/product"
                 element={<PageWrapper app={app} Page={Product} />}
             />

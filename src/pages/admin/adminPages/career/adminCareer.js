@@ -96,6 +96,7 @@ const AdminCareerTable = () => {
             dataIndex: "title",
             key: "title",
             render: text => <a>{text}</a>,
+            editable: true,
         },
         {
             title: "Date",
@@ -104,7 +105,7 @@ const AdminCareerTable = () => {
             responsive: ["lg"],
         },
         { title: "Categories", dataIndex: "type", responsive: ["md"] },
-        { title: "Delete", key: "delete" },
+        { title: "Delete", key: "delete", },
     ];
     const current = new Date();
     const month = [

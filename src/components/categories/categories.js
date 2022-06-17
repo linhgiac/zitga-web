@@ -38,12 +38,12 @@ const Categories = () => {
             </div>
             <div className="categories-inner">
                 <ul>
-                    <li><a href="">Khối BackOffice</a></li>
-                    <li><a href="">Khối Development</a></li>
-                    <li><a href="">Khối Marketing</a> </li>
-                    <li><a href="">Khối Sáng tạo/Thiết kế</a></li>
-                    <li><a href="">Tin tức</a></li>
-                    <li><a href="">Tuyển dụng</a></li>
+                    <li><a href="/careers/backoffice">Khối BackOffice</a></li>
+                    <li><a href="careers/development">Khối Development</a></li>
+                    <li><a href="/careers/marketing">Khối Marketing</a> </li>
+                    <li><a href="/careers/create-design">Khối Sáng tạo/Thiết kế</a></li>
+                    <li><a href="/news">Tin tức</a></li>
+                    <li><a href="/careers">Tuyển dụng</a></li>
                 </ul>
             </div>
         </div>

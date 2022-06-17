@@ -49,3 +49,8 @@
     bottom: 100px !important;
     right: 50px !important;
 }
+@media screen and (max-width: 650px) {
+    .title{
+        font-size: 30px;
+    }
+}

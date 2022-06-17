@@ -78,3 +78,9 @@
 .tab-pane>p>span{
     font-weight: 600;
 }
+
+@media screen and (max-width:650px){
+    .about-content-inner{
+        padding: 110px 30px;
+    }
+}

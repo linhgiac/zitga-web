@@ -80,6 +80,32 @@ const PostMainContent = () => {
 };
 
 const PostComments = () => {
+    const [comments, setComments] = useState([
+        {
+            id: 1,
+            content: "Haha",
+        },
+        {
+            id: 2,
+            content: "Haha",
+        },
+        {
+            id: 3,
+            content: "Haha",
+        },
+        {
+            id: 4,
+            content: "Haha",
+        },
+    ]);
+
+    const submitHandler = e => {
+        e.preventDefault();
+
+        // comments logic here
+        console.log("Your comment: " + comments);
+    };
+
     return (
         <div className="post-comment">
             <div className="post-comment-title">
@@ -94,11 +120,40 @@ const PostComments = () => {
                         type="text"
                         className="post-comment-input"
                         placeholder='"Your comment", nếu chưa login thì là "Bạn phải login mới có thể bình luận"'
+                        // onChange={e => setComment(e.target.value)}
                     />
-                    <button type="submit" className="post-comment-btn">Submit</button>
+                    <button type="submit" className="post-comment-btn">
+                        Submit
+                    </button>
                 </form>
             </div>
+            <div className="post-comment-list">
+                <PostCommentList commentData={comments} />
+            </div>
         </div>
+    );
+};
+
+const PostCommentList = ({ commentData }) => {
+    const commentList = commentData.map(comment => (
+        <PostComment key={comment.id.toString()} comment={comment} />
+    ));
+    return <>{commentList}</>;
+};
+
+const PostComment = ({ comment }) => {
+    return (
+        <Comment
+            className="post-comment"
+            author={"Han Solo"}
+            avatar={
+                <Avatar
+                    src="https://joeschmoe.io/api/v1/random"
+                    alt="Han Solo"
+                />
+            }
+            content={<p>{comment.content}</p>}
+        />
     );
 };
 export default Post;
