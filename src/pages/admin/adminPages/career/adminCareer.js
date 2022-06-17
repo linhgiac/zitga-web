@@ -18,6 +18,7 @@ const AdminCareer = () => {
     );
 };
 const AdminAddCareerModal = () => {
+    const [form] = Form.useForm();
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
@@ -25,6 +26,7 @@ const AdminAddCareerModal = () => {
     };
 
     const handleOk = () => {
+        form.submit();
         setIsModalVisible(false);
     };
 
@@ -44,20 +46,35 @@ const AdminAddCareerModal = () => {
                 onCancel={handleCancel}
                 width={900}
             >
-                <AdminAddCareerForm />
+                <AdminAddCareerForm form={form} />
             </Modal>
         </div>
     );
 };
 
-const AdminAddCareerForm = () => {
+const AdminAddCareerForm = ({ form }) => {
+    const onFinish = (values) => {
+        console.log('Success:', values);
+        const data = JSON.stringify(values);
+        console.log(data);
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
     return (
         <div>
-            <Form size="large" labelCol={{ span: 4 }} wrapperCol={{ span: 18 }}>
-                <Form.Item label="Title">
+            <Form
+                form={form}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                size="large" labelCol={{ span: 4 }} wrapperCol={{ span: 18 }}
+            >
+                <Form.Item label="Title" name='title'>
                     <Input />
                 </Form.Item>
-                <Form.Item label="Categories">
+                <Form.Item label="Categories" name='categories'>
                     <Select>
                         <Select.Option value="backoffice">
                             Khối BackOffice
@@ -73,21 +90,29 @@ const AdminAddCareerForm = () => {
                         </Select.Option>
                     </Select>
                 </Form.Item>
-                <Form.Item label="End-date">
+                <Form.Item label="End-date" name='end-date'>
                     <DatePicker />
                 </Form.Item>
-                <Form.Item label="Description">
-                    <MyEditor />
+                <Form.Item label="Description" name='description'>
+                    <MyEditor form={form} />
                 </Form.Item>
             </Form>
         </div>
     );
 };
-const MyEditor = () => {
+const MyEditor = ({ form }) => {
     const [value, setValue] = useState("");
 
-    return <ReactQuill theme="snow" value={value} onChange={setValue} />;
+    const onChange = (value) => {
+        setValue(value);
+        form.setFieldsValue({
+            description: value
+        })
+    }
+
+    return <ReactQuill theme="snow" value={value} onChange={onChange} />;
 };
+
 const AdminCareerTable = () => {
     const columns = [
         { title: "ID", dataIndex: "id", key: "id", width: "5%" },
@@ -127,18 +152,16 @@ const AdminCareerTable = () => {
             imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
             title: "Senior Game UX Designer",
             type: "Khối Sáng tạo/Thiết kế",
-            date: `${
-                month[current.getMonth()]
-            } ${current.getDate()}, ${current.getFullYear()}`,
+            date: `${month[current.getMonth()]
+                } ${current.getDate()}, ${current.getFullYear()}`,
         },
         {
             id: 2,
             imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
             title: "GAME OPERATION LEADER",
             type: "Khối Development",
-            date: `${
-                month[current.getMonth()]
-            } ${current.getDate()}, ${current.getFullYear()}`,
+            date: `${month[current.getMonth()]
+                } ${current.getDate()}, ${current.getFullYear()}`,
         },
     ];
 

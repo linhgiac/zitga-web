@@ -170,7 +170,7 @@ const CareerContainer = ({ career }) => {
                     <div className="careers-pre-title-btn">tuyển dụng</div>
                 </div>
                 <div className="careers-main-content-title">
-                    <a href="/careers/careers-details-01">{career.title}</a>
+                    <a onClick={() => console.log('Hello')} href="/careers/careers-details-01">{career.title}</a>
                 </div>
                 <div className="careers-main-content-post-tiltle">
                     <div className="careers-post-left">
