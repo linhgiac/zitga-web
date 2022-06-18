@@ -144,7 +144,7 @@ class BaseModel extends Database
                 'username' => $u,
                 'password' => $p
             ];
-            echo $this->_encodeJWT($data);
+            return $this->_encodeJWT($data);
         }
         else{
             header("HTTP/1.1 401 Unauthorized");
@@ -155,14 +155,14 @@ class BaseModel extends Database
     public function checkS($table, $u, $p, $rp, $n, $e) //check Signup
     {
         if($rp != $p) {
-            echo json_encode(["success" => "false", "error" => "repassword <> password"]);
+            return json_encode(["success" => "false", "error" => "repassword <> password"]);
             exit;
         }
 
         $sql = "SELECT * FROM user WHERE username = '$u' OR email = '$e'";
         $result = mysqli_query($this->connect, $sql);
         if(mysqli_num_rows($result) > 0){
-            echo json_encode(["success" => "false", "error" => "username or email existed"]);
+            return json_encode(["success" => "false", "error" => "username or email existed"]);
         }
         else
         {
@@ -170,7 +170,7 @@ class BaseModel extends Database
             $newValues = "'$u', '$p', '$n', '$e'";
             $sql = "INSERT INTO ${table}(${columns}) VALUES(${newValues})";
             $this->_query($sql);
-            echo json_encode(["success" => "true"]);
+            return json_encode(["success" => "true"]);
         }
     }
 
