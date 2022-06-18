@@ -84,7 +84,7 @@ class UserController extends BaseController
         ]);
     }
     
-    // get a recruitment by its id
+    // get a user by its accessToken
     public function show()
     {
         $detail = file_get_contents('php://input');

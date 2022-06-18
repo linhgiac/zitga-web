@@ -88,6 +88,7 @@ class BaseModel extends Database
         }
 
         $this->_query($sql);
+        return mysqli_error($this->connect);
     }
 
     public function delete($table, $id)
@@ -100,6 +101,7 @@ class BaseModel extends Database
         }
 
         $this->_query($sql);
+        return mysqli_error($this->connect);
     }
 
     public function search($table, $keyword)
@@ -149,6 +151,7 @@ class BaseModel extends Database
             return $this->_encodeJWT($data);
         }
         else{
+            // need revision
             header("HTTP/1.1 401 Unauthorized");
             exit;
         }

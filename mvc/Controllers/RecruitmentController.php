@@ -42,9 +42,10 @@ class RecruitmentController extends BaseController
                 'image' => $obj->image
             ];
     
-            $this->recruitmentModel->store($data);
+            $err = $this->recruitmentModel->store($data);
             return $this->view('frontend.recruitments.confirm', [
-                'confirm' => ['success' => true]
+                'confirm' => ['success' => true],
+                'error' => ['error' => $err]
             ]);
         } else {
             return $this->view('frontend.recruitments.confirm', [
@@ -68,9 +69,10 @@ class RecruitmentController extends BaseController
                 'image' => $obj->image
             ];
     
-            $this->recruitmentModel->updateData($id, $data);
+            $err = $this->recruitmentModel->updateData($id, $data);
             return $this->view('frontend.recruitments.confirm', [
-                'confirm' => ['success' => true]
+                'confirm' => ['success' => true],
+                'error' => ['error' => $err]
             ]);
         } else {
             return $this->view('frontend.recruitments.confirm', [
@@ -88,9 +90,10 @@ class RecruitmentController extends BaseController
 
         $id = $obj->id;
 
-        $this->recruitmentModel->destroy($id);
+        $err = $this->recruitmentModel->destroy($id);
         return $this->view('frontend.recruitments.confirm', [
-            'confirm' => ['success' => true]
+            'confirm' => ['success' => true],
+            'error' => ['error' => $err]
         ]);
     }
     

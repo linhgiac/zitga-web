@@ -67,9 +67,10 @@ class NewsController extends BaseController
                 'image' => $obj->image
             ];
 
-            $this->newsModel->updateData($id, $data);
+            $err = $this->newsModel->updateData($id, $data);
             return $this->view('frontend.news.confirm', [
-                'confirm' => ['success' => true]
+                'confirm' => ['success' => true],
+                'error' => ['error' => $err]
             ]);
         } else {
             return $this->view('frontend.news.confirm', [
@@ -87,9 +88,10 @@ class NewsController extends BaseController
 
         $id = $obj->id;
 
-        $this->newsModel->destroy($id);
+        $err = $this->newsModel->destroy($id);
         return $this->view('frontend.news.confirm', [
-            'confirm' => ['success' => true]
+            'confirm' => ['success' => true],
+            'error' => ['error' => $err]
         ]);
     }
     
