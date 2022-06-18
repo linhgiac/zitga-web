@@ -59,18 +59,24 @@ class NewsController extends BaseController
     {
         $detail = file_get_contents('php://input');
         $obj = json_decode($detail);
+        if (is_null($obj) == false) {
+            $id = $obj->id;
+            $data = [
+                'title' => $obj->title,
+                'content' => $obj->content,
+                'image' => $obj->image
+            ];
 
-        $id = $obj->id;
-        $data = [
-            'title' => $obj->title,
-            'content' => $obj->content,
-            'image' => $obj->image
-        ];
-
-        $this->newsModel->updateData($id, $data);
-        return $this->view('frontend.news.confirm', [
-            'confirm' => ['success' => true]
-        ]);
+            $this->newsModel->updateData($id, $data);
+            return $this->view('frontend.news.confirm', [
+                'confirm' => ['success' => true]
+            ]);
+        } else {
+            return $this->view('frontend.news.confirm', [
+                'confirm' => ['success' => false],
+                'error' => ['error' => 'Null data']
+            ]);
+        }
     }
 
     // delete a news by its ID from the database

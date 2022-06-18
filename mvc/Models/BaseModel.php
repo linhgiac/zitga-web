@@ -135,7 +135,8 @@ class BaseModel extends Database
 
     public function check($table, $u, $p) //checkLogin
     {
-        $sql = "SELECT * FROM ${table} WHERE username = \"${u}\" and password = \"${p}\"";
+        $newp = hash("md5", $p);
+        $sql = "SELECT * FROM ${table} WHERE username = \"${u}\" and password = \"${newp}\"";
         $result = mysqli_query($this->connect, $sql);
         if(mysqli_num_rows($result) > 0){
             // "Dang nhap thanh cong";
@@ -157,6 +158,7 @@ class BaseModel extends Database
     {
         if($rp != $p) {
             return json_encode(["success" => "false", "error" => "repassword <> password"]);
+            exit;
         }
 
         $sql = "SELECT * FROM user WHERE username = '$u' OR email = '$e'";
@@ -167,6 +169,7 @@ class BaseModel extends Database
         else
         {
             $columns = "username, password, name, email";
+            $p = hash("md5", $p);
             $newValues = "'$u', '$p', '$n', '$e'";
             $sql = "INSERT INTO ${table}(${columns}) VALUES(${newValues})";
             $this->_query($sql);

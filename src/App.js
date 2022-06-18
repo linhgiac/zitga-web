@@ -118,7 +118,7 @@ function App() {
         const data = JSON.stringify(details);
 
         const response = await axios.post(
-            'http://localhost/zitga-web/mvc/?controller=signup&action=check',
+            'http://localhost:8080/zitga-web/mvc/index.php?controller=signup&action=check',
             data,
             {
                 headers: {

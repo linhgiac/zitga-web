@@ -34,18 +34,24 @@ class RecruitmentController extends BaseController
     {
         $detail = file_get_contents('php://input');
         $obj = json_decode($detail);
-
-        $data = [
-            'title' => $obj->title,
-            'content' => $obj->content,
-            'category' => $obj->category,
-            'image' => $obj->image
-        ];
-
-        $this->recruitmentModel->store($data);
-        return $this->view('frontend.recruitments.confirm', [
-            'confirm' => ['success' => true]
-        ]);
+        if (is_null($obj) == false) {
+            $data = [
+                'title' => $obj->title,
+                'content' => $obj->content,
+                'category' => $obj->category,
+                'image' => $obj->image
+            ];
+    
+            $this->recruitmentModel->store($data);
+            return $this->view('frontend.recruitments.confirm', [
+                'confirm' => ['success' => true]
+            ]);
+        } else {
+            return $this->view('frontend.recruitments.confirm', [
+                'confirm' => ['success' => false],
+                'error' => ['error' => 'Null data']
+            ]);
+        }
     }
 
     // update a recruitment by its ID from the database
@@ -53,19 +59,25 @@ class RecruitmentController extends BaseController
     {
         $detail = file_get_contents('php://input');
         $obj = json_decode($detail);
-
-        $id = $obj->id;
-        $data = [
-            'title' => $obj->title,
-            'content' => $obj->content,
-            'category' => $obj->category,
-            'image' => $obj->image
-        ];
-
-        $this->recruitmentModel->updateData($id, $data);
-        return $this->view('frontend.recruitments.confirm', [
-            'confirm' => ['success' => true]
-        ]);
+        if (is_null($obj) == false) {
+            $id = $obj->id;
+            $data = [
+                'title' => $obj->title,
+                'content' => $obj->content,
+                'category' => $obj->category,
+                'image' => $obj->image
+            ];
+    
+            $this->recruitmentModel->updateData($id, $data);
+            return $this->view('frontend.recruitments.confirm', [
+                'confirm' => ['success' => true]
+            ]);
+        } else {
+            return $this->view('frontend.recruitments.confirm', [
+                'confirm' => ['success' => false],
+                'error' => ['error' => 'Null data']
+            ]);
+        }
     }
 
     // delete a recruitment by its ID from the database
