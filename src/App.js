@@ -3,7 +3,7 @@ import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
 import "antd/dist/antd.css";
 import { BrowserRouter } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { CookiesProvider, useCookies } from 'react-cookie';
 import { useJwt } from "react-jwt";
@@ -15,8 +15,6 @@ function App() {
         email: "admin@gmail.com",
         password: "123456",
     };
-
-    const [postId, setPostId] = useState(1);
 
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
@@ -33,8 +31,6 @@ function App() {
     const [userAccessToken, setUserAccessToken] = useState(getAccessToken());
 
     const { decodedToken, isExpired } = useJwt(userAccessToken);
-
-    console.log("User Access Token: ", userAccessToken);
 
     const getUserFromToken = async (accessToken) => {
         if (accessToken === null) {
@@ -54,31 +50,11 @@ function App() {
 
     const login = async (details) => {
 
-        // Test
-        // details = {
-        //     id: 3,
-        //     title: "updated",
-        //     content: "sfsdfsf",
-        //     image: "sfsdfsdf"
-        // }
-        // const response = await axios.post(
-        //     'http://localhost/mvc/index.php?controller=news&action=store',
-        //     details
-        //     , {
-        //         headers: {
-        //             'Access-Control-Allow-Origin': '*',
-        //             'Content-Type': 'application/json',
-        //         }
-        //     });
-        // console.log(response.data);
-        // console.log("Updated");
-        // End test
-
         console.log(details);
 
         if (
             details.email === "" ||
-            details.name === "" ||
+            details.username === "" ||
             details.password === ""
         ) {
             return "Vui lòng nhập đủ thông tin";
@@ -86,8 +62,9 @@ function App() {
 
         // // Test
         const data = JSON.stringify(details);
-        const response = await axios.get(
-            'http://localhost/mvc/?controller=login&action=check&username=' + details.name + "&password=" + details.password,
+        const response = await axios.post(
+            'http://localhost/mvc/?controller=login&action=check',
+            data,
             {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
@@ -101,8 +78,7 @@ function App() {
 
         if (
             // Authenticate User
-            details.email === adminUser.email &&
-            details.password === adminUser.password
+            response.data !== ""
         ) {
             console.log("Logged in");
             setUser({
@@ -123,6 +99,7 @@ function App() {
 
     const logout = () => {
         removeCookie('userAccessToken');
+        setUserAccessToken(null);
         console.log("Logout");
         setUser({
             name: "",
@@ -131,22 +108,39 @@ function App() {
     };
 
     const signup = async (details) => {
-        // const response = await axios.get(
-        //     'http://localhost/zitga-web/mvc/?controller=signup&action=check' + '&username=locnk&password=abc&repassword=abc&name=loc&email=loc@gmail.com');
-        // console.log(response);
+        details = {
+            username: 'minhtoan',
+            password: '123',
+            repassword: '123',
+            name: 'minh toan',
+            email: 'minhtoan@gmail.com'
+        };
+        const data = JSON.stringify(details);
+
+        const response = await axios.post(
+            'http://localhost/zitga-web/mvc/?controller=signup&action=check',
+            data,
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                },
+            });
+        console.log(response.data);
         return true;
     }
 
     const app = {
-        id: 1,
         user: user,
         login: login,
         logout: logout,
-        //isLogged: (user.email === "" || user.name === "") ? false : true,
         isLogged: userAccessToken === null ? false : true,
-        signup: signup
+        signup: signup,
     }
-    console.log("Fuk Pót ID", app.postId);
+
+    useEffect(() => {
+        console.log("User Access Token: ", userAccessToken);
+    }, [userAccessToken]);
 
     return (
         <CookiesProvider>

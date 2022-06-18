@@ -157,7 +157,6 @@ class BaseModel extends Database
     {
         if($rp != $p) {
             return json_encode(["success" => "false", "error" => "repassword <> password"]);
-            exit;
         }
 
         $sql = "SELECT * FROM user WHERE username = '$u' OR email = '$e'";

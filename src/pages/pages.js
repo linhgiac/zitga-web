@@ -36,7 +36,7 @@ const PageWrapper = ({ app, Page }) => {
 
 const Page = ({ app }) => {
 
-    
+
     return (
 
         <Routes>
@@ -70,11 +70,11 @@ const Page = ({ app }) => {
                 element={<PageWrapper app={app} Page={Product} />}
             />
             <Route
-                path= {`/careers/careers-details-${app.postId}`}
+                path="/careers/:postId"
                 element={<PageWrapper app={app} Page={Post} />}
             />
             <Route
-                path="/news/news-details-01"
+                path="/news/:postId"
                 element={<PageWrapper app={app} Page={Post} />}
             />
             <Route

@@ -10,10 +10,10 @@ const SignUpForm = ({ signup }) => {
     const [details, setDetails] = useState({ name: '', email: '', password: '' });
 
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
 
-        let result = signup(details);
+        let result = await signup(details);
 
         if (result === true) {
             navigate('/login');

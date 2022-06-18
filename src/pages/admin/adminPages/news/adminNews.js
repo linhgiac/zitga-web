@@ -28,6 +28,7 @@ const AdminAddNewsModal = () => {
     };
 
     const handleOk = () => {
+        console.log("AAAAAAAAAAAAA");
         form.submit();
         setIsModalVisible(false);
     };
@@ -57,7 +58,7 @@ const AdminAddNewsModal = () => {
 const AdminAddNewsForm = ({ form }) => {
     const onFinish = async (values) => {
         console.log('Success:', values);
-        const data = JSON.stringify({ ...values, id: 2 });
+        const data = JSON.stringify(values);
         console.log(data);
 
         const response = await axios.post(
@@ -157,7 +158,11 @@ const AdminNewsTable = () => {
 
     return (
         <div>
-            <Table columns={columns} dataSource={fakeData} />
+            <Table
+            
+                columns={columns}
+                dataSource={fakeData}
+            />
         </div>
     );
 };

@@ -7,7 +7,7 @@ import './loginForm.css';
 const LoginForm = ({ login }) => {
     const navigate = useNavigate();
     const [error, setError] = useState("");
-    const [details, setDetails] = useState({ name: '', email: '', password: '' });
+    const [details, setDetails] = useState({ username: '', email: '', password: '' });
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -50,9 +50,9 @@ const LoginForm = ({ login }) => {
                             {/* <label htmlFor='name'>Name: </label> */}
                             <input
                                 className='login-form-input'
-                                type='text' name='name' id='name'
-                                onChange={e => setDetails({ ...details, name: e.target.value })}
-                                value={details.name}
+                                type='text' name='username' id='username'
+                                onChange={e => setDetails({ ...details, username: e.target.value })}
+                                value={details.username}
                                 placeholder='Name'></input>
                         </div>
                         <div className='login-form-group'>
