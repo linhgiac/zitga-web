@@ -18,10 +18,14 @@ class LoginController extends BaseController
 
     public function check()
     {
-        $u = $_GET['username'];
-        $p = $_GET['password'];
-        $jwt = $this->loginModel->checkLogin($u, $p);
-        return $this->view('frontend.logins.check', ['jwt' => $jwt]);
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
+        if (is_null($obj) == false) {
+            $u = $obj->username;
+            $p = $obj->password;
+            $jwt = $this->loginModel->checkLogin($u, $p);
+            return $this->view('frontend.logins.check', ['jwt' => $jwt]);
+        }
     }
 
 }

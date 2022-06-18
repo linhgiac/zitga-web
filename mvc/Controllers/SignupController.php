@@ -12,13 +12,17 @@ class SignupController extends BaseController
 
     public function check()
     {
-        $u = $_GET['username'];
-        $p = $_GET['password'];
-        $rp = $_GET['repassword'];
-        $n = $_GET['name'];
-        $e = $_GET['email'];
-        $result = $this->signupModel->checkSignup($u, $p, $rp, $n, $e);
-        return $this->view('frontend.signups.check', ['result' => $result]);
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
+        if (is_null($obj) == false) {
+            $u = $obj->username;
+            $p = $obj->password;
+            $rp = $obj->repassword;
+            $n = $obj->name;
+            $e = $obj->email;
+            $result = $this->signupModel->checkSignup($u, $p, $rp, $n, $e);
+            return $this->view('frontend.signups.check', ['result' => $result]);
+        }
     }
 
 }
