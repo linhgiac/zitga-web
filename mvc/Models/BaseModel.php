@@ -152,9 +152,7 @@ class BaseModel extends Database
             return $this->_encodeJWT($data);
         }
         else{
-            // need revision
-            header("HTTP/1.1 401 Unauthorized");
-            exit;
+            return json_encode('Failed Login!');
         }
     }
 
