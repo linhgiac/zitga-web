@@ -33,19 +33,34 @@ class BaseModel extends Database
 
     public function find($table, $id)
     {
-        $sql = "SELECT * FROM ${table} WHERE id = ${id} LIMIT 1";
-        $query = $this->_query($sql);
-        return mysqli_fetch_assoc($query);
+        // handle for comment relation
+        if (is_array($id)) {
+            $sql = "SELECT * FROM ${table} WHERE news_id = {$id[0]}";
+            $query = $this->_query($sql);
+
+            $data = [];
+            while($row = mysqli_fetch_assoc($query)){
+                array_push($data, $row);
+            }
+            return $data;
+        }
+        else {
+            $sql = "SELECT * FROM ${table} WHERE id = ${id}";
+            $query = $this->_query($sql);
+            return mysqli_fetch_assoc($query);
+        }
     }
 
     public function create($table, $data = [])
     {
         $columns = implode(',', array_keys($data));
-
-        $newValues= array_map(function($value) {
-            return "'" . $value . "'";
+        
+        // don't need to handle with numeric type attribute in the database
+        // must to handle escape character
+        $newValues = array_map(function($value) {
+            return "'" . mysqli_real_escape_string($this->connect, $value) . "'";
         }, array_values($data));
-
+        
         $newValues = implode(',', $newValues);
 
         $sql = "INSERT INTO ${table}(${columns}) VALUES(${newValues})";
@@ -59,19 +74,31 @@ class BaseModel extends Database
         $dataSets = [];
 
         foreach($data as $key => $val) {
-            array_push($dataSets, "${key} = '". $val ."'");
+            array_push($dataSets, "${key} = '" . mysqli_real_escape_string($this->connect, $val) . "'");
         }
 
         $dataSetString = implode(',', $dataSets);
-
-        $sql = "UPDATE ${table} SET ${dataSetString} WHERE id = ${id}";
+        
+        // update for comment relation
+        if (is_array($id)) {
+            $sql = "UPDATE ${table} SET ${dataSetString} WHERE id = {$id[0]} AND news_id = {$id[1]}";
+        }
+        else {
+            $sql = "UPDATE ${table} SET ${dataSetString} WHERE id = ${id}";
+        }
 
         $this->_query($sql);
     }
 
     public function delete($table, $id)
     {
-        $sql = "DELETE FROM ${table} WHERE id = ${id}";
+        // delete for comment relation
+        if (is_array($id)) {
+            $sql = "DELETE FROM ${table} WHERE id = {$id[0]} AND news_id = {$id[1]}";
+        }
+        else {
+            $sql = "DELETE FROM ${table} WHERE id = ${id}";
+        }
 
         $this->_query($sql);
     }

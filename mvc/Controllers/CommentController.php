@@ -10,20 +10,29 @@ class CommentController extends BaseController
         $this->commentModel = new CommentModel;
     }
 
-    // get all of tuples of recruitment relation in the database
+    // get all comments of a news with given its ID
     public function index()
     {
-        $selectColumns = ['*'];
+        // $selectColumns = ['*'];
 
-        $orders = [
-            'column' => 'id',
-            'order' => 'desc',
-        ];
+        // $orders = [
+        //     'column' => 'id',
+        //     'order' => 'desc',
+        // ];
 
-        $comments = $this->commentModel->getAll(
-            $selectColumns,
-            $orders   
-        );
+        // $comments = $this->commentModel->getAll(
+        //     $selectColumns,
+        //     $orders   
+        // );
+        // return $this->view('frontend.comments.index', [
+        //     'comments' => $comments,
+        // ]);
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
+
+        $id = [$obj->news_id];
+
+        $comments = $this->commentModel->findById($id);
         return $this->view('frontend.comments.index', [
             'comments' => $comments,
         ]);
@@ -34,27 +43,27 @@ class CommentController extends BaseController
     {
         $detail = file_get_contents('php://input');
         $obj = json_decode($detail);
-
+        
         $data = [
             'id' => $obj->id,
             'news_id' => $obj->news_id,
             'user_id' => $obj->user_id,
             'content' => $obj->content
         ];
-
+        
         $this->commentModel->store($data);
         return $this->view('frontend.comments.confirm', [
             'confirm' => ['success' => true]
         ]);
     }
 
-    // update a comment by its ID from the database
+    // update a comment with its id and a news_id from the database
     public function update()
     {
         $detail = file_get_contents('php://input');
         $obj = json_decode($detail);
 
-        $id = $obj->id;
+        $id = [$obj->id, $obj->news_id];
         $data = [
             'id' => $obj->id,
             'news_id' => $obj->news_id,
@@ -64,17 +73,17 @@ class CommentController extends BaseController
 
         $this->commentModel->updateData($id, $data);
         return $this->view('frontend.comments.confirm', [
-            'confirm' => ['success' => true]
+            'confirm' => ['success' => true],
         ]);
     }
 
-    // delete a comment by its ID from the database
+    // delete a comment with its id and a news_id from the database
     public function delete()
     {
         $detail = file_get_contents('php://input');
         $obj = json_decode($detail);
 
-        $id = $obj->id;
+        $id = [$obj->id, $obj->news_id];
 
         $this->commentModel->destroy($id);
         return $this->view('frontend.comments.confirm', [
@@ -82,13 +91,12 @@ class CommentController extends BaseController
         ]);
     }
     
-    // get a comment by its id
     public function show()
     {
         $detail = file_get_contents('php://input');
         $obj = json_decode($detail);
 
-        $id = $obj->id;
+        $id = [$obj->news_id];
 
         $result = $this->commentModel->findById($id);
         return $this->view('frontend.comments.show', [
