@@ -68,7 +68,7 @@ class RecruitmentController extends BaseController
         ]);
     }
 
-    // delete a recruitments by its ID from the database
+    // delete a recruitment by its ID from the database
     public function delete()
     {
         $detail = file_get_contents('php://input');
@@ -82,7 +82,7 @@ class RecruitmentController extends BaseController
         ]);
     }
     
-    // get a recruitments by its id
+    // get a recruitment by its id
     public function show()
     {
         $detail = file_get_contents('php://input');

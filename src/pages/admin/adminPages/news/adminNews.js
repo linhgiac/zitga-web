@@ -5,6 +5,8 @@ import { useState } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
+import axios from "axios";
+
 const AdminNews = () => {
     return (
         <div className="admin-news-container">
@@ -18,6 +20,7 @@ const AdminNews = () => {
     );
 };
 const AdminAddNewsModal = () => {
+    const [form] = Form.useForm();
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
@@ -25,6 +28,7 @@ const AdminAddNewsModal = () => {
     };
 
     const handleOk = () => {
+        form.submit();
         setIsModalVisible(false);
     };
 
@@ -44,36 +48,68 @@ const AdminAddNewsModal = () => {
                 onCancel={handleCancel}
                 width={900}
             >
-                <AdminAddNewsForm />
+                <AdminAddNewsForm form={form} />
             </Modal>
         </div>
     );
 };
 
-const AdminAddNewsForm = () => {
+const AdminAddNewsForm = ({ form }) => {
+    const onFinish = async (values) => {
+        console.log('Success:', values);
+        const data = JSON.stringify({ ...values, id: 2 });
+        console.log(data);
+
+        const response = await axios.post(
+            'http://localhost/mvc/index.php?controller=news&action=store',
+            data
+            , {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                }
+            });
+        console.log(response.data);
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
     return (
         <div>
-            <Form size="large" labelCol={{ span: 4 }} wrapperCol={{ span: 18 }}>
-                <Form.Item label="Title">
+            <Form
+                form={form}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                size="large" labelCol={{ span: 4 }} wrapperCol={{ span: 18 }}
+            >
+                <Form.Item label="Title" name='title'>
                     <Input />
                 </Form.Item>
-                <Form.Item label="Image Source">
+                <Form.Item label="Image Source" name='image'>
                     <Input />
                 </Form.Item>
-                <Form.Item label="Post-date">
+                <Form.Item label="Post-date" name='post-date'>
                     <DatePicker />
                 </Form.Item>
-                <Form.Item label="Description">
-                    <MyEditor />
+                <Form.Item label="Content" name='content'>
+                    <MyEditor form={form} />
                 </Form.Item>
             </Form>
         </div>
     );
 };
-const MyEditor = () => {
+const MyEditor = ({ form }) => {
     const [value, setValue] = useState("");
 
-    return <ReactQuill theme="snow" value={value} onChange={setValue} />;
+    const onChange = (value) => {
+        setValue(value);
+        form.setFieldsValue({
+            content: value
+        })
+    }
+
+    return <ReactQuill theme="snow" value={value} onChange={onChange} />;
 };
 const AdminNewsTable = () => {
     const columns = [
@@ -107,17 +143,15 @@ const AdminNewsTable = () => {
             id: 1,
             imgSrc: "http://zitga.com.vn/wp-content/uploads/2022/05/11-1.jpg",
             title: "[OUR BELOVED SUMMER] CHUYẾN ĐI DÀNH CHO NHỮNG TÂM HỒN RỰC CHÁY",
-            date: `${
-                month[current.getMonth()]
-            } ${current.getDate()}, ${current.getFullYear()}`,
+            date: `${month[current.getMonth()]
+                } ${current.getDate()}, ${current.getFullYear()}`,
         },
         {
             id: 2,
             imgSrc: "http://zitga.com.vn/wp-content/uploads/2021/12/636A4498.jpg",
             title: "TEAMBUILDING – KẾT NỐI NHỮNG CHIẾN BINH",
-            date: `${
-                month[current.getMonth()]
-            } ${current.getDate()}, ${current.getFullYear()}`,
+            date: `${month[current.getMonth()]
+                } ${current.getDate()}, ${current.getFullYear()}`,
         },
     ];
 

@@ -1,11 +1,13 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./news.css";
 import PageStyles from "../pages.module.css";
 import { Col, Row, Button } from "antd";
 import SearchAndCategories from "../../components/categories/categories";
 import { NavLink } from "react-router-dom";
 import { HeartFilled } from "@ant-design/icons";
+import axios from "axios";
+
 const News = () => {
     return (
         <div className={PageStyles.content}>
@@ -46,6 +48,9 @@ const NewsContent = () => {
     );
 };
 const NewsMainContent = () => {
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState(null);
+
     const current = new Date();
     const month = [
         "January",
@@ -61,6 +66,23 @@ const NewsMainContent = () => {
         "November",
         "December",
     ];
+
+
+    const getData = async () => {
+        const response = await axios.get(
+            'http://localhost/mvc/index.php?controller=news',
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                }
+            }).then((value) => value.data);
+
+        console.log("Response data: ", response);
+        console.log("Updated");
+        setData(response);
+    }
+
     const fakeData = [
         {
             id: 1,
@@ -87,6 +109,13 @@ const NewsMainContent = () => {
             date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
         },
     ];
+
+    useEffect(() => {
+        if (isLoading) {
+            getData();
+            setLoading(false);
+        }
+    });
 
     return (
         <div className="news-container">
@@ -148,11 +177,12 @@ const NewsContainer = ({ news }) => {
             setCount(count + 1);
         }
     };
+    console.log(news);
     return (
         <>
             <div className="news-image-title">
                 <a href="#">
-                    <img src={news.imgSrc} />
+                    <img src={news.image} />
                 </a>
             </div>
             <div className="news-main-content-inner">

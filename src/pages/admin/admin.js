@@ -48,10 +48,10 @@ const Admin = ({ app }) => {
                         <Menu.Item key="user" className="admin-menu-item">
                             <a href="/admin">User</a>
                         </Menu.Item>
-                        <Menu.Item key="Careers" className="admin-menu-item">
+                        <Menu.Item disabled={false} key="Careers" className="admin-menu-item">
                             <a href="/admin/career">Careers</a>
                         </Menu.Item>
-                        <Menu.Item key="News" className="admin-menu-item">
+                        <Menu.Item disabled={false} key="News" className="admin-menu-item">
                             <a href="/admin/news">News</a>
                         </Menu.Item>
                     </Menu>
