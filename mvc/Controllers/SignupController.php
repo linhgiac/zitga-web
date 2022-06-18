@@ -12,23 +12,20 @@ class SignupController extends BaseController
 
     public function check()
     {
-        // $detail = file_get_contents('php://input');
-        // $obj = json_decode($detail);
-        // if (is_null($obj) == false) {
-        //     $u = $obj->username;
-        //     $p = $obj->password;
-        //     $rp = $obj->repassword;
-        //     $n = $obj->name;
-        //     $e = $obj->email;
-        //     $result = $this->signupModel->checkSignup($u, $p, $rp, $n, $e);
-        //     return $this->view('frontend.signups.check', ['result' => $result]);
-        // } else {
-        //     return $this->view('frontend.signups.check', ['result' => json_encode('Null data')]);
-        // }
-        return $this->view('frontend.signups.check', ['result' => json_encode('Null data')]);
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
+        if (is_null($obj) == false) {
+            $u = $obj->username;
+            $p = $obj->password;
+            $rp = $obj->repassword;
+            $n = $obj->name;
+            $e = $obj->email;
+            $result = $this->signupModel->checkSignup($u, $p, $rp, $n, $e);
+            return $this->view('frontend.signups.check', ['result' => $result]);
+        } else {
+            return $this->view('frontend.signups.check', ['result' => json_encode('Null data')]);
+        }
     }
 
 }
-
-
 ?>
