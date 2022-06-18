@@ -136,7 +136,9 @@ class BaseModel extends Database
     public function check($table, $u, $p) //checkLogin
     {
         $newp = hash("md5", $p);
-        $sql = "SELECT * FROM ${table} WHERE username = \"${u}\" and password = \"${newp}\"";
+        $sanitized_userid = mysqli_real_escape_string($this->connect, $u);
+        $sanitized_password = mysqli_real_escape_string($this->connect, $newp);
+        $sql = "SELECT * FROM ${table} WHERE username = \"${sanitized_userid}\" and password = \"${sanitized_password}\"";
         $result = mysqli_query($this->connect, $sql);
         if(mysqli_num_rows($result) > 0){
             // "Dang nhap thanh cong";
