@@ -16,7 +16,7 @@ function App() {
         password: "123456",
     };
 
-    // const { decodedToken, isExpired } = useJwt(accessTokenTest);
+    const [postId, setPostId] = useState(1);
 
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
@@ -146,6 +146,7 @@ function App() {
         isLogged: userAccessToken === null ? false : true,
         signup: signup
     }
+    console.log("Fuk Pót ID", app.postId);
 
     return (
         <CookiesProvider>

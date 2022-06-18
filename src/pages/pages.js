@@ -15,9 +15,7 @@ import Post from "../components/post/post";
 import Admin from "./admin/admin";
 import { BackTop } from "antd";
 import { UpCircleFilled } from "@ant-design/icons";
-import AdminUser from "./admin/adminPages/user/adminUser";
-import AdminCareer from "./admin/adminPages/career/adminCareer";
-import AdminNews from "./admin/adminPages/news/adminNews";
+
 
 const PageWrapper = ({ app, Page }) => {
     return (
@@ -37,7 +35,10 @@ const PageWrapper = ({ app, Page }) => {
 };
 
 const Page = ({ app }) => {
+
+    
     return (
+
         <Routes>
             <Route path="/" element={<PageWrapper app={app} Page={Home} />} />
             <Route
@@ -69,7 +70,7 @@ const Page = ({ app }) => {
                 element={<PageWrapper app={app} Page={Product} />}
             />
             <Route
-                path="/careers/careers-details-01"
+                path= {`/careers/careers-details-${app.postId}`}
                 element={<PageWrapper app={app} Page={Post} />}
             />
             <Route
