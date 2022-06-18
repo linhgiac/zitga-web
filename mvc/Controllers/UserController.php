@@ -90,9 +90,10 @@ class UserController extends BaseController
         $detail = file_get_contents('php://input');
         $obj = json_decode($detail);
 
-        $id = $obj->id;
+        $token = $obj->token;
+        $data = json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $token)[1]))));
 
-        $result = $this->userModel->findById($id);
+        $result = $this->userModel->findById($data->id);
         return $this->view('frontend.recruitments.show', [
             'data' => [$result]
         ]);

@@ -145,6 +145,7 @@ class BaseModel extends Database
             // $_SESSION['username'] = $u;
             // header('location:admin.php');
             $data = [
+                'id' => mysqli_fetch_assoc($result)['id'],
                 'username' => $u,
                 'password' => $p
             ];
