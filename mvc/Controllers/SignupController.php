@@ -17,7 +17,8 @@ class SignupController extends BaseController
         $rp = $_GET['repassword'];
         $n = $_GET['name'];
         $e = $_GET['email'];
-        $this->signupModel->checkSignup($u, $p, $rp, $n, $e);
+        $result = $this->signupModel->checkSignup($u, $p, $rp, $n, $e);
+        return $this->view('frontend.signups.check', ['result' => $result]);
     }
 
 }

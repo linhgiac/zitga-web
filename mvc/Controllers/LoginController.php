@@ -20,7 +20,8 @@ class LoginController extends BaseController
     {
         $u = $_GET['username'];
         $p = $_GET['password'];
-        $this->loginModel->checkLogin($u, $p);
+        $jwt = $this->loginModel->checkLogin($u, $p);
+        return $this->view('frontend.logins.check', ['jwt' => $jwt]);
     }
 
 }
