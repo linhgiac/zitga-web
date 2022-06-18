@@ -4,17 +4,17 @@ import "./careers.css";
 import PageStyles from "../pages.module.css";
 import { Col, Row, Button } from "antd";
 import SearchAndCategories from "../../components/categories/categories";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { HeartFilled } from "@ant-design/icons";
 
-const Careers = () => {
+const Careers = ({app}) => {
     return (
         <div className={PageStyles.content}>
             <div>
                 <CareersTitleImage />
             </div>
             <div>
-                <CareersContent />
+                <CareersContent app={app}/>
             </div>
         </div>
     );
@@ -25,19 +25,35 @@ const CareersTitleImage = () => {
         <div className={PageStyles.titleContent}>
             <div className={PageStyles.contentTitleImg} id="careers-img">
                 <div className={PageStyles.contentTitleInner}>
-                    <div className={PageStyles.title}>Careers</div>
+                    <div className={PageStyles.title}>
+                        {window.location.pathname === "/careers" && (
+                            <>Tuyển dụng</>
+                        )}
+                        {window.location.pathname === "/careers/create-design" && (
+                            <>Khối Sáng tạo/ Thiết kế</>
+                        )}
+                        {window.location.pathname === "/careers/marketing" && (
+                            <>Khối Marketing</>
+                        )}
+                        {window.location.pathname === "/careers/development" && (
+                            <>Khối Development</>
+                        )}
+                        {window.location.pathname === "/careers/backoffice" && (
+                            <>Khối BackOffice</>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
-const CareersContent = () => {
+const CareersContent = ({app}) => {
     return (
         <div className="careers-content-inner">
             <div>
                 <Row>
                     <Col md={24} lg={16}>
-                        <CareersMainContent />
+                        <CareersMainContent app = { app}/>
                     </Col>
                     <Col xs={24} lg={8}>
                         <SearchAndCategories />
@@ -48,7 +64,7 @@ const CareersContent = () => {
     );
 };
 
-const CareersMainContent = () => {
+const CareersMainContent = ({app}) => {
     const current = new Date();
     const month = [
         "January",
@@ -71,16 +87,34 @@ const CareersMainContent = () => {
             id: 1,
             imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
             title: "Senior Game UX Designer",
-            date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
+            date: `${
+                month[current.getMonth()]
+            } ${current.getDate()}, ${current.getFullYear()}`,
         },
         {
             id: 2,
             imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
             title: "Junior Game UX Designer",
-            date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
+            date: `${
+                month[current.getMonth()]
+            } ${current.getDate()}, ${current.getFullYear()}`,
         },
         {
             id: 3,
+            imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
+            title: "Fresher Game UX Designer",
+            date: `${
+                month[current.getMonth()]
+            } ${current.getDate()}, ${current.getFullYear()}`,
+        },
+        {
+            id: 4,
+            imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
+            title: "Junior Game UX Designer",
+            date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
+        },
+        {
+            id: 5,
             imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
             title: "Fresher Game UX Designer",
             date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
@@ -132,21 +166,19 @@ const CareersMainContent = () => {
                     </div>
                 </div>
             </div> */}
-            <CareersList careersData={fakeData} />
+            <CareersList careersData={fakeData} app={app}/>
         </div>
     );
 };
 
-const CareersList = ({ careersData }) => {
-    const careersList = careersData.map((career) =>
-        <CareerContainer key={career.id.toString()} career={career} />
-    );
-    return (
-        <>{careersList}</>
-    )
-}
+const CareersList = ({ careersData, app }) => {
+    const careersList = careersData.map(career => (
+        <CareerContainer key={career.id.toString()} career={career} app={app} />
+    ));
+    return <>{careersList}</>;
+};
 
-const CareerContainer = ({ career }) => {
+const CareerContainer = ({ career,app }) => {
     const [count, setCount] = useState(0);
     const [isLike, setIsLike] = useState(false);
     const handleLiked = () => {
@@ -157,11 +189,14 @@ const CareerContainer = ({ career }) => {
             setCount(count + 1);
         }
     };
-
+    const handleClicked = () => {
+        // app.setPostId(career.id);
+        
+    }
     return (
         <div className="careers-container">
             <div className="careers-image-title">
-                <a href="#">
+                <a href={`/careers/careers-details-${career.id}`} onClick= {handleClicked}>
                     <img src={career.imgSrc} />
                 </a>
             </div>
@@ -170,7 +205,7 @@ const CareerContainer = ({ career }) => {
                     <div className="careers-pre-title-btn">tuyển dụng</div>
                 </div>
                 <div className="careers-main-content-title">
-                    <a href="/careers/careers-details-01">{career.title}</a>
+                    <a href={`/careers/careers-details-${career.id}` } onClick= {handleClicked}>{career.title}</a>
                 </div>
                 <div className="careers-main-content-post-tiltle">
                     <div className="careers-post-left">
@@ -194,7 +229,7 @@ const CareerContainer = ({ career }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Careers;

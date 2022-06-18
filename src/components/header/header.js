@@ -55,7 +55,7 @@ const Header = ({ app }) => {
                     <NavLink className="header-elements" to="/about">
                         About Us
                     </NavLink>
-                    <Dropdown overlay= {careerCategories} placement="bottomLeft">
+                    <Dropdown overlay={careerCategories} placement="bottomLeft">
                         <NavLink className="header-elements" to="/careers">
                             Careers
                         </NavLink>
@@ -110,11 +110,7 @@ const careerCategories = (
             {
                 key: "1",
                 label: (
-                    <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="#"
-                    >
+                    <a rel="noopener noreferrer" href="/careers/create-design">
                         Khối Sáng tạo/ Thiết kế
                     </a>
                 ),
@@ -122,11 +118,7 @@ const careerCategories = (
             {
                 key: "2",
                 label: (
-                    <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="#"
-                    >
+                    <a rel="noopener noreferrer" href="/careers/marketing">
                         Khối Marketing
                     </a>
                 ),
@@ -134,11 +126,7 @@ const careerCategories = (
             {
                 key: "3",
                 label: (
-                    <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="#"
-                    >
+                    <a rel="noopener noreferrer" href="/careers/development">
                         Khối Development
                     </a>
                 ),
@@ -146,11 +134,7 @@ const careerCategories = (
             {
                 key: "4",
                 label: (
-                    <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="#"
-                    >
+                    <a rel="noopener noreferrer" href="careers/backoffice">
                         Khối BackOffice
                     </a>
                 ),

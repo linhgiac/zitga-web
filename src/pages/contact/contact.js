@@ -37,11 +37,10 @@ const ContactTitleImage = () => {
 };
 
 const ContactContent = ({ app }) => {
-    const size = app.isLogged ? 24 : 12;
     return (
         <div className="contact-content-inner">
             <Row gutter={16}>
-                <Col className="gutter-row" span={size}>
+                <Col className="gutter-row" sm={24} md={app.isLogged?24:12}>
                     <div className="content-col1">
                         <div className="content-sub-title">
                             Liên hệ với <br />
@@ -82,7 +81,7 @@ const ContactContent = ({ app }) => {
                     </div>
                 </Col>
                 {(!app.isLogged) && (
-                    <Col className="gutter-row" span={12}>
+                    <Col className="gutter-row" sm={24} md={12}>
                         <div className="content-col2">
                             <div className="content-col2-submit-form">
                                 <SubmitForm />

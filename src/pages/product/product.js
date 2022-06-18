@@ -118,8 +118,8 @@ const StickManLegendsModal = () => {
                     <iframe
                         className="edgtf-iframe-video fluidvids-item"
                         src="https://www.youtube.com/embed/irSMptf7MXQ?wmode=transparent"
-                        // width="800"
-                        // height="450"
+                        width="500"
+                        height="400"
                         wmode="Opaque"
                         allowfullscreen=""
                         data-fluidvids="loaded"
@@ -179,8 +179,8 @@ const EmpireWarriosModal = () => {
                     <iframe
                         class="edgtf-iframe-video fluidvids-item"
                         src="https://www.youtube.com/embed/Xfcc2vKJjgg"
-                        width="800"
-                        height="450"
+                        width="500"
+                        height="400"
                         wmode="Opaque"
                         allowfullscreen=""
                         data-fluidvids="loaded"
@@ -240,8 +240,8 @@ const SummonersEraModal = () => {
                     <iframe
                         class="edgtf-iframe-video fluidvids-item"
                         src="https://www.youtube.com/watch?v=jL247RxNuOo"
-                        width="800"
-                        height="450"
+                        width="500"
+                        height="400"
                         wmode="Opaque"
                         allowfullscreen=""
                         data-fluidvids="loaded"
@@ -301,8 +301,8 @@ const ShadowKnightModal = () => {
                     <iframe
                         class="edgtf-iframe-video fluidvids-item"
                         src="https://www.youtube.com/watch?v=OpeOTCyvaGs"
-                        width="800"
-                        height="450"
+                        width="500"
+                        height="400"
                         wmode="Opaque"
                         allowfullscreen=""
                         data-fluidvids="loaded"

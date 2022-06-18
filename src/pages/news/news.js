@@ -89,10 +89,10 @@ const NewsMainContent = () => {
     ];
 
     return (
-        <div className="news-main-content-container">
+        <div className="news-container">
             {/* <div className="news-image-title">
-                <a href="#">
-                    <img src={fakeData[0].imgSrc} />
+                <a href={`/news/news-details-${news.id}`}>
+                    <img src={news.imgSrc} />
                 </a>
             </div>
             <div className="news-main-content-inner">
@@ -100,7 +100,7 @@ const NewsMainContent = () => {
                     <div className="news-pre-title-btn">tin tức</div>
                 </div>
                 <div className="news-main-content-title">
-                    <a href="/news/news-details-01">{fakeData[0].title}</a>
+                    <a href={`/news/news-details-${news.id}`}>{news.title}</a>
                 </div>
                 <div className="news-main-content-post-tiltle">
                     <div className="news-post-left">
@@ -122,7 +122,7 @@ const NewsMainContent = () => {
                         </div>
                     </div>
                 </div>
-            </div> */}
+            </div>  */}
             <NewsList newsData={fakeData} />
         </div>
     );

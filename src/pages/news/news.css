@@ -10,8 +10,10 @@
 .news-main-content-container{
      margin: 30px;
      margin-top: 20px;
-   
-    
+     
+}
+.news-container{
+    margin-bottom: 40px;
 }
 .news-image-title{
     width: 100%;

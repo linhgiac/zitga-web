@@ -91,3 +91,17 @@
   height: 50px;
   margin: 10px 0;
 }
+.post-comment-list{
+  background-color: #17161a;
+}
+.post-comment{
+  background-color: #000;
+  padding: 10px;
+  margin-top: 10px;
+}
+.ant-comment-content-author>span{
+  color: #ff0e1f;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600px;
+  font-size: 15px;
+}
