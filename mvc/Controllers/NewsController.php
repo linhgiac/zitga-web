@@ -41,9 +41,10 @@ class NewsController extends BaseController
             'image' => $obj->image
         ];
 
-        $this->newsModel->store($data);
+        $err = $this->newsModel->store($data);
         return $this->view('frontend.news.confirm', [
-            'confirm' => ['success' => true]
+            'confirm' => ['success' => true],
+            'error' => ['error' => $err]
         ]);
     }
 
