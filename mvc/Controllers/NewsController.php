@@ -34,18 +34,19 @@ class NewsController extends BaseController
     {
         $detail = file_get_contents('php://input');
         $obj = json_decode($detail);
-
-        $data = [
-            'title' => $obj->title,
-            'content' => $obj->content,
-            'image' => $obj->image
-        ];
-
-        $err = $this->newsModel->store($data);
-        return $this->view('frontend.news.confirm', [
-            'confirm' => ['success' => true],
-            'error' => ['error' => $err]
-        ]);
+        if (is_null($obj) == false) {
+            $data = [
+                'title' => $obj->title,
+                'content' => $obj->content,
+                'image' => $obj->image
+            ];
+    
+            $err = $this->newsModel->store($data);
+            return $this->view('frontend.news.confirm', [
+                'confirm' => ['success' => true],
+                'error' => ['error' => $err]
+            ]);
+        }
     }
 
     // update a news by its ID from the database
