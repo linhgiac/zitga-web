@@ -48,25 +48,7 @@ const NewsContent = () => {
     );
 };
 const NewsMainContent = () => {
-    const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState(null);
-
-    const current = new Date();
-    const month = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-    ];
-
 
     const getData = async () => {
         const response = await axios.get(
@@ -83,43 +65,16 @@ const NewsMainContent = () => {
         setData(response);
     }
 
-    const fakeData = [
-        {
-            id: 1,
-            image: "http://zitga.com.vn/wp-content/uploads/2022/05/11-1.jpg",
-            title: "[OUR BELOVED SPRING] CHUYẾN ĐI DÀNH CHO NHỮNG TÂM HỒN RỰC CHÁY",
-            date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
-        },
-        {
-            id: 2,
-            image: "http://zitga.com.vn/wp-content/uploads/2022/05/11-1.jpg",
-            title: "[OUR BELOVED SUMMER] CHUYẾN ĐI DÀNH CHO NHỮNG TÂM HỒN RỰC CHÁY",
-            date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
-        },
-        {
-            id: 3,
-            image: "http://zitga.com.vn/wp-content/uploads/2022/05/11-1.jpg",
-            title: "[OUR BELOVED AUTUMN] CHUYẾN ĐI DÀNH CHO NHỮNG TÂM HỒN RỰC CHÁY",
-            date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
-        },
-        {
-            id: 4,
-            image: "http://zitga.com.vn/wp-content/uploads/2022/05/11-1.jpg",
-            title: "[OUR BELOVED WINTER] CHUYẾN ĐI DÀNH CHO NHỮNG TÂM HỒN RỰC CHÁY",
-            date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
-        },
-    ];
-
     useEffect(() => {
-        if (isLoading) {
-            getData();
-            setLoading(false);
-        }
-    });
+        getData();
+    }, []);
 
     return (
         <div className="news-main-content-container">
-            <NewsList newsData={fakeData} />
+            {
+                data !== null &&
+                <NewsList newsData={data} />
+            }
         </div>
     );
 };
