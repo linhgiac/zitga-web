@@ -135,7 +135,8 @@ class BaseModel extends Database
 
     public function check($table, $u, $p) //checkLogin
     {
-        $sql = "SELECT * FROM ${table} WHERE username = \"${u}\" and password = \"${p}\"";
+        $newp = hash("md5", $p);
+        $sql = "SELECT * FROM ${table} WHERE username = \"${u}\" and password = \"${newp}\"";
         $result = mysqli_query($this->connect, $sql);
         if(mysqli_num_rows($result) > 0){
             // "Dang nhap thanh cong";
@@ -168,6 +169,7 @@ class BaseModel extends Database
         else
         {
             $columns = "username, password, name, email";
+            $p = hash("md5", $p);
             $newValues = "'$u', '$p', '$n', '$e'";
             $sql = "INSERT INTO ${table}(${columns}) VALUES(${newValues})";
             $this->_query($sql);
@@ -202,6 +204,6 @@ class BaseModel extends Database
         // Create JWT
         $jwt = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
-        echo $jwt;
+        return $jwt;
     }
 }
