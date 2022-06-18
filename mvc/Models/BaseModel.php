@@ -66,6 +66,7 @@ class BaseModel extends Database
         $sql = "INSERT INTO ${table}(${columns}) VALUES(${newValues})";
 
         $this->_query($sql);
+        return mysqli_error($this->connect);
 
     }
 

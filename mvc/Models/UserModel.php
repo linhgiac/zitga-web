@@ -1,8 +1,8 @@
 <?php
 
-class NewsModel extends BaseModel
+class UserModel extends BaseModel
 {
-    const TABLE = 'news';
+    const TABLE = 'user';
 
     public function getAll($select = ['*'], $orderBy = [], $limit = 15)
     {
@@ -16,7 +16,7 @@ class NewsModel extends BaseModel
 
     public function store($data)
     {
-        return $this->create(self::TABLE, $data);
+        $this->create(self::TABLE, $data);
     }
 
     public function updateData($id, $data)
@@ -32,5 +32,10 @@ class NewsModel extends BaseModel
     public function findByKey($keyword)
     {
         return $this->search(self::TABLE, $keyword);
+    }
+
+    public function filterByCategory($category)
+    {
+        return $this->filter(self::TABLE, $category);
     }
 }
