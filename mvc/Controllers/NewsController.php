@@ -46,6 +46,11 @@ class NewsController extends BaseController
                 'confirm' => ['success' => true],
                 'error' => ['error' => $err]
             ]);
+        } else {
+            return $this->view('frontend.news.confirm', [
+                'confirm' => ['success' => false],
+                'error' => ['error' => 'Null data']
+            ]);
         }
     }
 
