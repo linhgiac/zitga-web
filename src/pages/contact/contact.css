@@ -34,7 +34,7 @@ Content */
     font-weight: 700;
     line-height: 1.17em;
 }
-content-separator{
+.content-separator{
     margin-top: 2px;
 }
 p{
@@ -42,7 +42,7 @@ p{
     color: silver;
 }
 
-content-col2{
+.content-col2{
     width: 100%;
     font-size: 25px;
     font-family: Montserrat,sans-serif;
@@ -88,4 +88,12 @@ Input{
     padding: 0 10px;
     font-size: 15px;
 }
-
+@media screen and (max-width: 650px){
+    .contact-content-inner{
+        
+        margin: 0px 40px;}
+    .content-col1{
+        padding-right: 20px;
+    }
+    
+}

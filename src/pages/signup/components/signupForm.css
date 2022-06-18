@@ -9,6 +9,11 @@
     background-color: #17161a;
     width: 50%;
 }
+@media screen and (max-width: 650px){
+    .signup-wrapper{
+        width: 80%;
+    }
+}
 
 .signup-header {
     min-height: 48px;

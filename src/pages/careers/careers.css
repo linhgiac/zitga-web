@@ -97,3 +97,8 @@
     color: #fff;
     padding: 5px 30px;
 }
+@media screen and (max-width: 650px){
+    .careers-post-right{
+        display: none;
+    }
+}
