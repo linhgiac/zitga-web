@@ -28,4 +28,14 @@ class RecruitmentModel extends BaseModel
     {
         return $this->delete(self::TABLE, $id);
     }
+
+    public function findByKey($keyword)
+    {
+        return $this->search(self::TABLE, $keyword);
+    }
+
+    public function filterByCategory($category)
+    {
+        return $this->filter(self::TABLE, $category);
+    }
 }

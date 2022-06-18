@@ -93,4 +93,18 @@ class NewsController extends BaseController
             'data' => [$result]
         ]);
     }
+
+    // search by given keyword
+    public function search()
+    {
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
+
+        $keyword = $obj->keyword;
+
+        $result = $this->newsModel->findByKey($keyword);
+        return $this->view('frontend.news.show', [
+            'data' => $result
+        ]);
+    }
 }

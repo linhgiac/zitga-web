@@ -37,7 +37,7 @@ class RecruitmentController extends BaseController
 
         $data = [
             'title' => $obj->title,
-            'description' => $obj->description,
+            'content' => $obj->content,
             'category' => $obj->category,
             'image' => $obj->image
         ];
@@ -57,7 +57,7 @@ class RecruitmentController extends BaseController
         $id = $obj->id;
         $data = [
             'title' => $obj->title,
-            'description' => $obj->description,
+            'content' => $obj->content,
             'category' => $obj->category,
             'image' => $obj->image
         ];
@@ -96,8 +96,30 @@ class RecruitmentController extends BaseController
         ]);
     }
 
-    // filter with category
+    // search by given keyword
+    public function search()
+    {
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
 
-    // find by title?
+        $keyword = $obj->keyword;
 
+        $result = $this->recruitmentModel->findByKey($keyword);
+        return $this->view('frontend.news.show', [
+            'data' => $result
+        ]);
+    }
+
+    public function filter()
+    {
+        $detail = file_get_contents('php://input');
+        $obj = json_decode($detail);
+
+        $category = $obj->category;
+
+        $result = $this->recruitmentModel->filterByCategory($category);
+        return $this->view('frontend.news.show', [
+            'data' => $result
+        ]);
+    }
 }

@@ -20,14 +20,13 @@ class BaseModel extends Database
         } else {
             $sql = "SELECT ${columns} FROM ${table} LIMIT ${limit}";
         }
-
         $query = $this->_query($sql);
 
         $data = [];
-
-        while($row = mysqli_fetch_assoc($query)){
+        while ($row = mysqli_fetch_assoc($query)) {
             array_push($data, $row);
         }
+
         return $data;
     }
 
@@ -39,9 +38,10 @@ class BaseModel extends Database
             $query = $this->_query($sql);
 
             $data = [];
-            while($row = mysqli_fetch_assoc($query)){
+            while ($row = mysqli_fetch_assoc($query)) {
                 array_push($data, $row);
             }
+
             return $data;
         }
         else {
@@ -82,8 +82,7 @@ class BaseModel extends Database
         // update for comment relation
         if (is_array($id)) {
             $sql = "UPDATE ${table} SET ${dataSetString} WHERE id = {$id[0]} AND news_id = {$id[1]}";
-        }
-        else {
+        } else {
             $sql = "UPDATE ${table} SET ${dataSetString} WHERE id = ${id}";
         }
 
@@ -95,12 +94,42 @@ class BaseModel extends Database
         // delete for comment relation
         if (is_array($id)) {
             $sql = "DELETE FROM ${table} WHERE id = {$id[0]} AND news_id = {$id[1]}";
-        }
-        else {
+        } else {
             $sql = "DELETE FROM ${table} WHERE id = ${id}";
         }
 
         $this->_query($sql);
+    }
+
+    public function search($table, $keyword)
+    {
+        $pattern = "%${keyword}%";
+        if ($table === "news") {
+            $sql = "SELECT * FROM ${table} WHERE title LIKE '${pattern}' OR content LIKE '${pattern}'";
+        } else { // $table === "recruitment"
+            $sql = "SELECT * FROM ${table} WHERE title LIKE '${pattern}' OR content LIKE '${pattern}' OR category LIKE '${pattern}'";
+        }
+        $query = $this->_query($sql);
+
+        $data = [];
+        while ($row = mysqli_fetch_assoc($query)) {
+            array_push($data, $row);
+        }
+
+        return $data;
+    }
+
+    public function filter($table, $category)
+    {
+        $sql = "SELECT * FROM ${table} WHERE category = '${category}'";
+        $query = $this->_query($sql);
+
+        $data = [];
+        while ($row = mysqli_fetch_assoc($query)) {
+            array_push($data, $row);
+        }
+
+        return $data;
     }
 
     public function check($table, $u, $p) //checkLogin
