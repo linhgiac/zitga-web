@@ -22,6 +22,8 @@ class SignupController extends BaseController
             $e = $obj->email;
             $result = $this->signupModel->checkSignup($u, $p, $rp, $n, $e);
             return $this->view('frontend.signups.check', ['result' => $result]);
+        } else {
+            return $this->view('frontend.signups.check', ['result' => 'Null data']);
         }
     }
 

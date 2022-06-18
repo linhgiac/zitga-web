@@ -25,6 +25,8 @@ class LoginController extends BaseController
             $p = $obj->password;
             $jwt = $this->loginModel->checkLogin($u, $p);
             return $this->view('frontend.logins.check', ['jwt' => $jwt]);
+        } else {
+            return $this->view('frontend.logins.check', ['jwt' => 'Null data']);
         }
     }
 
