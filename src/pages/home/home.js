@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // import {Routes, Route} from "react-router-dom"
 // import AboutUs from "../about/aboutUs";
 // import Careers from '../../pages/careers/careers';
@@ -10,6 +10,7 @@ import BearCarousel, { BearSlideItem } from "bear-react-carousel";
 import "bear-react-carousel/dist/index.css";
 import "./home.css";
 import { Col, Row } from "antd";
+import axios from "axios";
 
 const Home = () => {
     return (
@@ -126,48 +127,29 @@ const HomeNews = () => {
     );
 };
 const NewsList = () => {
-    const current = new Date();
-    const month = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-    ];
-    const fakeData = [
-        {
-            id: 1,
-            imgSrc: "http://zitga.com.vn/wp-content/uploads/2022/05/11-1.jpg",
-            title: "[OUR BELOVED SPRING] CHUYẾN ĐI DÀNH CHO NHỮNG TÂM HỒN RỰC CHÁY",
-            date: `${
-                month[current.getMonth()]
-            } ${current.getDate()}, ${current.getFullYear()}`,
-        },
-        {
-            id: 2,
-            imgSrc: "http://zitga.com.vn/wp-content/uploads/2022/05/11-1.jpg",
-            title: "[OUR BELOVED SUMMER] CHUYẾN ĐI DÀNH CHO NHỮNG TÂM HỒN RỰC CHÁY",
-            date: `${
-                month[current.getMonth()]
-            } ${current.getDate()}, ${current.getFullYear()}`,
-        },
-        {
-            id: 3,
-            imgSrc: "http://zitga.com.vn/wp-content/uploads/2022/05/11-1.jpg",
-            title: "[OUR BELOVED AUTUMN] CHUYẾN ĐI DÀNH CHO NHỮNG TÂM HỒN RỰC CHÁY",
-            date: `${
-                month[current.getMonth()]
-            } ${current.getDate()}, ${current.getFullYear()}`,
-        },
-    ];
-    const newsList = fakeData.map(news => (
+    const [data, setData] = useState(null);
+
+    const getData = async () => {
+        const response = await axios.get(
+            'http://localhost/mvc/index.php?controller=news',
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                }
+            }).then((value) => value.data);
+
+        console.log("Response data: ", response);
+        console.log("Updated");
+        setData(response);
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const newsList = data === null ? null : data.map((news, index) => (
+        index < 3 &&
         <NewsContainer key={news.id.toString()} news={news} />
     ));
     return <>{newsList}</>;
@@ -176,7 +158,7 @@ const NewsContainer = ({ news }) => {
     return (
         <div className="home-news-element">
             <div className="home-news-img">
-                <img src={news.imgSrc} />
+                <img src={news.image} />
             </div>
             <div className="home-news-element-title">
                 <span>Tin tức</span> <br />

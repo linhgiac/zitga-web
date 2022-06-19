@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./adminUser.css";
 import { Avatar, Image, Modal, Form, Input, Button } from "antd";
@@ -12,10 +12,12 @@ const AdminUser = () => {
             id: 1,
             name: "Admin",
             username: "admin",
-            mail: "admin@gmail.com",
+            email: "admin@gmail.com",
             password: "password",
         },
     ];
+
+    const data = fakeData[0];
 
     const uploadFile = async file => {
         const formData = new FormData();
@@ -50,13 +52,13 @@ const AdminUser = () => {
     };
 
     const handleOk = () => {
-      setIsAvatarModalVisible(false);
-      setIsPasswordModalVisible(false);
+        setIsAvatarModalVisible(false);
+        setIsPasswordModalVisible(false);
     };
 
     const handleCancel = () => {
-      setIsAvatarModalVisible(false);
-      setIsPasswordModalVisible(false);
+        setIsAvatarModalVisible(false);
+        setIsPasswordModalVisible(false);
     };
 
     return (
@@ -119,9 +121,10 @@ const AdminUser = () => {
                 </div>
             </div>
             <div className="admin-user-information">
-                <AdminUserForm form={formInfor} />
+                <AdminUserForm form={formInfor} data={data} />
             </div>
         </div>
+
     );
 };
 const ChangePasswordForm = ({ formPassword }) => {
@@ -182,7 +185,8 @@ const ChangePasswordForm = ({ formPassword }) => {
         </div>
     );
 };
-const AdminUserForm = ({ formInfor }) => {
+const AdminUserForm = ({ formInfor, data }) => {
+    const [buttonDisable, setButtonDisable] = useState(true);
     const onFinish = values => {
         console.log("Success:", values);
         const data = JSON.stringify(values);
@@ -192,7 +196,11 @@ const AdminUserForm = ({ formInfor }) => {
     const onFinishFailed = errorInfo => {
         console.log("Failed:", errorInfo);
     };
-    const handleClicked = () => {};
+    const handleClicked = () => { };
+
+    const onFieldsChange = () => {
+        setButtonDisable(false);
+    }
 
     return (
         <div>
@@ -200,6 +208,8 @@ const AdminUserForm = ({ formInfor }) => {
                 form={formInfor}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
+                onFieldsChange={() => onFieldsChange()}
+                initialValues={data}
                 size="large"
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 18 }}
@@ -231,6 +241,7 @@ const AdminUserForm = ({ formInfor }) => {
                         className="admin-user-form-btn"
                         type="submit"
                         onClick={handleClicked}
+                        disabled={buttonDisable}
                     >
                         Xác nhận
                     </button>

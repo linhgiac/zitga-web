@@ -9,8 +9,9 @@
     background-color: #17161a;
     width: 50%;
 }
-@media screen and (max-width: 650px){
-    .signup-wrapper{
+
+@media screen and (max-width: 650px) {
+    .signup-wrapper {
         width: 80%;
     }
 }
@@ -58,7 +59,7 @@
 }
 
 .signup-form-group {
-    padding: 10px;
+    padding: 5px 10px;
     width: 100%;
 }
 

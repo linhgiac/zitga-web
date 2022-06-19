@@ -30,30 +30,34 @@ function App() {
 
     const [userAccessToken, setUserAccessToken] = useState(getAccessToken());
 
-    const { decodedToken, isExpired } = useJwt(userAccessToken);
-
     const getUserFromToken = async (accessToken) => {
         if (accessToken === null) {
             return { name: "", email: "" };
         }
         else {
-            // Send request to Back-end to get UserInfo and return
-            // const response = await axios.post('url', userAccessToken);
-            // const data = response.data;
-            const response = decodedToken;
-            return { response };
-            // return { name: "", email: "" };
+            const dataSend = JSON.stringify({ token: accessToken });
+            const response = await axios.post(
+                `http://localhost/mvc/index.php?controller=user&action=show`,
+                dataSend
+                , {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json',
+                    }
+                });
+            //console.log(response.data);
+            setUser(response.data);
+            return response.data;
         }
     }
 
-    const [user, setUser] = useState(getUserFromToken(userAccessToken));
+    const [user, setUser] = useState({ name: "", email: "" });
 
     const login = async (details) => {
 
         console.log(details);
 
         if (
-            details.email === "" ||
             details.username === "" ||
             details.password === ""
         ) {
@@ -72,25 +76,23 @@ function App() {
                 },
             });
         console.log("Response Data", response.data);
-        console.log("Updated");
 
         // // End test
 
         if (
             // Authenticate User
-            response.data !== ""
+            response.data !== "Null data"
         ) {
             console.log("Logged in");
             setUser({
                 name: details.name,
                 email: details.email,
             });
-            // setCookie('userAccessToken', accessTokenTest, { path: '/' });
-            // setUserAccessToken(accessTokenTest);
 
             setCookie('userAccessToken', response.data, { path: '/' });
             setUserAccessToken(response.data);
             return true;
+
         } else {
             console.log("Thông tin đăng nhập sai");
             return "Thông tin đăng nhập sai";
@@ -108,17 +110,21 @@ function App() {
     };
 
     const signup = async (details) => {
-        details = {
-            username: 'minhtoan',
-            password: '123',
-            repassword: '123',
-            name: 'minh toan',
-            email: 'minhtoan@gmail.com'
-        };
+        if (
+            details.email === "" ||
+            details.username === "" ||
+            details.password === "" ||
+            details.repassword === "" ||
+            details.name === ""
+        ) {
+            return "Vui lòng nhập đủ thông tin";
+        }
+
+        console.log(details);
         const data = JSON.stringify(details);
 
         const response = await axios.post(
-            'http://localhost:8080/zitga-web/mvc/index.php?controller=signup&action=check',
+            'http://localhost/mvc/index.php?controller=signup&action=check',
             data,
             {
                 headers: {
@@ -127,20 +133,37 @@ function App() {
                 },
             });
         console.log(response.data);
-        return true;
+        if (response.data.success === "true") {
+            return true;
+        } else {
+            return response.data.error;
+        }
     }
 
-    const app = {
+    const [app, setApp] = useState({
         user: user,
         login: login,
         logout: logout,
-        isLogged: userAccessToken === null ? false : true,
         signup: signup,
-    }
+        isLogged: userAccessToken === null ? false : true,
+    });
 
     useEffect(() => {
-        console.log("User Access Token: ", userAccessToken);
+        if (userAccessToken !== null) {
+            console.log("User Access Token: ", userAccessToken);
+            const getUser = async () => {
+                let response = await getUserFromToken(userAccessToken);
+                //console.log("Get User Response: ", response[0]);
+                setApp({ ...app, user: response[0], isLogged: true });
+                //console.log(app);
+            }
+            getUser();
+        }
+        else {
+            setApp({ ...app, user: { name: '', email: '' }, isLogged: false });
+        }
     }, [userAccessToken]);
+
 
     return (
         <CookiesProvider>
