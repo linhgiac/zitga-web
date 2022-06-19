@@ -53,16 +53,7 @@ const LoginForm = ({ login }) => {
                                 type='text' name='username' id='username'
                                 onChange={e => setDetails({ ...details, username: e.target.value })}
                                 value={details.username}
-                                placeholder='Name'></input>
-                        </div>
-                        <div className='login-form-group'>
-                            {/* <label htmlFor='email'>Email: </label> */}
-                            <input
-                                className='login-form-input'
-                                type='text' name='email' id='email'
-                                onChange={e => setDetails({ ...details, email: e.target.value })}
-                                value={details.email}
-                                placeholder='Email'></input>
+                                placeholder='Username'></input>
                         </div>
                         <div className='login-form-group'>
                             {/* <label htmlFor='password'>Password: </label> */}

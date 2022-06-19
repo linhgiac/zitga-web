@@ -1,11 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./careers.css";
 import PageStyles from "../pages.module.css";
 import { Col, Row, Button, Pagination } from "antd";
 import SearchAndCategories from "../../components/categories/categories";
 import { NavLink, useParams } from "react-router-dom";
 import { HeartFilled } from "@ant-design/icons";
+import axios from "axios";
 
 const Careers = ({ app }) => {
     return (
@@ -65,58 +66,26 @@ const CareersContent = () => {
 };
 
 const CareersMainContent = () => {
-    const current = new Date();
-    const month = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-    ];
+    const [data, setData] = useState(null);
 
-    // Get Data from Backend
-    const fakeData = [
-        {
-            id: 1,
-            imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
-            title: "Senior Game UX Designer",
-            date: `${month[current.getMonth()]
-                } ${current.getDate()}, ${current.getFullYear()}`,
-        },
-        {
-            id: 2,
-            imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
-            title: "Junior Game UX Designer",
-            date: `${month[current.getMonth()]
-                } ${current.getDate()}, ${current.getFullYear()}`,
-        },
-        {
-            id: 3,
-            imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
-            title: "Fresher Game UX Designer",
-            date: `${month[current.getMonth()]
-                } ${current.getDate()}, ${current.getFullYear()}`,
-        },
-        {
-            id: 4,
-            imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
-            title: "Intern Game UX Designer",
-            date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
-        },
-        {
-            id: 5,
-            imgSrc: "http://zitga.com.vn/wp-content/uploads/2020/05/website.jpg",
-            title: "Chicken Game UX Designer",
-            date: `${month[current.getMonth()]} ${current.getDate()}, ${current.getFullYear()}`,
-        },
-    ];
+    const getData = async (category) => {
+        const action = category === "" ? "index" : "filter";
+        const data = JSON.stringify({ category: category });
+        const response = await axios.post(
+            `http://localhost/mvc/index.php?controller=recruitment&action=${action}`,
+            data,
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                }
+            }).then((value) => value.data);
+
+        console.log("Response data: ", response);
+        console.log("Updated");
+        setData(response);
+    }
+
     const [count, setCount] = useState(0);
     const [isLike, setIsLike] = useState(false);
     const handleLiked = () => {
@@ -128,10 +97,31 @@ const CareersMainContent = () => {
         }
     };
 
+    useEffect(() => {
+        if (window.location.pathname === "/careers/create-design") {
+            getData("Khối Sáng tạo/ Thiết kế");
+        }
+        else if (window.location.pathname === "/careers/marketing") {
+            getData("Khối Marketing");
+        }
+        else if (window.location.pathname === "/careers/development") {
+            getData("Khối Development");
+        }
+        else if (window.location.pathname === "/careers/backoffice") {
+            getData("Khối BackOffice");
+        }
+        else {
+            getData("");
+        }
+
+    }, []);
+
     return (
         <div className="careers-main-content-container">
-            <CareersList careersData={fakeData} />
-
+            {
+                data !== null &&
+                <CareersList careersData={data} />
+            }
         </div>
     );
 };
@@ -156,12 +146,15 @@ const CareersList = ({ careersData }) => {
     ));
     return <>
         {careersList}
-        <Pagination
-            pageSize={pageSize}
-            current={current}
-            total={careersData.length}
-            onChange={handleChange}
-        />
+        {
+            careersData.length > 0 &&
+            <Pagination
+                pageSize={pageSize}
+                current={current}
+                total={careersData.length}
+                onChange={handleChange}
+            />
+        }
     </>;
 };
 
@@ -184,7 +177,7 @@ const CareerContainer = ({ career }) => {
         <div className="careers-container">
             <div className="careers-image-title">
                 <a href={`/careers/careers-details-${career.id}`} onClick={handleClicked}>
-                    <img src={career.imgSrc} />
+                    <img src={career.image} />
                 </a>
             </div>
             <div className="careers-main-content-inner">

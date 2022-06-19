@@ -14,6 +14,7 @@ const SignUpForm = ({ signup }) => {
         e.preventDefault();
 
         let result = await signup(details);
+        console.log("Signup result: ", result);
 
         if (result === true) {
             navigate('/login');
@@ -49,7 +50,30 @@ const SignUpForm = ({ signup }) => {
                 <form onSubmit={submitHandler}>
                     <div className='signup-form'>
                         <div className='signup-form-group'>
-                            {/* <label htmlFor='name'>Name: </label> */}
+                            <input
+                                className='signup-form-input'
+                                type='text' name='username' id='username'
+                                onChange={e => setDetails({ ...details, username: e.target.value })}
+                                value={details.username}
+                                placeholder='Username'></input>
+                        </div>
+                        <div className='signup-form-group'>
+                            <input
+                                className='signup-form-input'
+                                type='password' name='password' id='password'
+                                onChange={e => setDetails({ ...details, password: e.target.value })}
+                                value={details.password}
+                                placeholder='Password'></input>
+                        </div>
+                        <div className='signup-form-group'>
+                            <input
+                                className='signup-form-input'
+                                type='password' name='repassword' id='repassword'
+                                onChange={e => setDetails({ ...details, repassword: e.target.value })}
+                                value={details.repassword}
+                                placeholder='Confirm Password'></input>
+                        </div>
+                        <div className='signup-form-group'>
                             <input
                                 className='signup-form-input'
                                 type='text' name='name' id='name'
@@ -58,22 +82,12 @@ const SignUpForm = ({ signup }) => {
                                 placeholder='Name'></input>
                         </div>
                         <div className='signup-form-group'>
-                            {/* <label htmlFor='email'>Email: </label> */}
                             <input
                                 className='signup-form-input'
                                 type='text' name='email' id='email'
                                 onChange={e => setDetails({ ...details, email: e.target.value })}
                                 value={details.email}
                                 placeholder='Email'></input>
-                        </div>
-                        <div className='signup-form-group'>
-                            {/* <label htmlFor='password'>Password: </label> */}
-                            <input
-                                className='signup-form-input'
-                                type='password' name='password' id='password'
-                                onChange={e => setDetails({ ...details, password: e.target.value })}
-                                value={details.password}
-                                placeholder='Password'></input>
                         </div>
                         <div className='signup-form-group'>
                             <input className='signup-form-button' type='submit' value='sign up'></input>

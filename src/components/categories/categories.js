@@ -1,11 +1,11 @@
 import "./categories.css";
-import { SearchOutlined,CaretRightOutlined} from "@ant-design/icons";
+import { SearchOutlined, CaretRightOutlined } from "@ant-design/icons";
 
 const SearchAndCategories = () => {
     return (
         <div>
             <Search />
-            <Categories/>
+            <Categories />
         </div>
     );
 };
@@ -32,14 +32,14 @@ const Categories = () => {
         <div className="categories-container">
             <div className="categories-title">
                 <p>
-                <CaretRightOutlined style = {{color: '#ff0e1f'}} />
+                    <CaretRightOutlined style={{ color: '#ff0e1f' }} />
                     Categories
                 </p>
             </div>
             <div className="categories-inner">
                 <ul>
                     <li><a href="/careers/backoffice">Khối BackOffice</a></li>
-                    <li><a href="careers/development">Khối Development</a></li>
+                    <li><a href="/careers/development">Khối Development</a></li>
                     <li><a href="/careers/marketing">Khối Marketing</a> </li>
                     <li><a href="/careers/create-design">Khối Sáng tạo/Thiết kế</a></li>
                     <li><a href="/news">Tin tức</a></li>
