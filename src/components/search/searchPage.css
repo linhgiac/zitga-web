@@ -27,8 +27,28 @@
   flex-direction: column;
   margin-bottom: 30px;
 }
-.search-page-result-item>a{
+.search-page-result-page{
   border-top: 2px solid #17161a;
+
+}
+.search-page-result-page>p{
+  font-family: Montserrat, sans-serif;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: #ff0e1f;
+  color: #fff;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  padding-left:20px;
+  margin-top: 20px;
+}
+.search-page-result-link{
+  border-bottom: 2px solid #17161a
+}
+.search-page-result-link>a{
+  
   color: #fff;
   text-transform: uppercase;
   font-family: Montserrat, sans-serif;
@@ -36,4 +56,5 @@
   font-weight: 500;
   height: 50px;
   line-height: 50px;
+  width: 100%;
 }
