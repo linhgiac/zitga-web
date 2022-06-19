@@ -127,6 +127,7 @@ class UserController extends BaseController
                     $response = array(
                         "success" => true,
                         "message" => "Image has uploaded",
+                        "avatar" => dirname(dirname(__FILE__)) . $DIR . "/" . $UPLOAD_IMG_NAME
                     );
                 } else {
                     $response = array(
