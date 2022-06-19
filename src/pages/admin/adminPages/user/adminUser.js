@@ -2,56 +2,72 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./adminUser.css";
 import { Avatar, Image, Modal, Form, Input, Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
-const url = "localhost:8080/zitga-web/mvc/?controller=...";
 
-const AdminUser = () => {
+const AdminUser = ({ app }) => {
+    const navigate = useNavigate();
     const [file, setFile] = useState();
-    const fakeData = [
-        {
-            id: 1,
-            name: "Admin",
-            username: "admin",
-            email: "admin@gmail.com",
-            password: "password",
-        },
-    ];
 
-    const data = fakeData[0];
+    const data = app.user;
+
+    console.log(data);
 
     const uploadFile = async file => {
         const formData = new FormData();
 
-        formData.append("avatar", file);
+        formData.append("image", file);
 
-        return await axios.post(url, formData, {
-            headers: {
-                "content-type": "multipart/form-data",
-            },
-        });
+        const responseUpload = await axios.post(
+            'http://localhost/mvc/index.php?controller=user&action=upload',
+            formData,
+            {
+                headers: {
+                    "content-type": "multipart/form-data",
+                },
+            });
+
+        console.log("Response Upload: ", responseUpload);
+
+        let avatarURL = responseUpload.data.avatar;
+        //avatarURL = avatarURL.replaceAll('/', '\\');
+        console.log('\\');
+        console.log("AVATAR URL:", avatarURL);
+        const data = JSON.stringify({ ...app.user, avatar: avatarURL });
+        console.log("Data updated: ", data);
+
+        const responseUpdate = await axios.post(
+            'http://localhost/mvc/index.php?controller=user&action=update',
+            data,
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                },
+            });
+
+        return responseUpdate;
     };
 
     const handleSubmit = async e => {
         e.preventDefault();
         const response = await uploadFile(file);
-        console.log(response.data);
+        console.log("Response Data:", response.data);
+        navigate('/admin');
     };
 
     const handleChange = e => {
         setFile(e.target.files[0]);
     };
     const [formInfor] = Form.useForm();
-   
+
     const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
     const showAvatarModal = () => {
         setIsAvatarModalVisible(true);
     };
 
     const handleOk = () => {
-        if (isPasswordModalVisible) {
-            formPassword.submit();
-        }
-        console.log(formPassword);
+
         console.log("Handle Ok");
 
         setIsAvatarModalVisible(false);
@@ -67,9 +83,10 @@ const AdminUser = () => {
                 <Avatar
                     src={
                         <Image
-                            src="https://joeschmoe.io/api/v1/random"
+                            src={app.user.avatar}
                             style={{
-                                width: 32,
+                                height: 100,
+                                width: 100,
                             }}
                         />
                     }
@@ -77,7 +94,7 @@ const AdminUser = () => {
                     size={100}
                 />
                 <div className="admin-user-name">
-                    <div className="admin-username">{fakeData[0].username}</div>
+                    <div className="admin-username">{data.username}</div>
                     <button
                         className="admin-user-avatar-btn"
                         onClick={showAvatarModal}
@@ -86,7 +103,7 @@ const AdminUser = () => {
                     </button>
                     <button
                         className="admin-user-avatar-btn"
-                        
+
                     >
                         <a href='/admin/change-password'>Đổi mật khẩu</a>
                     </button>
@@ -128,7 +145,7 @@ const AdminUserForm = ({ formInfor, data }) => {
     const onFinishFailed = errorInfo => {
         console.log("Failed:", errorInfo);
     };
-    const handleClicked = () => {};
+    const handleClicked = () => { };
 
     const onFieldsChange = () => {
         setButtonDisable(false);

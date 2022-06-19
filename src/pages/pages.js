@@ -87,11 +87,15 @@ const Page = ({ app }) => {
                 path="/contact"
                 element={<PageWrapper app={app} Page={Contact} />}
             />
-            <Route path="/admin" element={<Admin app={app} />} />
-
-            <Route path="/admin/news" element={<Admin app={app} />} />
-            <Route path="/admin/career" element={<Admin app={app} />} />
-            <Route path="/admin/change-password" element={<ChangePassword />} />
+            {app.isLogged &&
+                <Route path="/admin" element={<Admin app={app} />} />}
+            {app.isLogged &&
+                <Route path="/admin/news" element={<Admin app={app} />} />}
+            {app.isLogged &&
+                <Route path="/admin/career" element={<Admin app={app} />} />}
+            {app.isLogged &&
+                <Route path="/admin/change-password" element={<ChangePassword />} />}
+                
             <Route path="/login" element={<Login login={app.login} />} />
             <Route path="/signup" element={<SignUp signup={app.signup} />} />
         </Routes>

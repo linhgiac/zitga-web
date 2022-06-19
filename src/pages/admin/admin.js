@@ -59,7 +59,7 @@ const Admin = ({ app }) => {
                 <Layout>
                     {/* <AdminUser /> */}
 
-                    {window.location.pathname === "/admin" && <AdminUser />}
+                    {window.location.pathname === "/admin" && <AdminUser app={app}/>}
                     {window.location.pathname === "/admin/career" && (
                         <AdminCareer />
                     )}
