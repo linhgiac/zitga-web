@@ -56,18 +56,35 @@ class UserController extends BaseController
         $obj = json_decode($detail);
 
         $id = $obj->id;
-        $data = [
-            'username' => $obj->username,
-            'password' => hash("md5", $obj->password),
-            'name' => $obj->name,
-            'email' => $obj->email,
-            'avatar' => $obj->avatar
-        ];
-
-        $this->userModel->updateData($id, $data);
-        return $this->view('frontend.users.confirm', [
-            'confirm' => ['success' => true]
-        ]);
+        if (property_exists($obj, 'token')) {
+            $userInfo = $this->userModel->findById($id);
+            $data = json_decode(base64_decode(str_replace('_', '/', str_replace('-','+',explode('.', $obj->token)[1]))));
+            $oldPassword = $data->password;
+            if (hash("md5", $oldPassword) == $userInfo['password']) {
+                $data = [
+                    'name' => $obj->name,
+                    'avatar' => $obj->avatar,
+                    'password' => hash("md5", $obj->password)
+                ];
+                $this->userModel->updateData($id, $data);
+                return $this->view('frontend.users.confirm', [
+                    'confirm' => ['success' => true]
+                ]);
+            } else {
+                return $this->view('frontend.users.confirm', [
+                    'confirm' => ['success' => false]
+                ]);
+            }
+        } else {
+            $data = [
+                'name' => $obj->name,
+                'avatar' => $obj->avatar
+            ];
+            $this->userModel->updateData($id, $data);
+            return $this->view('frontend.users.confirm', [
+                'confirm' => ['success' => true]
+            ]);
+        }
     }
 
     // delete a user by its ID from the database
@@ -127,7 +144,8 @@ class UserController extends BaseController
                     $response = array(
                         "success" => true,
                         "message" => "Image has uploaded",
-                        "avatar" => dirname(dirname(__FILE__)) . '/' . $DIR . '/' . $UPLOAD_IMG_NAME
+                        // need revision
+                        "avatar" => 'http://localhost/mvc/' . $UPLOAD_IMG_NAME
                     );
                 } else {
                     $response = array(
