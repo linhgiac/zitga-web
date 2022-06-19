@@ -3,7 +3,7 @@ import axios from "axios";
 import "./adminUser.css";
 import { Avatar, Image, Modal, Form, Input, Button } from "antd";
 
-const url = "localhost/mvc/?controller=...";
+const url = "localhost:8080/zitga-web/mvc/?controller=...";
 
 const AdminUser = () => {
     const [file, setFile] = useState();
@@ -41,14 +41,10 @@ const AdminUser = () => {
         setFile(e.target.files[0]);
     };
     const [formInfor] = Form.useForm();
-    const [formPassword] = Form.useForm();
+   
     const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
-    const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
     const showAvatarModal = () => {
         setIsAvatarModalVisible(true);
-    };
-    const showPasswordModal = () => {
-        setIsPasswordModalVisible(true);
     };
 
     const handleOk = () => {
@@ -59,12 +55,10 @@ const AdminUser = () => {
         console.log("Handle Ok");
 
         setIsAvatarModalVisible(false);
-        setIsPasswordModalVisible(false);
     };
 
     const handleCancel = () => {
         setIsAvatarModalVisible(false);
-        setIsPasswordModalVisible(false);
     };
 
     return (
@@ -92,9 +86,9 @@ const AdminUser = () => {
                     </button>
                     <button
                         className="admin-user-avatar-btn"
-                        onClick={showPasswordModal}
+                        
                     >
-                        Đổi mật khẩu
+                        <a href='/admin/change-password'>Đổi mật khẩu</a>
                     </button>
                     <Modal
                         centered
@@ -114,83 +108,15 @@ const AdminUser = () => {
                             <button type="submit">Upload File</button>
                         </form>
                     </Modal>
-                    <Modal
-                        centered
-                        title="Đổi mật khẩu"
-                        visible={isPasswordModalVisible}
-                        onOk={handleOk}
-                        onCancel={handleCancel}
-                        width={900}
-                    >
-                        <ChangePasswordForm form={formPassword} />
-                    </Modal>
                 </div>
             </div>
             <div className="admin-user-information">
                 <AdminUserForm form={formInfor} data={data} />
             </div>
         </div>
-
     );
 };
-const ChangePasswordForm = ({ formPassword }) => {
-    const onFinish = values => {
-        console.log("Success:", values);
-        const data = JSON.stringify(values);
-        console.log(data);
-    };
 
-    const onFinishFailed = errorInfo => {
-        console.log("Failed:", errorInfo);
-    };
-
-    return (
-        <div>
-            <Form
-                form={formPassword}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                size="large"
-                labelCol={{ span: 4 }}
-                wrapperCol={{ span: 18 }}
-            >
-                <Form.Item
-                    label="Mật khẩu cũ"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Vui lòng nhập mật khẩu cũ",
-                        },
-                    ]}
-                >
-                    <Input.Password />
-                </Form.Item>
-                <Form.Item
-                    label="Mật khẩu mới"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Vui lòng nhập mật khẩu mới!",
-                        },
-                    ]}
-                >
-                    <Input.Password />
-                </Form.Item>
-                <Form.Item
-                    label="Nhập lại mật khẩu"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Vui lòng nhập lại mật khẩu mới!",
-                        },
-                    ]}
-                >
-                    <Input.Password />
-                </Form.Item>
-            </Form>
-        </div>
-    );
-};
 const AdminUserForm = ({ formInfor, data }) => {
     const [buttonDisable, setButtonDisable] = useState(true);
     const onFinish = values => {
@@ -202,11 +128,11 @@ const AdminUserForm = ({ formInfor, data }) => {
     const onFinishFailed = errorInfo => {
         console.log("Failed:", errorInfo);
     };
-    const handleClicked = () => { };
+    const handleClicked = () => {};
 
     const onFieldsChange = () => {
         setButtonDisable(false);
-    }
+    };
 
     return (
         <div>

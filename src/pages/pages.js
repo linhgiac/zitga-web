@@ -16,7 +16,7 @@ import Admin from "./admin/admin";
 import { BackTop } from "antd";
 import { UpCircleFilled } from "@ant-design/icons";
 import SearchPage from "../components/search/searchPage";
-
+import ChangePassword from "./admin/changePassword/changePassword";
 
 const PageWrapper = ({ app, Page }) => {
     return (
@@ -36,10 +36,7 @@ const PageWrapper = ({ app, Page }) => {
 };
 
 const Page = ({ app }) => {
-
-
     return (
-
         <Routes>
             <Route path="/" element={<PageWrapper app={app} Page={Home} />} />
             <Route
@@ -94,7 +91,7 @@ const Page = ({ app }) => {
 
             <Route path="/admin/news" element={<Admin app={app} />} />
             <Route path="/admin/career" element={<Admin app={app} />} />
-
+            <Route path="/admin/change-password" element={<ChangePassword />} />
             <Route path="/login" element={<Login login={app.login} />} />
             <Route path="/signup" element={<SignUp signup={app.signup} />} />
         </Routes>
