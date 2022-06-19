@@ -52,6 +52,12 @@ const AdminUser = () => {
     };
 
     const handleOk = () => {
+        if (isPasswordModalVisible) {
+            formPassword.submit();
+        }
+        console.log(formPassword);
+        console.log("Handle Ok");
+
         setIsAvatarModalVisible(false);
         setIsPasswordModalVisible(false);
     };

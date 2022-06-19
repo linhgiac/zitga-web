@@ -1,5 +1,7 @@
 import "./categories.css";
 import { SearchOutlined, CaretRightOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const SearchAndCategories = () => {
     return (
@@ -11,13 +13,26 @@ const SearchAndCategories = () => {
 };
 
 const Search = () => {
+    let { searchPage: searchInput } = useParams();
+    const navigate = useNavigate();
+    const [input, setInput] = useState("");
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        searchInput = "input:" + input;
+        console.log("Search: ", input);
+        navigate('/search/' + searchInput);
+    }
+
     return (
         <div className="search-container">
-            <form className="search-form">
+            <form className="search-form" onSubmit={submitHandler}>
                 <input
                     type="search"
                     placeholder="Type your search"
                     className="search-input"
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
                 />
                 <button type="submit" className="search-btn">
                     <SearchOutlined />

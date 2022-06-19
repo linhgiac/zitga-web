@@ -46,8 +46,8 @@ const Page = ({ app }) => {
                 path="/about"
                 element={<PageWrapper app={app} Page={AboutUs} />}
             />
-             <Route
-                path="/search"
+            <Route
+                path="/search/:searchInput"
                 element={<PageWrapper app={app} Page={SearchPage} />}
             />
             <Route

@@ -153,9 +153,7 @@ function App() {
             console.log("User Access Token: ", userAccessToken);
             const getUser = async () => {
                 let response = await getUserFromToken(userAccessToken);
-                console.log("Get User Response: ", response);
                 setApp({ ...app, user: response[0], isLogged: true });
-                console.log("APP: ", app);
             }
             getUser();
         }
