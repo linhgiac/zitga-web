@@ -58,7 +58,7 @@ class UserController extends BaseController
         $id = $obj->id;
         $data = [
             'username' => $obj->username,
-            'password' => $obj->password,
+            'password' => hash("md5", $obj->password),
             'name' => $obj->name,
             'email' => $obj->email,
             'avatar' => $obj->avatar
