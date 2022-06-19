@@ -15,6 +15,7 @@ import Post from "../components/post/post";
 import Admin from "./admin/admin";
 import { BackTop } from "antd";
 import { UpCircleFilled } from "@ant-design/icons";
+import SearchPage from "../components/search/searchPage";
 
 
 const PageWrapper = ({ app, Page }) => {
@@ -44,6 +45,10 @@ const Page = ({ app }) => {
             <Route
                 path="/about"
                 element={<PageWrapper app={app} Page={AboutUs} />}
+            />
+             <Route
+                path="/search"
+                element={<PageWrapper app={app} Page={SearchPage} />}
             />
             <Route
                 path="/careers"
