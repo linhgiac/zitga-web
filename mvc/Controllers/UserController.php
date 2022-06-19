@@ -99,30 +99,46 @@ class UserController extends BaseController
         ]);
     }
 
-    // search by given keyword
-    public function search()
+    public function upload()
     {
-        $detail = file_get_contents('php://input');
-        $obj = json_decode($detail);
+        $response = array();
+        $DIR = 'uploads/';
 
-        $keyword = $obj->keyword;
+        if ($_FILES['image']) {
+            $fileName = $_FILES["image"]["name"];
+            $tempFileName = $_FILES["image"]["tmp_name"];
+            $error = $_FILES["image"]["error"];
 
-        $result = $this->userModel->findByKey($keyword);
-        return $this->view('frontend.news.show', [
-            'data' => $result
-        ]);
-    }
-
-    public function filter()
-    {
-        $detail = file_get_contents('php://input');
-        $obj = json_decode($detail);
-
-        $category = $obj->category;
-
-        $result = $this->userModel->filterByCategory($category);
-        return $this->view('frontend.news.show', [
-            'data' => $result
+            if ($error > 0) {
+                $response = array(
+                    "success" => false,
+                    "message" => "Error uploading the file!"
+                );
+            } else {
+                $FILE_NAME = rand(10, 1000000) . "-" . $fileName;
+                $UPLOAD_IMG_NAME = $DIR.strtolower($FILE_NAME);
+                $UPLOAD_IMG_NAME = preg_replace('/\s+/', '-', $UPLOAD_IMG_NAME);
+            
+                if (move_uploaded_file($tempFileName , $UPLOAD_IMG_NAME)) {
+                    $response = array(
+                        "success" => true,
+                        "message" => "Image has uploaded",
+                    );
+                } else {
+                    $response = array(
+                        "success" => false,
+                        "message" => "Error occured"
+                    );
+                }
+            }
+        } else {
+            $response = array(
+                "success" => false,
+                "message" => "File not found"
+            );
+        }
+        return $this->view('frontend.users.confirm', [
+            'confirm' => $response
         ]);
     }
 }
