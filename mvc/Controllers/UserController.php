@@ -58,7 +58,7 @@ class UserController extends BaseController
         $id = $obj->id;
         $data = [
             'username' => $obj->username,
-            'password' => $obj->password,
+            'password' => hash("md5", $obj->password),
             'name' => $obj->name,
             'email' => $obj->email,
             'avatar' => $obj->avatar
@@ -127,6 +127,7 @@ class UserController extends BaseController
                     $response = array(
                         "success" => true,
                         "message" => "Image has uploaded",
+                        "avatar" => dirname(dirname(__FILE__)) . $DIR . "/" . $UPLOAD_IMG_NAME
                     );
                 } else {
                     $response = array(
