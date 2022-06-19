@@ -190,7 +190,7 @@ const CareerContainer = ({ career }) => {
                 <div className="careers-main-content-post-tiltle">
                     <div className="careers-post-left">
                         <NavLink className="careers-post-left-element" to="#">
-                            {career.date}
+                            {career.to_date}
                         </NavLink>
 
                         <div className="careers-post-left-like">

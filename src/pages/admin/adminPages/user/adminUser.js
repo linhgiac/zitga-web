@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./adminUser.css";
 import { Avatar, Image, Modal, Form, Input, Button } from "antd";
-import { useNavigate } from "react-router-dom";
-
 
 const AdminUser = ({ app }) => {
-    const navigate = useNavigate();
     const [file, setFile] = useState();
 
-    const data = app.user;
+    const [avatarSrc, setAvatarSrc] = useState("");
 
-    console.log(data);
+    console.log(app.user);
 
     const uploadFile = async file => {
         const formData = new FormData();
@@ -30,10 +27,8 @@ const AdminUser = ({ app }) => {
         console.log("Response Upload: ", responseUpload);
 
         let avatarURL = responseUpload.data.avatar;
-        //avatarURL = avatarURL.replaceAll('/', '\\');
-        console.log('\\');
-        console.log("AVATAR URL:", avatarURL);
         const data = JSON.stringify({ ...app.user, avatar: avatarURL });
+        setAvatarSrc(avatarURL);
         console.log("Data updated: ", data);
 
         const responseUpdate = await axios.post(
@@ -53,7 +48,6 @@ const AdminUser = ({ app }) => {
         e.preventDefault();
         const response = await uploadFile(file);
         console.log("Response Data:", response.data);
-        navigate('/admin');
     };
 
     const handleChange = e => {
@@ -77,13 +71,17 @@ const AdminUser = ({ app }) => {
         setIsAvatarModalVisible(false);
     };
 
+    useEffect(() => {
+        setAvatarSrc(app.user.avatar);
+    }, [])
+
     return (
         <div className="admin-user-container">
             <div className="admin-user-avatar">
                 <Avatar
                     src={
                         <Image
-                            src={app.user.avatar}
+                            src={avatarSrc}
                             style={{
                                 height: 100,
                                 width: 100,
@@ -94,7 +92,7 @@ const AdminUser = ({ app }) => {
                     size={100}
                 />
                 <div className="admin-user-name">
-                    <div className="admin-username">{data.username}</div>
+                    <div className="admin-username">{app.user.username}</div>
                     <button
                         className="admin-user-avatar-btn"
                         onClick={showAvatarModal}
@@ -128,7 +126,7 @@ const AdminUser = ({ app }) => {
                 </div>
             </div>
             <div className="admin-user-information">
-                <AdminUserForm form={formInfor} data={data} />
+                <AdminUserForm form={formInfor} data={app.user} />
             </div>
         </div>
     );
@@ -158,7 +156,11 @@ const AdminUserForm = ({ formInfor, data }) => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 onFieldsChange={() => onFieldsChange()}
-                initialValues={data}
+                initialValues={{
+                    name: "Admin",
+                    username: "admin",
+                    email: "admin@gmail.com"
+                }}
                 size="large"
                 labelCol={{ span: 4 }}
                 wrapperCol={{ span: 18 }}
@@ -176,14 +178,14 @@ const AdminUserForm = ({ formInfor, data }) => {
                     label="Username"
                     name="username"
                 >
-                    <Input />
+                    <Input disabled={true} />
                 </Form.Item>
                 <Form.Item
                     className="admin-user-form-item"
                     label="Email"
                     name="email"
                 >
-                    <Input />
+                    <Input disabled={true} />
                 </Form.Item>
                 <Form.Item className="admin-user-form-item">
                     <button

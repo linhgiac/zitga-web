@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 
 const SearchPage = () => {
 	const [search, setSearch] = useState('');
-	const fakeDataResults = [{ title: "result1" }, { title: "result2" }, { title: "result3" }, { title: "result3" }];
 
 	const getInput = () => {
 		const path = decodeURI(window.location.pathname);
@@ -44,6 +43,7 @@ const SearchPage = () => {
 const SearchNews = ({ search }) => {
 	const [result, setResult] = useState([]);
 	const getResult = async () => {
+		console.log("Search news by keyword: ", search);
 		const dataSend = JSON.stringify({ keyword: search });
 		const response = await axios.post(
 			`http://localhost/mvc/index.php?controller=news&action=search`,
@@ -60,7 +60,7 @@ const SearchNews = ({ search }) => {
 
 	useEffect(() => {
 		getResult();
-	}, [])
+	})
 
 	const newsList = result.map((news, index) => (
 		<NewsContainer key={news.id.toString()} news={news} />
@@ -97,6 +97,7 @@ const NewsContainer = ({ news }) => {
 const SearchCareers = ({ search }) => {
 	const [result, setResult] = useState([]);
 	const getResult = async () => {
+		console.log("Search careers by keyword: ", search);
 		const dataSend = JSON.stringify({ keyword: search });
 		const response = await axios.post(
 			`http://localhost/mvc/index.php?controller=recruitment&action=search`,
@@ -113,7 +114,7 @@ const SearchCareers = ({ search }) => {
 
 	useEffect(() => {
 		getResult();
-	}, [])
+	})
 
 	const careersList = result.map((career, index) => (
 		<CareerContainer key={career.id.toString()} career={career} />

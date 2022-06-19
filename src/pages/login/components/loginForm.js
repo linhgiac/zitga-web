@@ -74,7 +74,7 @@ const LoginForm = ({ login }) => {
                         Chưa có tài khoản?
                     </div>
                     <div className='login-link-wrapper'>
-                        <a href='/signup' className='login-link'>Đăng kí</a>
+                        <a href='/signup' className='login-link'>SIGN UP</a>
                     </div>
                 </div>
             </div>

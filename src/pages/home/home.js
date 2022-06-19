@@ -11,6 +11,7 @@ import "bear-react-carousel/dist/index.css";
 import "./home.css";
 import { Col, Row } from "antd";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Home = () => {
     return (
@@ -155,6 +156,10 @@ const NewsList = () => {
     return <>{newsList}</>;
 };
 const NewsContainer = ({ news }) => {
+    let { postId } = useParams();
+    const handleClick = () => {
+        postId = "news-details-" + news.id;
+    }
     return (
         <div className="home-news-element">
             <div className="home-news-img">
@@ -162,7 +167,7 @@ const NewsContainer = ({ news }) => {
             </div>
             <div className="home-news-element-title">
                 <span>Tin tức</span> <br />
-                <a href="">{news.title}</a>
+                <a onClick={handleClick} href={`/news/${"news-details-" + news.id}`}>{news.title}</a>
             </div>
         </div>
     );

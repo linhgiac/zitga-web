@@ -52,9 +52,21 @@
   text-transform: uppercase;
 }
 .post-main-content {
-  height: 200px;
+  /* height: 200px; */
   color: #ccc;
 
+}
+.post-main-content>p>p>img{
+  width: 100%;
+  padding-right: 30px;
+}
+.post-main-content>p>p{
+ 
+  padding: 0 30px;
+}
+.post-main-content>p>ul>li>img {
+  width: 100%;
+  padding-right: 30px;
 }
 .post-comment-title{
   height: 50px;

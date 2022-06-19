@@ -5,6 +5,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const AdminCareer = () => {
     const [isDataChanged, setIsDataChanged] = useState();
@@ -149,6 +150,7 @@ const MyEditor = ({ form, initValue }) => {
 };
 
 const AdminCareerTable = ({ isDataChanged, handleData }) => {
+    let { postId } = useParams();
     const [data, setData] = useState();
 
     const getData = async () => {
@@ -194,7 +196,13 @@ const AdminCareerTable = ({ isDataChanged, handleData }) => {
             title: "Title",
             dataIndex: "title",
             key: "title",
-            render: text => <a>{text}</a>,
+            render: (text, careers) =>
+                <a
+                    onClick={() => postId = "careers-details-" + careers.id}
+                    href={`/careers/${"careers-details-" + careers.id}`}
+                >
+                    {text}
+                </a>
         },
         {
             title: "Date",

@@ -5,6 +5,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const AdminNews = () => {
     const [isDataChanged, setIsDataChanged] = useState();
@@ -133,6 +134,7 @@ const MyEditor = ({ form, initValue }) => {
 };
 
 const AdminNewsTable = ({ isDataChanged, handleData }) => {
+    let { postId } = useParams();
     const [data, setData] = useState();
 
     const getData = async () => {
@@ -179,7 +181,13 @@ const AdminNewsTable = ({ isDataChanged, handleData }) => {
             title: "Title",
             dataIndex: "title",
             key: "title",
-            render: text => <a>{text}</a>
+            render: (text, news) =>
+                <a
+                    onClick={() => postId = "news-details-" + news.id}
+                    href={`/news/${"news-details-" + news.id}`}
+                >
+                    {text}
+                </a>
         },
         {
             title: "Date",

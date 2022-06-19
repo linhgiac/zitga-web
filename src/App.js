@@ -81,7 +81,7 @@ function App() {
 
         if (
             // Authenticate User
-            response.data !== "Null data"
+            response.data !== "Failed Login!" && response.data !== "Null data"
         ) {
             console.log("Logged in");
             setUser({
@@ -161,6 +161,10 @@ function App() {
             setApp({ ...app, user: { name: '', email: '' }, isLogged: false });
         }
     }, [userAccessToken]);
+
+    useEffect(() => {
+        console.log(app);
+    }, [app])
 
 
     return (

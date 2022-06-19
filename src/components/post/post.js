@@ -179,7 +179,7 @@ const PostComments = ({ app }) => {
                         type="text"
                         className="post-comment-input"
                         placeholder={
-                            app.isLogged === false ? "Bạn phải login mới có thể bình luận" : "Bình luận"
+                            app.isLogged === false ? "Bạn phải đăng nhập mới có thể bình luận" : "Bình luận"
                         }
                         onChange={e => setComment(e.target.value)}
                         value={comment}

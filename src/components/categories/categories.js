@@ -13,7 +13,7 @@ const SearchAndCategories = () => {
 };
 
 const Search = () => {
-    let { searchPage: searchInput } = useParams();
+    let { searchInput } = useParams();
     const navigate = useNavigate();
     const [input, setInput] = useState("");
 
