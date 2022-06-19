@@ -125,7 +125,11 @@ const PostComments = ({ app }) => {
             });
         console.log("Comment Data: ", response.data);
         setData(response.data);
-        setMaxId(parseInt(response.data[response.data.length - 1].id));
+        if (response.data.length != 0) {
+            setMaxId(parseInt(response.data[response.data.length - 1].id));
+        } else {
+            setMaxId(0);
+        }
         setDataUpdated(false);
     }
 
@@ -174,11 +178,14 @@ const PostComments = ({ app }) => {
                     <input
                         type="text"
                         className="post-comment-input"
-                        placeholder='"Your comment", nếu chưa login thì là "Bạn phải login mới có thể bình luận"'
+                        placeholder={
+                            app.isLogged === false ? "Bạn phải login mới có thể bình luận" : "Bình luận"
+                        }
                         onChange={e => setComment(e.target.value)}
                         value={comment}
+                        disabled={app.isLogged === false}
                     />
-                    <button type="submit" className="post-comment-btn">
+                    <button type="submit" className="post-comment-btn" disabled={app.isLogged === false || comment === ""}>
                         Submit
                     </button>
                 </form>
